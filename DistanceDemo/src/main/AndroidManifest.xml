@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.estimote.examples.distancedemo"
+          android:versionCode="1"
+          android:versionName="1.0">
+
+  <uses-sdk
+      android:minSdkVersion="18"
+      android:targetSdkVersion="18"/>
+
+  <!-- Needed permissions in order to scan for beacons. -->
+  <uses-permission android:name="android.permission.BLUETOOTH"/>
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+  <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+  <application
+      android:label="Distance Demo"
+      android:theme="@android:style/Theme.Holo.Light">
+
+    <activity
+        android:name="com.estimote.examples.distancedemo.ListBeaconsActivity"
+        android:label="Distance Demo"
+        android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+
+    <activity android:name=".DistanceBeaconActivity"
+              android:label="Distance Demo"
+              android:screenOrientation="portrait"/>
+
+    <!-- Estimote service responsible for scanning beacons. -->
+    <service android:name="com.estimote.sdk.BeaconService"
+             android:exported="false"/>
+  </application>
+
+</manifest>
