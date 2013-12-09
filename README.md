@@ -70,7 +70,7 @@ Example distance app is located in [DistanceDemo](https://github.com/Estimote/An
 
   // Should be invoked in #onStop.
   try {
-    beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+    beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS);
   } catch (RemoteException e) {
     Log.e(TAG, "Cannot stop but it does not matter now", e);
   }
