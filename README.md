@@ -49,7 +49,7 @@ Example distance app is located in [DistanceDemo](https://github.com/Estimote/An
   private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
   private static final Region ALL_ESTIMOTE_BEACONS = new Region(ESTIMOTE_PROXIMITY_UUID, null, null)
 
-  // Should be invoked in #onCreate
+  // Should be invoked in #onCreate.
   BeaconManager beaconManager = new BeaconManager(context);
   beaconManager.setRangingListener(new BeaconManager.RangingListener() {
     @Override public void onBeaconsDiscovered(Region region, final List beacons) {
@@ -57,7 +57,7 @@ Example distance app is located in [DistanceDemo](https://github.com/Estimote/An
     }
   });
 
-  // Should be invoked in #onStart
+  // Should be invoked in #onStart.
   beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
     @Override public void onServiceReady() {
       try {
