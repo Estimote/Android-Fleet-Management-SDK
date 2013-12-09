@@ -2,7 +2,7 @@
 
 ## Overview ##
 
-Estimote SDK for Android is a library to interact with Estimote beacons.
+Estimote SDK for Android is a library to interact with iBeacons. SDK requires Android 4.3 or above and works on devices with Bluetooth Low Energy.
 
 It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All name conventions come from iBeacon library from iOS and from Estimote iOS library.
 
@@ -25,6 +25,18 @@ Apps can use `startRanging` method of `BeaconsManager` class to determine relati
 
 ## Installation ##
 
+1. Copy [estimote-sdk-preview.jar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.jar) along with [guava-15.0.jar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/guava-15.0.jar) to your `libs` directory.
+2. Add following permissions and service declaration to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.BLUETOOTH"/>
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+```
+
+```xml
+<service android:name="com.estimote.sdk.BeaconService"
+         android:exported="false"/>
+```
 
 ## Usage ##
 
