@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.estimote.sdk.Beacon;
+import com.estimote.sdk.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +16,8 @@ import java.util.Comparator;
 
 
 /**
- * Displays basic information about beacon. List is sorted by RSSI of beacon.
+ * Displays basic information about beacon. List is sorted by distance between beacon and device.
+ * @see Utils#computeAccuracy(Beacon)
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
@@ -35,7 +37,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
     Collections.sort(beacons, new Comparator<Beacon>() {
       @Override
       public int compare(Beacon lhs, Beacon rhs) {
-        return rhs.rssi - lhs.rssi;
+        return (int) Math.signum(Utils.computeAccuracy(lhs) - Utils.computeAccuracy(rhs));
       }
     });
     notifyDataSetChanged();
@@ -65,7 +67,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
   private void bind(Beacon beacon, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.macTextView.setText("MAC: " + beacon.macAddress);
+    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.macAddress, Utils.computeAccuracy(beacon)));
     holder.majorTextView.setText("Major: " + beacon.major);
     holder.minorTextView.setText("Minor: " + beacon.minor);
     holder.measuredPowerTextView.setText("MPower: " + beacon.measuredPower);
