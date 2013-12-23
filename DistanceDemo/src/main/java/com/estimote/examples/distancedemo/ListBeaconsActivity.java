@@ -3,14 +3,14 @@ package com.estimote.examples.distancedemo;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
@@ -35,15 +35,10 @@ public class ListBeaconsActivity extends Activity {
   private BeaconManager beaconManager;
   private LeDeviceListAdapter adapter;
 
-  private TextView statusTextView;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-
-    // Initialize status views.
-    statusTextView = (TextView) findViewById(R.id.status);
 
     // Configure device list.
     adapter = new LeDeviceListAdapter(this);
@@ -60,12 +55,20 @@ public class ListBeaconsActivity extends Activity {
         runOnUiThread(new Runnable() {
           @Override
           public void run() {
-            statusTextView.setText("Found beacons: " + beacons.size());
+            getActionBar().setSubtitle("Found beacons: " + beacons.size());
             adapter.replaceWith(beacons);
           }
         });
       }
     });
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.scan_menu, menu);
+    MenuItem refreshItem = menu.findItem(R.id.refresh);
+    refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+    return true;
   }
 
   @Override
@@ -112,14 +115,14 @@ public class ListBeaconsActivity extends Activity {
         connectToService();
       } else {
         Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
-        statusTextView.setText("Bluetooth not enabled");
+        getActionBar().setSubtitle("Bluetooth not enabled");
       }
     }
     super.onActivityResult(requestCode, resultCode, data);
   }
 
   private void connectToService() {
-    statusTextView.setText("Scanning...");
+    getActionBar().setSubtitle("Scanning...");
     adapter.replaceWith(Collections.<Beacon>emptyList());
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override
