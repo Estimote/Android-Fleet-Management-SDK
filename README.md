@@ -56,6 +56,8 @@ Apps can use `startMonitoring` method of `BeaconManager` class to start monitori
 
 Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradle installDebug` when your device is connected to computer.
 
+Demos include samples for ranging beacons, monitoring beacons are calculating distance between beacon and the device.
+
 Quick start with ranging:
 
 ```java
