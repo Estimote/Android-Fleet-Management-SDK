@@ -44,6 +44,7 @@ public class ListBeaconsActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
+    getActionBar().setDisplayHomeAsUpEnabled(true);
 
     // Configure device list.
     adapter = new LeDeviceListAdapter(this);
@@ -77,6 +78,15 @@ public class ListBeaconsActivity extends Activity {
     MenuItem refreshItem = menu.findItem(R.id.refresh);
     refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
     return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      finish();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override
