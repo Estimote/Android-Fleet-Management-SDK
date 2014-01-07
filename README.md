@@ -23,8 +23,19 @@ As Bluetooth Low Energy ranging depends on detecting radio signals, results will
 
 Good way to have consistent ranging results is to use the app in the foreground which means that user holds device in hand (which means the app is on and running).
 
-Apps can use `startRanging` method of `BeaconsManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconsManger` class. Update contains list of currently found beacons. If beacon goes out of range, it will not be present on this list anymore.
+Apps can use `startRanging` method of `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconManger` class. Update contains list of currently found beacons. If beacon goes out of range, it will not be present on this list anymore.
 
+**What is monitoring?**
+
+Region monitoring is term that describes usage of device's Bluetooth to detect when user is in the vicinity of the beacon. You can use this functionality to show alerts or provide context aware information when user enters or exits beacon's region. Beacon's regions are defined by beacon's values:
+
+- proximity UUID: 128-bit unique identifier,
+- major: 16-bit unsigned integer to differentiate between beacons within the same proximity UUID,
+- minor: 16-bit unsigned integer to differentiate between beacons with the same proximity UUID and major value.
+
+Note that all of those values are optional. That means that single region can contain multiple beacons which creates interesting use cases. Consider for example department store that is identified by proximity UUID and major value. Different  sections of the store are differentiated by a different minor values. App can monitor region defined by proximity UUID and major value and provide location-relevant information by distinguishing minor values.
+
+Apps can use `startMonitoring` method of `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with `setMonitoringListener` method of `BeaconsManger` class.
 
 ## Installation ##
 
