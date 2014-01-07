@@ -52,6 +52,8 @@ Apps can use `startMonitoring` method of `BeaconManager` class to start monitori
          android:exported="false"/>
 ```
 
+3. (optional) You can enable debug logging of the Estimote SDK by calling `com.estimote.sdk.utils.L.enableDebugLogging(true)`.
+
 ## Usage and demos ##
 
 Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradle installDebug` when your device is connected to computer.
