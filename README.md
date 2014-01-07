@@ -8,7 +8,7 @@ It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All name 
 
 It allows to:
 - range beacons (scan beacons and optionally filter them by their values),
-- monitor beacons (not implemented yet, on roadmap),
+- monitor beacons (monitoring regions if device has entered/exited region),
 - read beacon's characteristics (not implemented yet, on roadmap).
 
 [Current JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/)
@@ -41,18 +41,20 @@ Apps can use `startRanging` method of `BeaconsManager` class to determine relati
          android:exported="false"/>
 ```
 
-## Usage ##
+## Usage and demos ##
 
-Example distance app is located in [DistanceDemo](https://github.com/Estimote/Android-SDK/tree/master/DistanceDemo) directory.
+Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradle installDebug` when your device is connected to computer.
+
+Quick start with ranging:
 
 ```java
   private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
-  private static final Region ALL_ESTIMOTE_BEACONS = new Region(ESTIMOTE_PROXIMITY_UUID, null, null)
+  private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", ESTIMOTE_PROXIMITY_UUID, null, null)
 
   // Should be invoked in #onCreate.
   BeaconManager beaconManager = new BeaconManager(context);
   beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-    @Override public void onBeaconsDiscovered(Region region, final List beacons) {
+    @Override public void onBeaconsDiscovered(Region region, List<Beacon> beacons) {
       Log.d(TAG, "Ranged beacons: " + beacons);
     }
   });
@@ -80,6 +82,13 @@ Example distance app is located in [DistanceDemo](https://github.com/Estimote/An
 ```
 
 ## Changelog ##
+
+* 0.2 (January 7, 2014)
+ * *IMPORTANT*: package changes BeaconService is now in `com.estimote.sdk.service service`. You need to update your `AndroidManifest.xml` service definition to `com.estimote.sdk.service.BeaconService`.
+ * Support for monitoring regions in BeaconManager.
+ * Region class: it is mandatory to provide region id in its constructor. This matches CLRegion/ESTBeaconRegion from iOS.
+ * Beacon, Region classes now follow Java bean conventions (that is getXXX for accessing properties).
+ * Debug logging is disabled by default. You can enable it via `com.estimote.sdk.utils.L#enableDebugLogging(boolean)`.
 
 * 0.1 (December 9, 2013)
  * Initial version.

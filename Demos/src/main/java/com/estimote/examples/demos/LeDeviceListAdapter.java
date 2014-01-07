@@ -1,4 +1,4 @@
-package com.estimote.examples.distancedemo;
+package com.estimote.examples.demos;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -67,11 +67,11 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
   private void bind(Beacon beacon, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.macAddress, Utils.computeAccuracy(beacon)));
-    holder.majorTextView.setText("Major: " + beacon.major);
-    holder.minorTextView.setText("Minor: " + beacon.minor);
-    holder.measuredPowerTextView.setText("MPower: " + beacon.measuredPower);
-    holder.rssiTextView.setText("RSSI: " + beacon.rssi);
+    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
+    holder.majorTextView.setText("Major: " + beacon.getMajor());
+    holder.minorTextView.setText("Minor: " + beacon.getMinor());
+    holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+    holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
   }
 
   private View inflateIfRequired(View view, int position, ViewGroup parent) {

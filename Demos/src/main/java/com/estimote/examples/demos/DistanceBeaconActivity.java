@@ -1,4 +1,4 @@
-package com.estimote.examples.distancedemo;
+package com.estimote.examples.demos;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,10 +15,6 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.Utils;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -30,17 +26,9 @@ public class DistanceBeaconActivity extends Activity {
 
   private static final String TAG = DistanceBeaconActivity.class.getSimpleName();
 
-  private static final String EXTRAS_BEACON = "beacon";
-
   // Y positions are relative to height of bg_distance image.
   private static final double RELATIVE_START_POS = 320.0 / 1110.0;
   private static final double RELATIVE_STOP_POS = 885.0 / 1110.0;
-
-  public static Intent createIntent(Context context, Beacon beacon) {
-    Intent intent = new Intent(context, DistanceBeaconActivity.class);
-    intent.putExtra(EXTRAS_BEACON, beacon);
-    return intent;
-  }
 
   private BeaconManager beaconManager;
   private Beacon beacon;
@@ -58,8 +46,8 @@ public class DistanceBeaconActivity extends Activity {
     setContentView(R.layout.distance_view);
     dotView = findViewById(R.id.dot);
 
-    beacon = getIntent().getParcelableExtra(EXTRAS_BEACON);
-    region = new Region(beacon.proximityUUID, beacon.major, beacon.minor);
+    beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
+    region = new Region("regionid", beacon.getProximityUUID(), beacon.getMajor(), beacon.getMinor());
     if (beacon == null) {
       Toast.makeText(this, "Beacon not found in intent extras", Toast.LENGTH_LONG).show();
       finish();
@@ -76,7 +64,7 @@ public class DistanceBeaconActivity extends Activity {
             // Just in case if there are multiple beacons with the same uuid, major, minor.
             Beacon foundBeacon = null;
             for (Beacon rangedBeacon : rangedBeacons) {
-              if (rangedBeacon.macAddress.equals(beacon.macAddress)) {
+              if (rangedBeacon.getMacAddress().equals(beacon.getMacAddress())) {
                 foundBeacon = rangedBeacon;
               }
             }

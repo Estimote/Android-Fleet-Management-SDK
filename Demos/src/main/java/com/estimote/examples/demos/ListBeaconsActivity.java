@@ -1,4 +1,4 @@
-package com.estimote.examples.distancedemo;
+package com.estimote.examples.demos;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -15,12 +15,14 @@ import android.widget.Toast;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
+import com.estimote.sdk.utils.L;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Displays list of found beacons sorted by RSSI.
+ * Starts new activity with selected beacon if activity was provided.
  *
  * @author wiktorgworek@google.com (Wiktor Gworek)
  */
@@ -28,9 +30,12 @@ public class ListBeaconsActivity extends Activity {
 
   private static final String TAG = ListBeaconsActivity.class.getSimpleName();
 
+  public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
+  public static final String EXTRAS_BEACON = "extrasBeacon";
+
   private static final int REQUEST_ENABLE_BT = 1234;
   private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
-  private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region(ESTIMOTE_PROXIMITY_UUID, null, null);
+  private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", ESTIMOTE_PROXIMITY_UUID, null, null);
 
   private BeaconManager beaconManager;
   private LeDeviceListAdapter adapter;
@@ -45,6 +50,9 @@ public class ListBeaconsActivity extends Activity {
     ListView list = (ListView) findViewById(R.id.device_list);
     list.setAdapter(adapter);
     list.setOnItemClickListener(createOnItemClickListener());
+
+    // Configure verbose debug logging.
+    L.enableDebugLogging(true);
 
     // Configure BeaconManager.
     beaconManager = new BeaconManager(this);
@@ -142,7 +150,16 @@ public class ListBeaconsActivity extends Activity {
     return new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(DistanceBeaconActivity.createIntent(ListBeaconsActivity.this, adapter.getItem(position)));
+        if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
+          try {
+            Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
+            Intent intent = new Intent(ListBeaconsActivity.this, clazz);
+            intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+            startActivity(intent);
+          } catch (ClassNotFoundException e) {
+            Log.e(TAG, "Finding class by name failed", e);
+          }
+        }
       }
     };
   }

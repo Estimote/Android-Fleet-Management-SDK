@@ -1,4 +1,4 @@
-package com.estimote.examples.distancedemo;
+package com.estimote.examples.demos;
 
 import android.content.Context;
 import android.graphics.Canvas;
