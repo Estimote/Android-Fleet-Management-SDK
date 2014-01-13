@@ -25,3 +25,7 @@ android {
 dependencies {
   compile files('../EstimoteSDK/estimote-sdk-preview.jar', '../EstimoteSDK/guava-15.0.jar')
 }
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.8'
+}
