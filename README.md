@@ -56,7 +56,7 @@ Apps can use `startMonitoring` method of `BeaconManager` class to start monitori
 
 ## Usage and demos ##
 
-Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradle installDebug` when your device is connected to computer.
+Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` when your device is connected to computer.
 
 Demos include samples for ranging beacons, monitoring beacons are calculating distance between beacon and the device.
 
@@ -64,7 +64,7 @@ Quick start with ranging:
 
 ```java
   private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
-  private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", ESTIMOTE_PROXIMITY_UUID, null, null)
+  private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", ESTIMOTE_PROXIMITY_UUID, null, null);
 
   // Should be invoked in #onCreate.
   BeaconManager beaconManager = new BeaconManager(context);
