@@ -2,38 +2,36 @@
 
 ## Overview ##
 
-Estimote SDK for Android is a library to interact with iBeacons. SDK requires Android 4.3 or above and works on devices with Bluetooth Low Energy.
+Estimote SDK for Android is a library to allow interaction with iBeacons. The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
 
-It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All name conventions come from iBeacon library from iOS and from Estimote iOS library.
+It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All naming conventions come from the iBeacon library for iOS and the Estimote iOS library.
 
-It allows to:
-- range beacons (scan beacons and optionally filter them by their values),
-- monitor beacons (monitoring regions if device has entered/exited region),
-- read beacon's characteristics (not implemented yet, on roadmap).
+It allows for:
+- beacon ranging (scan beacons and optionally filters them by their values)
+- beacon monitoring (monitors regions for those devices that have entered/exited a region)
+- beacon characteristic probing (to be implemented)
 
 [Current JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/)
 
 **What is ranging?**
 
-Ranging allows apps to know the relative distance between a device and beacons. This can be very valuable. Consider for example of an indoor location app of department store. App can know in which department (such as department of shoes, suits, accessories) user is close-by. Information about this proximity can be use by the app to show fitting guides or offer today's discounts.
+Ranging allows apps to know the relative distance between a device and beacons. This can be very valuable. Consider for example of an indoor location app of department store. The app can determine which department (such footwear, clothing, accessories etc) is closest by. Information about this proximity can be employed by the app to show fitting guides or offer discounts.
 
-As Bluetooth Low Energy ranging depends on detecting radio signals, results will vary depending on placements of Estimote beacon and user's device:
-- device being in user's hands, in a bag, or user's jean's pocket will produce different results,
-- if there is clear line of sight between a device and a beacon gives better results than having beacon hidden between shelves.
+As Bluetooth Low Energy ranging depends on detecting radio signals, results will vary depending on the placement of Estimote beacons and whether a user's mobile device is in-hand, in a bag or a pocket. Clear line of sight between a mobile device and a beacon will yield better results so it is recommended that Estimote beacons not be hidden between shelves.
 
-Good way to have consistent ranging results is to use the app in the foreground which means that user holds device in hand (which means the app is on and running).
+To enjoy consistent ranging it is good practice to use the app in the foreground while the user is holding the device in-hand (which means the app is on and running).
 
-Apps can use `startRanging` method of `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconManger` class. Update contains list of currently found beacons. If beacon goes out of range, it will not be present on this list anymore.
+Apps can use `startRanging` method of `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconManger` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
 
 **What is monitoring?**
 
-Region monitoring is term that describes usage of device's Bluetooth to detect when user is in the vicinity of the beacon. You can use this functionality to show alerts or provide context aware information when user enters or exits beacon's region. Beacon's regions are defined by beacon's values:
+Region monitoring is a term used to describe a Bluetooth device's usage and  detect when a user is in the vicinity of beacons. You can use this functionality to show alerts or provide contextual aware information as a user enters or exits  a beacon's region. Beacon's regions are defined by beacon's values:
 
 - proximity UUID: 128-bit unique identifier,
 - major: 16-bit unsigned integer to differentiate between beacons within the same proximity UUID,
 - minor: 16-bit unsigned integer to differentiate between beacons with the same proximity UUID and major value.
 
-Note that all of those values are optional. That means that single region can contain multiple beacons which creates interesting use cases. Consider for example department store that is identified by proximity UUID and major value. Different  sections of the store are differentiated by a different minor values. App can monitor region defined by proximity UUID and major value and provide location-relevant information by distinguishing minor values.
+Note that all of those values are optional. That means that single region can contain multiple beacons which creates interesting use cases. Consider for example a department store that is identified by a particular proximity UUID and major value. Different sections of the store are differentiated further by a different minor value. An app can monitor region defined by their proximity UUID and major value to provide location-relevant information by distinguishing minor values.
 
 Apps can use `startMonitoring` method of `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with `setMonitoringListener` method of `BeaconsManger` class.
 
@@ -51,12 +49,11 @@ Apps can use `startMonitoring` method of `BeaconManager` class to start monitori
 <service android:name="com.estimote.sdk.BeaconService"
          android:exported="false"/>
 ```
-
-3. (optional) You can enable debug logging of the Estimote SDK by calling `com.estimote.sdk.utils.L.enableDebugLogging(true)`.
+(optional) You can enable debug logging of the Estimote SDK by calling `com.estimote.sdk.utils.L.enableDebugLogging(true)`.
 
 ## Usage and demos ##
 
-Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` when your device is connected to computer.
+Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` in terminal when your device is connected to computer.
 
 Demos include samples for ranging beacons, monitoring beacons are calculating distance between beacon and the device.
 
