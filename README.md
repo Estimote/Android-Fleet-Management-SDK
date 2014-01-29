@@ -21,7 +21,7 @@ As Bluetooth Low Energy ranging depends on detecting radio signals, results will
 
 To enjoy consistent ranging it is good practice to use the app in the foreground while the user is holding the device in-hand (which means the app is on and running).
 
-Apps can use `startRanging` method of `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconManger` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
+Apps can use `startRanging` method of `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconManager` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
 
 **What is monitoring?**
 
@@ -33,7 +33,7 @@ Region monitoring is a term used to describe a Bluetooth device's usage and  det
 
 Note that all of those values are optional. That means that single region can contain multiple beacons which creates interesting use cases. Consider for example a department store that is identified by a particular proximity UUID and major value. Different sections of the store are differentiated further by a different minor value. An app can monitor region defined by their proximity UUID and major value to provide location-relevant information by distinguishing minor values.
 
-Apps can use `startMonitoring` method of `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with `setMonitoringListener` method of `BeaconsManger` class.
+Apps can use `startMonitoring` method of `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with `setMonitoringListener` method of `BeaconsManager` class.
 
 ## Installation ##
 
@@ -46,7 +46,7 @@ Apps can use `startMonitoring` method of `BeaconManager` class to start monitori
 ```
 
 ```xml
-<service android:name="com.estimote.sdk.BeaconService"
+<service android:name="com.estimote.sdk.service.BeaconService"
          android:exported="false"/>
 ```
 (optional) You can enable debug logging of the Estimote SDK by calling `com.estimote.sdk.utils.L.enableDebugLogging(true)`.
