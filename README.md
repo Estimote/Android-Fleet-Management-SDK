@@ -95,6 +95,11 @@ Quick start with ranging:
 
 ## Changelog ##
 
+* 0.3 (February 11, 2014)
+ * Background monitoring is more robust and using AlarmService to invoke scanning.
+ * Default values for background monitoring were changed. Scanning is performed for 5 seconds and then service sleeps for 25 seconds. Those values can be changed with BeaconManager#setBackgroundScanPeriod.
+ * Beacons reported in RangingListener#onBeaconsDiscovered are sorted by accuracy (estimated distance between device and beacon).
+ * Bug fixes.
 * 0.2 (January 7, 2014)
  * *IMPORTANT*: package changes BeaconService is now in `com.estimote.sdk.service service`. You need to update your `AndroidManifest.xml` service definition to `com.estimote.sdk.service.BeaconService`.
  * Support for monitoring regions in BeaconManager.
