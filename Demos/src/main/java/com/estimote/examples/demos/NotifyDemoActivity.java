@@ -15,6 +15,8 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.estimote.sdk.BeaconManager.MonitoringListener;
 
 /**
@@ -45,6 +47,11 @@ public class NotifyDemoActivity extends Activity {
     region = new Region("regionId", beacon.getProximityUUID(), beacon.getMajor(), beacon.getMinor());
     notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     beaconManager = new BeaconManager(this);
+
+    // Default values are 5s of scanning and 25s of waiting time to save CPU cycles.
+    // In order for this demo to be more responsive and immediate we lower down those values.
+    beaconManager.setBackgroundScanPeriod(TimeUnit.SECONDS.toMillis(1), 0);
+
     beaconManager.setMonitoringListener(new MonitoringListener() {
       @Override
       public void onEnteredRegion(Region region) {

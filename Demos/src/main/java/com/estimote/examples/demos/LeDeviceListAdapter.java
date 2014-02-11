@@ -16,8 +16,7 @@ import java.util.Comparator;
 
 
 /**
- * Displays basic information about beacon. List is sorted by distance between beacon and device.
- * @see Utils#computeAccuracy(Beacon)
+ * Displays basic information about beacon.
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
@@ -34,12 +33,6 @@ public class LeDeviceListAdapter extends BaseAdapter {
   public void replaceWith(Collection<Beacon> newBeacons) {
     this.beacons.clear();
     this.beacons.addAll(newBeacons);
-    Collections.sort(beacons, new Comparator<Beacon>() {
-      @Override
-      public int compare(Beacon lhs, Beacon rhs) {
-        return (int) Math.signum(Utils.computeAccuracy(lhs) - Utils.computeAccuracy(rhs));
-      }
-    });
     notifyDataSetChanged();
   }
 
