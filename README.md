@@ -100,7 +100,7 @@ Quick start with ranging:
 ## Changelog ##
 
 * 0.3.1 (February 11, 2014)
- * Fixes bug when simulated beacons were not seed even when using Estimote's proximity UUID.
+ * Fixes bug when simulated beacons were not seen even when using Estimote's proximity UUID.
 * 0.3 (February 11, 2014)
  * Background monitoring is more robust and using AlarmService to invoke scanning.
  * Default values for background monitoring were changed. Scanning is performed for 5 seconds and then service sleeps for 25 seconds. Those values can be changed with BeaconManager#setBackgroundScanPeriod.
