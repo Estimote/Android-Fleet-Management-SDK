@@ -11,7 +11,9 @@ It allows for:
 - beacon monitoring (monitors regions for those devices that have entered/exited a region)
 - beacon characteristic probing (to be implemented)
 
-[Current JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/)
+Docs: 
+ - [Current JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/)
+ - [Estimote Community Portal](http://community.estimote.com/hc/en-us)
 
 **What is ranging?**
 
