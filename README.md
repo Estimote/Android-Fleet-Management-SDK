@@ -9,7 +9,7 @@ It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All namin
 It allows for:
 - beacon ranging (scan beacons and optionally filters them by their values)
 - beacon monitoring (monitors regions for those devices that have entered/exited a region)
-- beacon characteristic probing (to be implemented)
+- beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
 
 Docs: 
  - [Current JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/)
