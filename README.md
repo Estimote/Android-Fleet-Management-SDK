@@ -61,7 +61,7 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` in terminal when your device is connected to computer.
 
-Demos include samples for ranging beacons, monitoring beacons are calculating distance between beacon and the device.
+Demos include samples for ranging beacons, monitoring beacons, calculating distance between beacon and the device and also changing minor value of the beacon.
 
 Quick start with ranging:
 
