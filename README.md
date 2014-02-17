@@ -43,7 +43,7 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 ## Installation ##
 
-1. Copy [estimote-sdk-preview.jar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.jar) along with [guava-15.0.jar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/guava-15.0.jar) to your `libs` directory.
+1. Copy [estimote-sdk-preview.jar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.jar) to your `libs` directory.
 2. Add following permissions and service declaration to your `AndroidManifest.xml`:
 
 ```xml
@@ -101,6 +101,9 @@ Quick start with ranging:
 
 ## Changelog ##
 
+* 0.4 (February 17, 2014)
+ * Introducing ability to change beacon's UUID, major, minor, broadcasting power, advertising interval (see BeaconConnection class).
+ * Dropping Guava dependency.
 * 0.3.1 (February 11, 2014)
  * Fixes bug when simulated beacons were not seen even when using Estimote's proximity UUID.
 * 0.3 (February 11, 2014)
