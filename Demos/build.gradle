@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-  compile files('../EstimoteSDK/estimote-sdk-preview.jar', '../EstimoteSDK/guava-15.0.jar')
+  compile files('../EstimoteSDK/estimote-sdk-preview.jar')
 }
 
 task wrapper(type: Wrapper) {
