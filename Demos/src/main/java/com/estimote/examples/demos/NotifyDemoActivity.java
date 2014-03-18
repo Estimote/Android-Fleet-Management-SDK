@@ -15,6 +15,7 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.estimote.sdk.BeaconManager.MonitoringListener;
@@ -54,7 +55,7 @@ public class NotifyDemoActivity extends Activity {
 
     beaconManager.setMonitoringListener(new MonitoringListener() {
       @Override
-      public void onEnteredRegion(Region region) {
+      public void onEnteredRegion(Region region, List<Beacon> beacons) {
         postNotification("Entered region");
       }
 
