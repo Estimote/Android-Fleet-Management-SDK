@@ -101,6 +101,10 @@ Quick start with ranging:
 
 ## Changelog ##
 
+* 0.4.1 (March 18, 2014)
+ * CAN BREAK BUILD: MonitoringListener returns list of beacons the triggered enter region event (https://github.com/Estimote/Android-SDK/issues/18)
+ * Better messaging when BeaconManager cannot start service to scan beacons (https://github.com/Estimote/Android-SDK/issues/25)
+ * Fixed bug in SDK when other beacons are around (https://github.com/Estimote/Android-SDK/issues/27)
 * 0.4 (February 17, 2014)
  * Introducing ability to change beacon's UUID, major, minor, broadcasting power, advertising interval (see BeaconConnection class).
  * Dropping Guava dependency.
