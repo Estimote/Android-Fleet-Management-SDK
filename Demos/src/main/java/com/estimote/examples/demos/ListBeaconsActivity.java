@@ -17,7 +17,6 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.utils.L;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,8 +34,6 @@ public class ListBeaconsActivity extends Activity {
   public static final String EXTRAS_BEACON = "extrasBeacon";
 
   private static final int REQUEST_ENABLE_BT = 1234;
-  private static final String ESTIMOTE_BEACON_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
-  private static final String ESTIMOTE_IOS_PROXIMITY_UUID = "8492E75F-4FD6-469D-B132-043FE94921D8";
   private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
   private BeaconManager beaconManager;
@@ -68,24 +65,12 @@ public class ListBeaconsActivity extends Activity {
           public void run() {
             // Note that beacons reported here are already sorted by estimated
             // distance between device and beacon.
-            List<Beacon> estimoteBeacons = filterBeacons(beacons);
-            getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
-            adapter.replaceWith(estimoteBeacons);
+            getActionBar().setSubtitle("Found beacons: " + beacons.size());
+            adapter.replaceWith(beacons);
           }
         });
       }
     });
-  }
-
-  private List<Beacon> filterBeacons(List<Beacon> beacons) {
-    List<Beacon> filteredBeacons = new ArrayList<Beacon>(beacons.size());
-    for (Beacon beacon : beacons) {
-      if (beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_BEACON_PROXIMITY_UUID)
-          || beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_IOS_PROXIMITY_UUID)) {
-        filteredBeacons.add(beacon);
-      }
-    }
-    return filteredBeacons;
   }
 
   @Override
