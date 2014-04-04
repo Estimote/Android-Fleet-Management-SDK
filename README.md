@@ -99,6 +99,48 @@ Quick start with ranging:
   beaconManager.disconnect();
 ```
 
+## FAQ ##
+
+
+1. Where are JavaDocs for Estimote Android library?
+
+  They are published on [GitHub pages](http://estimote.github.io/Android-SDK/JavaDocs/).
+
+2. Android Bluetooth stack is crashing (“Bluetooth Share has stopped” alert)
+
+  You may observe in logs either of those two:
+   * process com.android.bluetooth crashed with SIGSEGV and backtrace leading to Bluetooth native driver
+   * exception similar to this one:
+A/EstimoteSDK(2413): com.estimote.sdk.service.BeaconService.stopScanning:285 BluetoothAdapter throws unexpected exception
+A/EstimoteSDK(2413): java.lang.NullPointerException
+A/EstimoteSDK(2413): at android.bluetooth.BluetoothAdapter$GattCallbackWrapper.stopLeScan(BluetoothAdapter.java:1596)
+A/EstimoteSDK(2413): at android.bluetooth.BluetoothAdapter.stopLeScan(BluetoothAdapter.java:1540)
+A/EstimoteSDK(2413): at com.estimote.sdk.service.BeaconService.stopScanning(BeaconService.java:283)
+A/EstimoteSDK(2413): at com.estimote.sdk.service.BeaconService.access$700(BeaconService.java:60)
+A/EstimoteSDK(2413): at com.estimote.sdk.service.BeaconService$1$1.run(BeaconService.java:545)
+A/EstimoteSDK(2413): at android.os.Handler.handleCallback(Handler.java:733)
+A/EstimoteSDK(2413): at android.os.Handler.dispatchMessage(Handler.java:95)
+A/EstimoteSDK(2413): at android.os.Looper.loop(Looper.java:136)
+A/EstimoteSDK(2413): at android.os.HandlerThread.run(HandlerThread.java:61)
+
+  Resolution: turn on Airplane Mode on the device for a few seconds. If it does not help, please do try factory reset.
+
+  This happens only when hundreds of Bluetooth Low Energy devices are around (hackathons, dev shops). Bluetooth library has low-level bug which activates only of there many many BLE devices around.
+
+  This will not be seen by end users since they do not operate in the environment where there are many many Bluetooth devices.
+
+  [Issue is already reported to Android](https://code.google.com/p/android/issues/detail?id=67272) and hopefully it will be fixed within next release.
+
+  For more detailed info please see those [two StackOverflow](http://stackoverflow.com/questions/22048721/bluetooth-share-has-stopped-working-when-performing-lescan) [threads](http://stackoverflow.com/questions/22476951/bluetooth-share-has-stopped-alert-when-detecting-ibeacons-on-android).
+
+3. I did not find answer here. Where I can seek for help?
+
+  You have three options:
+   * file an issue on GitHub for [Estimote SDK for Android](https://github.com/Estimote/Android-SDK/issues) if it is highly technical
+   * check our [Community Portal](https://community.estimote.com/hc/en-us) to get answers for most common questions related to our Hardware and Software, you can post questions there
+   * ask a question on [StackOverflow.com](http://stackoverflow.com) with iBeacon, Estimote, Android tags
+
+
 ## Changelog ##
 
 * 0.4.1 (March 18, 2014)
