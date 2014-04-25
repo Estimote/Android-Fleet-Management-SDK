@@ -133,6 +133,8 @@ A/EstimoteSDK(2413): at android.os.HandlerThread.run(HandlerThread.java:61)
   [Issue is already reported to Android](https://code.google.com/p/android/issues/detail?id=67272) and hopefully it will be fixed within next release.
 
   For more detailed info please see those [two StackOverflow](http://stackoverflow.com/questions/22048721/bluetooth-share-has-stopped-working-when-performing-lescan) [threads](http://stackoverflow.com/questions/22476951/bluetooth-share-has-stopped-alert-when-detecting-ibeacons-on-android).
+  
+  There is a workaround around this bug. Please read the [article](http://developer.radiusnetworks.com/2014/04/02/a-solution-for-android-bluetooth-crashes.html) and check out [Bluetooth crash resolver project on GitHub](https://github.com/RadiusNetworks/bluetooth-crash-resolver).
 
 3. I did not find answer here. Where I can seek for help?
 
