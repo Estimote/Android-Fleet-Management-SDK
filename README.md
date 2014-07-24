@@ -2,7 +2,7 @@
 
 ## Overview ##
 
-Estimote SDK for Android is a library to allow interaction with iBeacons. The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
+Estimote SDK for Android is a library to allow interaction with Estimote beacons. The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
 
 It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All naming conventions come from the iBeacon library for iOS and the Estimote iOS library.
 
