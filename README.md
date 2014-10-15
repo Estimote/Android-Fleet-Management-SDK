@@ -2,12 +2,12 @@
 
 ## Overview ##
 
-Estimote SDK for Android is a library to allow interaction with Estimote beacons. The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
+The Estimote SDK for Android is a library that allows interaction with Estimote beacons. The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
 
-It mimics [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All naming conventions come from the iBeacon library for iOS and the Estimote iOS library.
+The Android SDK mimics the [Estimote SDK for iOS](https://github.com/Estimote/iOS-SDK). All naming conventions come from the iBeacon library for iOS and the Estimote iOS library.
 
 It allows for:
-- beacon ranging (scan beacons and optionally filters them by their values)
+- beacon ranging (scans beacons and optionally filters them by their properties)
 - beacon monitoring (monitors regions for those devices that have entered/exited a region)
 - beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
 
@@ -17,29 +17,29 @@ Docs:
 
 **What is ranging?**
 
-Ranging allows apps to know the relative distance between a device and beacons. This can be very valuable. Consider for example of an indoor location app of department store. The app can determine which department (such footwear, clothing, accessories etc) is closest by. Information about this proximity can be employed by the app to show fitting guides or offer discounts.
+Ranging allows apps to know the relative distance between a device and beacons. This can be very valuable – consider for example an indoor location app of a department store. The app can determine which department (such as footwear, clothing, accessories etc) you're closest by. Information about this proximity can be used within the app to show fitting guides or offer discounts.
 
 As Bluetooth Low Energy ranging depends on detecting radio signals, results will vary depending on the placement of Estimote beacons and whether a user's mobile device is in-hand, in a bag or a pocket. Clear line of sight between a mobile device and a beacon will yield better results so it is recommended that Estimote beacons not be hidden between shelves.
 
 To enjoy consistent ranging it is good practice to use the app in the foreground while the user is holding the device in-hand (which means the app is on and running).
 
-Apps can use `startRanging` method of `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with `setRangingListener` method of `BeaconManager` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
+Apps can use the `startRanging` method of the `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with the `setRangingListener` method of the `BeaconManager` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
 
-Ranging is designed to be used in apps in foreground.
+Ranging is designed to be used for apps running in the foreground.
 
 **What is monitoring?**
 
-Region monitoring is a term used to describe a Bluetooth device's usage and  detect when a user is in the vicinity of beacons. You can use this functionality to show alerts or provide contextual aware information as a user enters or exits  a beacon's region. Beacon's regions are defined by beacon's values:
+Region monitoring is a term used to describe a Bluetooth device's usage and detect when a user is in the vicinity of beacons. You can use this functionality to show alerts or provide contextually aware information as a user enters or exits a beacon region. Beacon regions are defined by the following beacon properties:
 
 - proximity UUID: 128-bit unique identifier,
 - major: 16-bit unsigned integer to differentiate between beacons within the same proximity UUID,
 - minor: 16-bit unsigned integer to differentiate between beacons with the same proximity UUID and major value.
 
-Note that all of those values are optional. That means that single region can contain multiple beacons which creates interesting use cases. Consider for example a department store that is identified by a particular proximity UUID and major value. Different sections of the store are differentiated further by a different minor value. An app can monitor region defined by their proximity UUID and major value to provide location-relevant information by distinguishing minor values.
+Note that all of these values are optional, meaning that a single region can encompass multiple beacons — which creates interesting use cases. Consider for example a department store that is identified by a particular proximity UUID and major value. Different sections of the store are differentiated further by a different minor value. An app can monitor region defined by their proximity UUID and major value to provide location-relevant information by distinguishing minor values.
 
-Apps can use `startMonitoring` method of `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with `setMonitoringListener` method of `BeaconsManager` class.
+Apps can use the `startMonitoring` method of the `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with the `setMonitoringListener` method of the `BeaconsManager` class.
 
-Monitoring is designed to perform periodic scans in the background. By default it scans for 5 seconds and sleeps 25 seconds. That means that it can take by default up to 30 seconds to detect entering or exiting a region. Default behaviour can be changed via `BeaconManager#setBackgroundScanPeriod`.
+Monitoring is designed to perform periodic scans in the background. By default it scans for 5 seconds and sleeps for 25 seconds. This means that it can take by default up to 30 seconds to detect entering or exiting a region. Default behaviour can be changed via `BeaconManager#setBackgroundScanPeriod`.
 
 ## Installation ##
 
