@@ -143,6 +143,9 @@ A/EstimoteSDK(2413): at android.os.HandlerThread.run(HandlerThread.java:61)
    * check our [Community Portal](https://community.estimote.com/hc/en-us) to get answers for most common questions related to our Hardware and Software, you can post questions there
    * ask a question on [StackOverflow.com](http://stackoverflow.com) with iBeacon, Estimote, Android tags
 
+4. How to run demos from Eclipse?
+
+  Eclipse cannot import Gradle projects out of the box. See [tutorial how to do it](https://github.com/Estimote/Android-SDK/wiki/Running-SDK-demos-from-Eclipse).
 
 ## Changelog ##
 
