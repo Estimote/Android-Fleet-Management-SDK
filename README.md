@@ -149,6 +149,9 @@ A/EstimoteSDK(2413): at android.os.HandlerThread.run(HandlerThread.java:61)
 
 ## Changelog ##
 
+* 0.4.3 (November 12, 2014):
+ - Fixes https://github.com/Estimote/Android-SDK/issues/59: compatibilty with Android L
+
 * 0.4.2 (June 24, 2014):
  - Fixes https://github.com/Estimote/Android-SDK/issues/55: it is safe to use library from remote process
 
