@@ -46,19 +46,34 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 ## Installation ##
 
-1. Copy [estimote-sdk-preview.jar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.jar) to your `libs` directory.
-2. Add following permissions and service declaration to your `AndroidManifest.xml`:
+*Note*: SDK version 0.5 switched from jar distribution to [aar archive](http://tools.android.com/tech-docs/new-build-system/aar-format). There is no longer need to change your `AndroidManifest.xml` as it is being done automatically.
 
-```xml
-<uses-permission android:name="android.permission.BLUETOOTH"/>
-<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-```
+1. Create `libs` directory inside your project and copy there [estimote-sdk-preview.aar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.aar).
+2. In your `build.gradle` add `flatDir` entry to your repositories
 
-```xml
-<service android:name="com.estimote.sdk.service.BeaconService"
-         android:exported="false"/>
+  ```groovy
+  repositories {
+    mavenCentral()
+      flatDir {
+        dirs 'libs'
+      }
+  }
 ```
-(optional) You can enable debug logging of the Estimote SDK by calling `com.estimote.sdk.utils.L.enableDebugLogging(true)`.
+3. Add dependency to Estimote SDK. All needed permissions (`BLUETOOTH`, `BLUETOOTH_ADMIN` and `INTERNET`) and services will be merged from SDK's `AndroidManifest.xml` to your application's `AndroidManifest.xml`.
+
+  ```groovy
+  dependencies {
+    compile(name:'estimote-sdk-preview', ext:'aar')
+  }
+```
+4. Initialize Estimote SDK in your Application class if you are using [Estimote Cloud](http://cloud.estimote.com).
+
+  ```java
+  //  App ID & App Token can be taken from App section of Estimote Cloud.
+  EstimoteSDK.initialize(applicationContext, appId, appToken);
+  // Optional, debug logging.
+  EstimoteSDK.enableDebugLogging(true);
+  ```
 
 ## Usage and demos ##
 
