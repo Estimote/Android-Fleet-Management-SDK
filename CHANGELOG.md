@@ -1,3 +1,26 @@
+Changelog
+=====================
+
+## 0.5 (April 17, 2015)
+ - Welcome back! We have added support for [Estimote Cloud](http://cloud.estimote.com). You can access it via `EstimoteCloud` class. Remember first to provide your App ID & App Token from App section of [Estimote Cloud](http://cloud.estimote.com) via `EstimoteSDK#initialize` method.
+ - From now all connections to beacons needs to be authorized. If a beacon is not registered to your account, you will not be able to connect to it.
+ - If you are using [Estimote Cloud](http://cloud.estimote.com) you need to add `INTERNET` permission to your `AndroidManifest.xml`.
+
+ ```xml
+ <uses-permission android:name="android.permission.INTERNET"/>
+ ```
+ 
+ - Yes, there is single point of initialisation of the SDK.
+
+ ```java
+ EstimoteSDK.initialize(applicationContext, appId, appToken);
+ EstimoteSDK.enableDebugLogging(true);
+ ```
+ - All exceptions within the SDK has been unified and exposed in `com.estimote.sdk.exception` package.
+ 
+ - That means some **breaking changes**:
+	 - `L` class is no longer available, in order to turn on debug logging use `EstimoteSDK` class.
+	 - `BeaconConnection.ConnectionCallback` & `BeaconConnection.WriteCallback` methods have been changed to contain apropriate exception when happens.
 
 ## 0.4.3 (November 12, 2014):
  - Fixes https://github.com/Estimote/Android-SDK/issues/59: compatibilty with Android L
