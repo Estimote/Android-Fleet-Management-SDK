@@ -2,9 +2,9 @@ Changelog
 =====================
 
 ## 0.5 (April 17, 2015)
+- From now Estimote SDK for Android is distributed as [AAR archive](http://tools.android.com/tech-docs/new-build-system/aar-format) rather than jar. That means that you do not need to change your `AndroidManifest.xml`. SDK's `AndroidManifest.xml` will be merged with your application's `AndroidManifest.xml`. See [installation guide](https://github.com/Estimote/Android-SDK#installation) how to add library to your project.
  - Welcome back! We have added support for [Estimote Cloud](http://cloud.estimote.com). You can access it via `EstimoteCloud` class. Remember first to provide your App ID & App Token from App section of [Estimote Cloud](http://cloud.estimote.com) via `EstimoteSDK#initialize` method.
  - From now all connections to beacons needs to be authorized. If a beacon is not registered to your account, you will not be able to connect to it.
- - From now Estimote SDK for Android is distributed as AAR archive rather than jar. That means that you do not need to change your `AndroidManifest.xml`. SDK's `AndroidManifest.xml` will be merged with your application's `AndroidManifest.xml`.
  - Estimote SDK's `AndroidManifest.xml` uses `BLUETOOTH`, `BLUETOOTH_ADMIN` and `INTERNET` permissions.
  - Yes, there is single point of initialisation of the SDK.
 
