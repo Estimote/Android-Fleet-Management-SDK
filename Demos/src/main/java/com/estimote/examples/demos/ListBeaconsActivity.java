@@ -14,8 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.EstimoteSDK;
 import com.estimote.sdk.Region;
-import com.estimote.sdk.utils.L;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,9 +50,6 @@ public class ListBeaconsActivity extends Activity {
     ListView list = (ListView) findViewById(R.id.device_list);
     list.setAdapter(adapter);
     list.setOnItemClickListener(createOnItemClickListener());
-
-    // Configure verbose debug logging.
-    L.enableDebugLogging(true);
 
     // Configure BeaconManager.
     beaconManager = new BeaconManager(this);

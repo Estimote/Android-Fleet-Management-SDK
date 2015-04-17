@@ -4,18 +4,18 @@
           android:versionCode="1"
           android:versionName="1.0">
 
-  <uses-sdk
-      android:minSdkVersion="18"
-      android:targetSdkVersion="18"/>
-
   <!-- Needed permissions in order to scan for beacons. -->
   <uses-permission android:name="android.permission.BLUETOOTH"/>
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+  <!-- Needed permission for accessing Estimote Cloud. -->
+  <uses-permission android:name="android.permission.INTERNET"/>
 
   <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
   <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
   <application
+      android:name=".DemosApplication"
       android:label="Estimote Demos"
       android:theme="@android:style/Theme.Holo.Light">
 

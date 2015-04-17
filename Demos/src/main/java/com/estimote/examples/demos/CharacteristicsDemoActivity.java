@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.estimote.sdk.Beacon;
+import com.estimote.sdk.cloud.model.BeaconInfo;
 import com.estimote.sdk.connection.BeaconConnection;
+import com.estimote.sdk.exception.EstimoteDeviceException;
 
 /**
  * Demo that shows how to connect to beacon and change its minor value.
@@ -105,7 +107,7 @@ public class CharacteristicsDemoActivity extends Activity {
         });
       }
 
-      @Override public void onError() {
+      @Override public void onError(EstimoteDeviceException exception) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
             showToast("Minor not updated");
@@ -117,7 +119,7 @@ public class CharacteristicsDemoActivity extends Activity {
 
   private BeaconConnection.ConnectionCallback createConnectionCallback() {
     return new BeaconConnection.ConnectionCallback() {
-      @Override public void onAuthenticated(final BeaconConnection.BeaconCharacteristics beaconChars) {
+      @Override public void onAuthenticated(final BeaconInfo beaconInfo, final BeaconConnection.BeaconCharacteristics beaconChars) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
             statusView.setText("Status: Connected to beacon");
@@ -134,10 +136,12 @@ public class CharacteristicsDemoActivity extends Activity {
         });
       }
 
-      @Override public void onAuthenticationError() {
+      @Override public void onAuthenticationError(final EstimoteDeviceException exception) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
-            statusView.setText("Status: Cannot connect to beacon. Authentication problems.");
+            statusView.setText("Status: Cannot connect to beacon. \n" +
+                "Error: " + exception.getMessage() + "\n" +
+                "Did you change App ID and App Token in DemosApplication?");
           }
         });
       }

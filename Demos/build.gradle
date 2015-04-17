@@ -13,6 +13,9 @@ apply plugin: 'com.android.application'
 
 repositories {
   mavenCentral()
+  flatDir {
+    dirs '../EstimoteSDK'
+  }
 }
 
 android {
@@ -21,7 +24,6 @@ android {
 
   defaultConfig {
     minSdkVersion 18
-    targetSdkVersion 18
   }
 
   compileOptions {
@@ -31,7 +33,7 @@ android {
 }
 
 dependencies {
-  compile files('../EstimoteSDK/estimote-sdk-preview.jar')
+  compile(name:'estimote-sdk-preview', ext:'aar')
 }
 
 task wrapper(type: Wrapper) {
