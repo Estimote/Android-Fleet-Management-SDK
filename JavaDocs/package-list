@@ -1,4 +1,6 @@
 com.estimote.sdk
+com.estimote.sdk.cloud
+com.estimote.sdk.cloud.model
 com.estimote.sdk.connection
+com.estimote.sdk.exception
 com.estimote.sdk.service
-com.estimote.sdk.utils
