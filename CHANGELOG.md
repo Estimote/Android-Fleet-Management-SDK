@@ -9,7 +9,9 @@ Changelog
  - Yes, there is single point of initialisation of the SDK.
 
  ```java
+ //  App ID & App Token can be taken from App section of Estimote Cloud.
  EstimoteSDK.initialize(applicationContext, appId, appToken);
+ // Optional, debug logging.
  EstimoteSDK.enableDebugLogging(true);
  ```
  - All exceptions within the SDK has been unified and exposed in `com.estimote.sdk.exception` package.
