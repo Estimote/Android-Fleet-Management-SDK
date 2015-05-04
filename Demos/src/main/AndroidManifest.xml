@@ -11,6 +11,7 @@
 
   <uses-permission android:name="android.permission.BLUETOOTH"/>
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
 -->
 
@@ -49,6 +50,9 @@
               android:label="Characteristics Demo"
               android:screenOrientation="portrait"/>
 
+      <activity android:name="com.estimote.examples.demos.UpdateDemoActivity"
+                android:label="Update Firmware Demo"
+                android:screenOrientation="portrait"/>
 <!--
     There is no need any longer to declare BeaconService. It is declared in SDK's AndroidManifest.xml
     and it will be merged to your app's AndroidManifest.xml.

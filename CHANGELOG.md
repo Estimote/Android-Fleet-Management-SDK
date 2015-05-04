@@ -1,6 +1,16 @@
 Changelog
 =====================
 
+## 0.6 (May 4, 2015)
+ - You can update update firmware in Estimote beacons from the SDK. There are several ways to do it:
+    - Use `BeaconOta` class to perform firmware update on selected beacon.
+    - Use `BeaconConnection#updateBeacon` which triggers update on the beacon. See updated demos to see how it works.
+    - You can also use Estimote app from Play Store to do that.
+ - Estimote SDK now includes also `android.permission.ACCESS_NETWORK_STATE` permission to determine internet connectivity.
+ - **Breaking changes** (please bear with us, we are approaching stable 1.0 release):
+    - `BeaconConnection`'s `ConnectionCallback#onAuthenticated` method does not return `BeaconCharacteristics` object any more. You can read them directly on `BeaconConnection` object.
+    - For example read reading broadcasting power is just `connection.getBroadcastingPower()`.
+
 ## 0.5 (April 17, 2015)
  - From now Estimote SDK for Android is distributed as [AAR archive](http://tools.android.com/tech-docs/new-build-system/aar-format) rather than jar. That means that you do not need to change your `AndroidManifest.xml`. SDK's `AndroidManifest.xml` will be merged with your application's `AndroidManifest.xml`. See [installation guide](https://github.com/Estimote/Android-SDK#installation) how to add library to your project.
  - Welcome back! We have added support for [Estimote Cloud](http://cloud.estimote.com). You can access it via `EstimoteCloud` class. Remember first to provide your App ID & App Token from App section of [Estimote Cloud](http://cloud.estimote.com) via `EstimoteSDK#initialize` method.
@@ -20,10 +30,10 @@ Changelog
 	 - `L` class is no longer available, in order to turn on debug logging use `EstimoteSDK` class.
 	 - `BeaconConnection.ConnectionCallback` & `BeaconConnection.WriteCallback` methods have been changed to contain apropriate exception when happens.
 
-## 0.4.3 (November 12, 2014):
+## 0.4.3 (November 12, 2014)
  - Fixes https://github.com/Estimote/Android-SDK/issues/59: compatibilty with Android L
 
-## 0.4.2 (June 24, 2014):
+## 0.4.2 (June 24, 2014)
  - Fixes https://github.com/Estimote/Android-SDK/issues/55: it is safe to use library from remote process
 
 ## 0.4.1 (March 18, 2014)

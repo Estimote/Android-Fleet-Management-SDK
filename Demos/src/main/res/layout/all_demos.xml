@@ -23,4 +23,10 @@
       android:layout_height="wrap_content"
       android:text="Change Beacon's Minor Demo"/>
 
+    <Button
+        android:id="@+id/update_demo_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update beacon's firmware demo"/>
+
 </LinearLayout>

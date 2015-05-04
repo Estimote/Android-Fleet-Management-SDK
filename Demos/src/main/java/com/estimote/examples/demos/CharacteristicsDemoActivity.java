@@ -119,16 +119,17 @@ public class CharacteristicsDemoActivity extends Activity {
 
   private BeaconConnection.ConnectionCallback createConnectionCallback() {
     return new BeaconConnection.ConnectionCallback() {
-      @Override public void onAuthenticated(final BeaconInfo beaconInfo, final BeaconConnection.BeaconCharacteristics beaconChars) {
+      @Override public void onAuthenticated(final BeaconInfo beaconInfo) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
             statusView.setText("Status: Connected to beacon");
             StringBuilder sb = new StringBuilder()
                 .append("Major: ").append(beacon.getMajor()).append("\n")
                 .append("Minor: ").append(beacon.getMinor()).append("\n")
-                .append("Advertising interval: ").append(beaconChars.getAdvertisingIntervalMillis()).append("ms\n")
-                .append("Broadcasting power: ").append(beaconChars.getBroadcastingPower()).append(" dBm\n")
-                .append("Battery: ").append(beaconChars.getBatteryPercent()).append(" %");
+                .append("Advertising interval: ").append(connection.getAdvertisingIntervalMillis()).append("ms\n")
+                .append("Broadcasting power: ").append(connection.getBroadcastingPower()).append(" dBm\n")
+                .append("Battery: ").append(connection.getBatteryPercent()).append(" %\n")
+                .append("Firmware: ").append(connection.getSoftwareVersion());
             beaconDetailsView.setText(sb.toString());
             minorEditView.setText(String.valueOf(beacon.getMinor()));
             afterConnectedView.setVisibility(View.VISIBLE);
