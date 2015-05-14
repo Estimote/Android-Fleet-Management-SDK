@@ -46,6 +46,8 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 *Note*: SDK version 0.5 switched from jar distribution to [aar archive](http://tools.android.com/tech-docs/new-build-system/aar-format). There is no longer need to change your `AndroidManifest.xml` as it is being done automatically.
 
+*Eclipse users:* Mark Murphy [on his blog explained](https://commonsware.com/blog/2014/07/03/consuming-aars-eclipse.html) how to use `aar` format in Eclipse.
+
 1. Create `libs` directory inside your project and copy there [estimote-sdk-preview.aar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.aar).
 2. In your `build.gradle` add `flatDir` entry to your repositories
 
