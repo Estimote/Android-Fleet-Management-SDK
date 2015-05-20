@@ -48,6 +48,8 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 *Eclipse users:* Mark Murphy [on his blog explained](https://commonsware.com/blog/2014/07/03/consuming-aars-eclipse.html) how to use `aar` format in Eclipse.
 
+*Note about AAR Manifest Merger*: SDK's `AndroidManifest.xml` will be automatically merged into your app. Right now it declared min SDK level 18. You can override this declaration as [described here](http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger#TOC-tools:overrideLibrary-marker).
+
 1. Create `libs` directory inside your project and copy there [estimote-sdk-preview.aar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk-preview.aar).
 2. In your `build.gradle` add `flatDir` entry to your repositories
 
