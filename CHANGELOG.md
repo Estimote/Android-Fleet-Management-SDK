@@ -1,6 +1,9 @@
 Changelog
 =====================
 
+## 0.6.1 (June 2, 2015)
+ - Fixed authentication issues (#111).
+
 ## 0.6 (May 4, 2015)
  - You can update update firmware in Estimote beacons from the SDK. There are several ways to do it:
     - Use `BeaconOta` class to perform firmware update on selected beacon.
