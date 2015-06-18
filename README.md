@@ -2,11 +2,12 @@
 
 ## Overview ##
 
-The Estimote SDK for Android is a library that allows interaction with Estimote beacons. The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
+The Estimote SDK for Android is a library that allows interaction with [Estimote beacons & stickers](http://estimote.com/#jump-to-products). The SDK system requirements are Android 4.3 or above and Bluetooth Low Energy.
 
 It allows for:
 - beacon ranging (scans beacons and optionally filters them by their properties)
 - beacon monitoring (monitors regions for those devices that have entered/exited a region)
+- nearables (aka stickers) discovery
 - beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
 
 Learn more: 
@@ -79,11 +80,11 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 ## Usage and demos ##
 
-Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` (or `gradlew.bat installDebug` on Windows) in terminal when your device is connected to computer. If you use [Android Studio](http://developer.android.com/tools/studio/index.html) you can just simply open `build.gradle`.
+SDK Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` (or `gradlew.bat installDebug` on Windows) in terminal when your device is connected to computer. If you use [Android Studio](http://developer.android.com/tools/studio/index.html) you can just simply open `build.gradle`.
 
-Demos include samples for ranging beacons, monitoring beacons, calculating distance between beacon and the device and also changing minor value of the beacon.
+Demos include samples for ranging beacons, monitoring beacons, nearable discovery, calculating distance between beacon and the device and also changing minor value of the beacon.
 
-Quick start with ranging:
+## Quick start for beacon ranging ##
 
 ```java
   private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
@@ -115,6 +116,33 @@ Quick start with ranging:
   } catch (RemoteException e) {
     Log.e(TAG, "Cannot stop but it does not matter now", e);
   }
+
+  // When no longer needed. Should be invoked in #onDestroy.
+  beaconManager.disconnect();
+```
+
+## Quick start for nearables discovery ##
+
+```java
+  private BeaconManager beaconManager = new BeaconManager(context);
+  private String scanId;
+
+  // Should be invoked in #onCreate.
+  beaconManager.setNearableListener(new BeaconManager.NearableListener() {
+    @Override public void onNearablesDiscovered(List<Nearable> nearables) {
+      Log.d(TAG, "Discovered nearables: " + nearables);
+    }
+  });
+
+  // Should be invoked in #onStart.
+  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+    @Override public void onServiceReady() {
+      scanId = beaconManager.startNearableDiscovery();
+    }
+  });
+
+  // Should be invoked in #onStop.
+  beaconManager.stopBeaconDiscovery(scanId);
 
   // When no longer needed. Should be invoked in #onDestroy.
   beaconManager.disconnect();
