@@ -29,4 +29,10 @@
         android:layout_height="wrap_content"
         android:text="Update beacon's firmware demo"/>
 
+  <Button
+      android:id="@+id/nearables_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Nearables Demo"/>
+
 </LinearLayout>

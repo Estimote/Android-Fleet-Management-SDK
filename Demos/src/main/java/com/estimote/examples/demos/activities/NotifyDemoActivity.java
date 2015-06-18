@@ -1,4 +1,4 @@
-package com.estimote.examples.demos;
+package com.estimote.examples.demos.activities;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -11,10 +11,10 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

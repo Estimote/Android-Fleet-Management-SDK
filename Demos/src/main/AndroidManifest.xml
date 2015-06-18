@@ -24,7 +24,7 @@
       android:theme="@android:style/Theme.Holo.Light">
 
     <activity
-        android:name="com.estimote.examples.demos.AllDemosActivity"
+        android:name=".activities.AllDemosActivity"
         android:label="Estimote Demos"
         android:screenOrientation="portrait">
       <intent-filter>
@@ -34,25 +34,34 @@
     </activity>
 
     <activity
-        android:name="com.estimote.examples.demos.ListBeaconsActivity"
+        android:name=".activities.ListBeaconsActivity"
         android:label="Select Beacon"
         android:screenOrientation="portrait"/>
 
-    <activity android:name="com.estimote.examples.demos.DistanceBeaconActivity"
+    <activity
+        android:name=".activities.ListNearablesActivity"
+        android:label="Select Beacon"
+        android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.DistanceBeaconActivity"
               android:label="Distance Demo"
               android:screenOrientation="portrait"/>
 
-    <activity android:name="com.estimote.examples.demos.NotifyDemoActivity"
+    <activity android:name=".activities.NotifyDemoActivity"
               android:label="Notify Demo"
               android:screenOrientation="portrait"/>
 
-    <activity android:name="com.estimote.examples.demos.CharacteristicsDemoActivity"
+    <activity android:name=".activities.CharacteristicsDemoActivity"
               android:label="Characteristics Demo"
               android:screenOrientation="portrait"/>
 
-      <activity android:name="com.estimote.examples.demos.UpdateDemoActivity"
-                android:label="Update Firmware Demo"
-                android:screenOrientation="portrait"/>
+    <activity android:name=".activities.UpdateDemoActivity"
+              android:label="Update Firmware Demo"
+              android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.NearablesDemoActivity"
+        android:label="Nearables Demo"
+        android:screenOrientation="portrait"/>
 <!--
     There is no need any longer to declare BeaconService. It is declared in SDK's AndroidManifest.xml
     and it will be merged to your app's AndroidManifest.xml.

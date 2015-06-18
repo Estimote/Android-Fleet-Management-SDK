@@ -1,4 +1,4 @@
-package com.estimote.examples.demos;
+package com.estimote.examples.demos.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.cloud.model.BeaconInfo;
 import com.estimote.sdk.connection.BeaconConnection;
@@ -98,23 +99,25 @@ public class CharacteristicsDemoActivity extends Activity {
   private void updateMinor(int minor) {
     // Minor value will be normalized if it is not in the range.
     // Minor should be 16-bit unsigned integer.
-    connection.writeMinor(minor, new BeaconConnection.WriteCallback() {
-      @Override public void onSuccess() {
-        runOnUiThread(new Runnable() {
-          @Override public void run() {
-            showToast("Minor value updated");
+    connection.edit()
+        .set(connection.minor(), minor)
+        .commit(new BeaconConnection.WriteCallback() {
+          @Override public void onSuccess() {
+            runOnUiThread(new Runnable() {
+              @Override public void run() {
+                showToast("Minor value updated");
+              }
+            });
           }
-        });
-      }
 
-      @Override public void onError(EstimoteDeviceException exception) {
-        runOnUiThread(new Runnable() {
-          @Override public void run() {
-            showToast("Minor not updated");
+          @Override public void onError(EstimoteDeviceException exception) {
+            runOnUiThread(new Runnable() {
+              @Override public void run() {
+                showToast("Minor not updated");
+              }
+            });
           }
         });
-      }
-    });
   }
 
   private BeaconConnection.ConnectionCallback createConnectionCallback() {
@@ -126,8 +129,8 @@ public class CharacteristicsDemoActivity extends Activity {
             StringBuilder sb = new StringBuilder()
                 .append("Major: ").append(beacon.getMajor()).append("\n")
                 .append("Minor: ").append(beacon.getMinor()).append("\n")
-                .append("Advertising interval: ").append(connection.getAdvertisingIntervalMillis()).append("ms\n")
-                .append("Broadcasting power: ").append(connection.getBroadcastingPower()).append(" dBm\n")
+                .append("Advertising interval: ").append(connection.advertisingIntervalMillis().get()).append("ms\n")
+                .append("Broadcasting power: ").append(connection.broadcastingPower().get()).append(" dBm\n")
                 .append("Battery: ").append(connection.getBatteryPercent()).append(" %\n")
                 .append("Firmware: ").append(connection.getSoftwareVersion());
             beaconDetailsView.setText(sb.toString());

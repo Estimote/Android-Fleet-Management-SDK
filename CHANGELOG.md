@@ -1,6 +1,30 @@
 Changelog
 =====================
 
+## 0.7 (June 18, 2015)
+ - Initial support for nearables. You can discover nearby nearables via `BeaconManager.startNearableDiscovery()`. With nearbles you can read temperature, motion, orientation without need to connect to it. Directly from discovered `Nearable` class.
+ - You can change basic & smart power mode in your beacon via `BeaconConnection`. [Read more about power modes.](https://community.estimote.com/hc/en-us/articles/202552866-How-to-optimize-battery-performance-of-Estimote-Beacons-)
+ - You can also change conditional broadcating in beacon (Flip To Sleep). It is great for development. [Read more about Flip To Sleep.](https://community.estimote.com/hc/en-us/articles/205413787-How-to-enable-conditional-broadcasting-and-Flip-to-sleep-mode-)
+ - **Breaking changes** (1.0 is approaching, bear with us):
+   - most of `BeaconConnection`s write* methods are gone, they are replaced with more appropriate `Property` class
+
+```java
+// Before
+connection.writeMajor(newMajor, callback);
+connection.writeMinor(newMinor, callback);
+
+// After: reading
+connection.minor().get()
+connection.major().get()
+
+// After: writing in batch
+connection.edit()
+  .set(connection.proximityUuid(), newUuid)
+  .set(connection.major(), newMajor)
+  .set(connection.minor(), newMinor)
+  .commit(callback);
+```
+
 ## 0.6.1 (June 2, 2015)
  - Fixed authentication issues (#111).
 

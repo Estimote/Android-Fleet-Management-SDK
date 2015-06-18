@@ -1,9 +1,10 @@
-package com.estimote.examples.demos;
+package com.estimote.examples.demos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import com.estimote.examples.demos.R;
 
 /**
  * Shows all available demos.
@@ -47,6 +48,14 @@ public class AllDemosActivity extends Activity {
       public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
         intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, UpdateDemoActivity.class.getName());
+        startActivity(intent);
+      }
+    });
+    findViewById(R.id.nearables_demo_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(AllDemosActivity.this, ListNearablesActivity.class);
+        intent.putExtra(ListNearablesActivity.EXTRAS_TARGET_ACTIVITY, NearablesDemoActivity.class.getName());
         startActivity(intent);
       }
     });

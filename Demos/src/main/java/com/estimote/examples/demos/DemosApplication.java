@@ -1,7 +1,6 @@
 package com.estimote.examples.demos;
 
 import android.app.Application;
-
 import com.estimote.sdk.EstimoteSDK;
 
 /**

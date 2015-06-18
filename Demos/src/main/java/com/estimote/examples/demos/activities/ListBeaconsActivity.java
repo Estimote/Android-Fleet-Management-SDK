@@ -1,4 +1,4 @@
-package com.estimote.examples.demos;
+package com.estimote.examples.demos.activities;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -12,11 +12,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.estimote.examples.demos.R;
+import com.estimote.examples.demos.adapters.BeaconListAdapter;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.EstimoteSDK;
 import com.estimote.sdk.Region;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +24,7 @@ import java.util.List;
  * Displays list of found beacons sorted by RSSI.
  * Starts new activity with selected beacon if activity was provided.
  *
- * @author wiktorgworek@google.com (Wiktor Gworek)
+ * @author wiktor.gworek@estimote.com (Wiktor Gworek)
  */
 public class ListBeaconsActivity extends Activity {
 
@@ -37,7 +37,7 @@ public class ListBeaconsActivity extends Activity {
   private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
   private BeaconManager beaconManager;
-  private LeDeviceListAdapter adapter;
+  private BeaconListAdapter adapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class ListBeaconsActivity extends Activity {
     getActionBar().setDisplayHomeAsUpEnabled(true);
 
     // Configure device list.
-    adapter = new LeDeviceListAdapter(this);
+    adapter = new BeaconListAdapter(this);
     ListView list = (ListView) findViewById(R.id.device_list);
     list.setAdapter(adapter);
     list.setOnItemClickListener(createOnItemClickListener());
@@ -54,12 +54,10 @@ public class ListBeaconsActivity extends Activity {
     // Configure BeaconManager.
     beaconManager = new BeaconManager(this);
     beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-      @Override
-      public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
+      @Override public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
         // Note that results are not delivered on UI thread.
         runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
+          @Override public void run() {
             // Note that beacons reported here are already sorted by estimated
             // distance between device and beacon.
             getActionBar().setSubtitle("Found beacons: " + beacons.size());

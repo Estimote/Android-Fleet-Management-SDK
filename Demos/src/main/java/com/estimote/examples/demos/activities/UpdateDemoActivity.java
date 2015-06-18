@@ -1,4 +1,4 @@
-package com.estimote.examples.demos;
+package com.estimote.examples.demos.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.cloud.model.BeaconInfo;
 import com.estimote.sdk.cloud.model.Firmware;
