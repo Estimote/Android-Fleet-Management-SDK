@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <include layout="@layout/toolbar" android:id="@+id/toolbar" />
 
   <Button
       android:id="@+id/distance_demo_button"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Distance Demo"/>
+      android:text="Distance Demo"
+      style="@style/EstimoteButton"
+      />
 
   <Button
       android:id="@+id/notify_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Notify Demo"/>
+      android:text="Notify Demo"
+      style="@style/EstimoteButton"
+      />
 
   <Button
       android:id="@+id/characteristics_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Change Beacon's Minor Demo"/>
+      android:text="Change Beacon's Minor Demo"
+      style="@style/EstimoteButton"
+      />
 
-    <Button
-        android:id="@+id/update_demo_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update beacon's firmware demo"/>
+  <Button
+      android:id="@+id/update_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Update beacon's firmware demo"
+      style="@style/EstimoteButton"
+      />
+
+  <Button
+      android:id="@+id/eddystones_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Eddystones Demo"
+      style="@style/EstimoteButton"
+      />
 
   <Button
       android:id="@+id/nearables_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Nearables Demo"/>
+      android:text="Nearables Demo"
+      style="@style/EstimoteButton"
+      />
 
 </LinearLayout>

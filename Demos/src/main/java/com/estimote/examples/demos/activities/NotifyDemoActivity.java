@@ -1,6 +1,5 @@
 package com.estimote.examples.demos.activities;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
@@ -29,7 +30,7 @@ import static com.estimote.sdk.BeaconManager.MonitoringListener;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class NotifyDemoActivity extends Activity {
+public class NotifyDemoActivity extends AppCompatActivity {
 
   private static final String TAG = NotifyDemoActivity.class.getSimpleName();
   private static final int NOTIFICATION_ID = 123;
@@ -42,7 +43,15 @@ public class NotifyDemoActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.notify_demo);
-    getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
+    toolbar.setTitle(getTitle());
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        onBackPressed();
+      }
+    });
 
     Beacon beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
     region = new Region("regionId", beacon.getProximityUUID(), beacon.getMajor(), beacon.getMinor());
@@ -64,15 +73,6 @@ public class NotifyDemoActivity extends Activity {
         postNotification("Exited region");
       }
     });
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
-    }
-    return super.onOptionsItemSelected(item);
   }
 
   @Override

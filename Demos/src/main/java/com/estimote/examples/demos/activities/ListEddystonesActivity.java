@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,31 +12,29 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.estimote.examples.demos.R;
-import com.estimote.examples.demos.adapters.BeaconListAdapter;
-import com.estimote.sdk.Beacon;
+import com.estimote.examples.demos.adapters.EddystonesListAdapter;
 import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
+import com.estimote.sdk.eddystone.Eddystone;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Displays list of found beacons sorted by RSSI.
- * Starts new activity with selected beacon if activity was provided.
+ * Displays list of found eddystones sorted by RSSI.
+ * Starts new activity with selected eddystone if activity was provided.
  *
  * @author wiktor.gworek@estimote.com (Wiktor Gworek)
  */
-public class ListBeaconsActivity extends AppCompatActivity {
+public class ListEddystonesActivity extends AppCompatActivity {
 
-  private static final String TAG = ListBeaconsActivity.class.getSimpleName();
+  private static final String TAG = ListEddystonesActivity.class.getSimpleName();
 
   public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
-  public static final String EXTRAS_BEACON = "extrasBeacon";
+  public static final String EXTRAS_EDDYSTONE = "extrasEddystone";
 
   private static final int REQUEST_ENABLE_BT = 1234;
-  private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
   private BeaconManager beaconManager;
-  private BeaconListAdapter adapter;
+  private EddystonesListAdapter adapter;
   private Toolbar toolbar;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -54,31 +51,17 @@ public class ListBeaconsActivity extends AppCompatActivity {
     });
 
     // Configure device list.
-    adapter = new BeaconListAdapter(this);
+    adapter = new EddystonesListAdapter(this);
     ListView list = (ListView) findViewById(R.id.device_list);
     list.setAdapter(adapter);
     list.setOnItemClickListener(createOnItemClickListener());
 
-    // Configure BeaconManager.
+    //Initialize Beacon Manager
     beaconManager = new BeaconManager(this);
-    beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-      @Override public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
-        // Note that results are not delivered on UI thread.
-        runOnUiThread(new Runnable() {
-          @Override public void run() {
-            // Note that beacons reported here are already sorted by estimated
-            // distance between device and beacon.
-            toolbar.setSubtitle("Found beacons: " + beacons.size());
-            adapter.replaceWith(beacons);
-          }
-        });
-      }
-    });
   }
 
   @Override protected void onDestroy() {
     beaconManager.disconnect();
-
     super.onDestroy();
   }
 
@@ -101,12 +84,7 @@ public class ListBeaconsActivity extends AppCompatActivity {
   }
 
   @Override protected void onStop() {
-    try {
-      beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
-    } catch (RemoteException e) {
-      Log.d(TAG, "Error while stopping ranging", e);
-    }
-
+    beaconManager.disconnect();
     super.onStop();
   }
 
@@ -124,15 +102,18 @@ public class ListBeaconsActivity extends AppCompatActivity {
 
   private void connectToService() {
     toolbar.setSubtitle("Scanning...");
-    adapter.replaceWith(Collections.<Beacon>emptyList());
+    adapter.replaceWith(Collections.<Eddystone>emptyList());
+
+    beaconManager.setEddystoneListener(new BeaconManager.EddystoneListener() {
+      @Override public void onEddystonesFound(List<Eddystone> eddystones) {
+        toolbar.setSubtitle("Found eddystones: " + eddystones.size());
+        adapter.replaceWith(eddystones);
+      }
+    });
+
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override public void onServiceReady() {
-        try {
-          beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
-        } catch (RemoteException e) {
-          Toast.makeText(ListBeaconsActivity.this, "Cannot start ranging, something terrible happened", Toast.LENGTH_LONG).show();
-          Log.e(TAG, "Cannot start ranging", e);
-        }
+        beaconManager.startEddystoneScanning();
       }
     });
   }
@@ -143,8 +124,8 @@ public class ListBeaconsActivity extends AppCompatActivity {
         if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
           try {
             Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
-            Intent intent = new Intent(ListBeaconsActivity.this, clazz);
-            intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+            Intent intent = new Intent(ListEddystonesActivity.this, clazz);
+            intent.putExtra(EXTRAS_EDDYSTONE, adapter.getItem(position));
             startActivity(intent);
           } catch (ClassNotFoundException e) {
             Log.e(TAG, "Finding class by name failed", e);

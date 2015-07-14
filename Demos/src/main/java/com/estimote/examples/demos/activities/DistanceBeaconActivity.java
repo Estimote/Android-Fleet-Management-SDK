@@ -1,10 +1,10 @@
 package com.estimote.examples.demos.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class DistanceBeaconActivity extends Activity {
+public class DistanceBeaconActivity extends AppCompatActivity {
 
   private static final String TAG = DistanceBeaconActivity.class.getSimpleName();
 
@@ -39,11 +39,18 @@ public class DistanceBeaconActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    getActionBar().setDisplayHomeAsUpEnabled(true);
     setContentView(R.layout.distance_view);
-    dotView = findViewById(R.id.dot);
 
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
+    toolbar.setTitle(getTitle());
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        onBackPressed();
+      }
+    });
+
+    dotView = findViewById(R.id.dot);
     beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
     region = new Region("regionid", beacon.getProximityUUID(), beacon.getMajor(), beacon.getMinor());
     if (beacon == null) {
@@ -76,8 +83,7 @@ public class DistanceBeaconActivity extends Activity {
 
     final View view = findViewById(R.id.sonar);
     view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-      @Override
-      public void onGlobalLayout() {
+      @Override public void onGlobalLayout() {
         view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
         startY = (int) (RELATIVE_START_POS * view.getMeasuredHeight());
@@ -102,15 +108,6 @@ public class DistanceBeaconActivity extends Activity {
     // Let's put dot at the end of the scale when it's further than 6m.
     double distance = Math.min(Utils.computeAccuracy(beacon), 6.0);
     return startY + (int) (segmentLength * (distance / 6.0));
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
-    }
-    return super.onOptionsItemSelected(item);
   }
 
   @Override

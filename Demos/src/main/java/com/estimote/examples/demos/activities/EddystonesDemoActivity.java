@@ -8,30 +8,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.estimote.examples.demos.R;
-import com.estimote.sdk.Beacon;
 import com.estimote.sdk.cloud.model.BeaconInfo;
 import com.estimote.sdk.connection.BeaconConnection;
+import com.estimote.sdk.eddystone.Eddystone;
 import com.estimote.sdk.exception.EstimoteDeviceException;
 
 /**
- * Demo that shows how to connect to beacon and change its minor value.
+ * Demo that shows how to connect to eddystone and change its url or namespace values depending on Eddystone type
+ * (Eddystone-UID or Eddystone-URL).
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class CharacteristicsDemoActivity extends AppCompatActivity {
+public class EddystonesDemoActivity extends AppCompatActivity {
 
-  private Beacon beacon;
+  private Eddystone eddystone;
   private BeaconConnection connection;
 
   private TextView statusView;
-  private TextView beaconDetailsView;
-  private EditText minorEditView;
+  private TextView eddystoneDetailsView;
+  private EditText eddystoneEditView;
   private View afterConnectedView;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.characteristics_demo);
+    setContentView(R.layout.eddystones_demo);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
@@ -43,12 +43,15 @@ public class CharacteristicsDemoActivity extends AppCompatActivity {
     });
 
     statusView = (TextView) findViewById(R.id.status);
-    beaconDetailsView = (TextView) findViewById(R.id.beacon_details);
+    eddystoneDetailsView = (TextView) findViewById(R.id.eddystone_details);
+    TextView eddystoneIdLabel = (TextView) findViewById(R.id.eddystone_id_label);
     afterConnectedView = findViewById(R.id.after_connected);
-    minorEditView = (EditText) findViewById(R.id.minor);
+    eddystoneEditView = (EditText) findViewById(R.id.eddystone_id);
 
-    beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
-    connection = new BeaconConnection(this, beacon, createConnectionCallback());
+    eddystone = getIntent().getParcelableExtra(ListEddystonesActivity.EXTRAS_EDDYSTONE);
+    connection = new BeaconConnection(this, eddystone.macAddress, createConnectionCallback());
+
+    eddystoneIdLabel.setText(eddystone.isUrl() ? "Eddystone's url" : "Eddystone's namespace");
     findViewById(R.id.update).setOnClickListener(createUpdateButtonListener());
   }
 
@@ -67,73 +70,21 @@ public class CharacteristicsDemoActivity extends AppCompatActivity {
     super.onDestroy();
   }
 
-  /**
-   * Returns click listener on update minor button.
-   * Triggers update minor value on the beacon.
-   */
-  private View.OnClickListener createUpdateButtonListener() {
-    return new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        int minor = parseMinorFromEditView();
-        if (minor == -1) {
-          showToast("Minor must be a number");
-        } else {
-          updateMinor(minor);
-        }
-      }
-    };
-  }
-
-  /**
-   * @return Parsed integer from edit text view or -1 if cannot be parsed.
-   */
-  private int parseMinorFromEditView() {
-    try {
-      return Integer.parseInt(String.valueOf(minorEditView.getText()));
-    } catch (NumberFormatException e) {
-      return -1;
-    }
-  }
-
-  private void updateMinor(int minor) {
-    // Minor value will be normalized if it is not in the range.
-    // Minor should be 16-bit unsigned integer.
-    connection.edit()
-        .set(connection.minor(), minor)
-        .commit(new BeaconConnection.WriteCallback() {
-          @Override public void onSuccess() {
-            runOnUiThread(new Runnable() {
-              @Override public void run() {
-                showToast("Minor value updated");
-              }
-            });
-          }
-
-          @Override public void onError(EstimoteDeviceException exception) {
-            runOnUiThread(new Runnable() {
-              @Override public void run() {
-                showToast("Minor not updated");
-              }
-            });
-          }
-        });
-  }
-
   private BeaconConnection.ConnectionCallback createConnectionCallback() {
     return new BeaconConnection.ConnectionCallback() {
       @Override public void onAuthenticated(final BeaconInfo beaconInfo) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
-            statusView.setText("Status: Connected to beacon");
+            statusView.setText("Status: Connected to eddystone");
             StringBuilder sb = new StringBuilder()
-                .append("Major: ").append(beacon.getMajor()).append("\n")
-                .append("Minor: ").append(beacon.getMinor()).append("\n")
-                .append("Advertising interval: ").append(connection.advertisingIntervalMillis().get()).append("ms\n")
+                .append("Url: ").append(eddystone.isUrl() ? eddystone.url : "-").append("\n")
+                .append("Namespace: ").append(eddystone.isUid() ? eddystone.namespace : "-").append("\n")
+                .append("Instance ID: ").append(eddystone.isUid() ? eddystone.instance : "-").append("\n")
                 .append("Broadcasting power: ").append(connection.broadcastingPower().get()).append(" dBm\n")
                 .append("Battery: ").append(connection.getBatteryPercent()).append(" %\n")
                 .append("Firmware: ").append(connection.getSoftwareVersion());
-            beaconDetailsView.setText(sb.toString());
-            minorEditView.setText(String.valueOf(beacon.getMinor()));
+            eddystoneDetailsView.setText(sb.toString());
+            eddystoneEditView.setText(String.valueOf(eddystone.isUrl() ? eddystone.url : eddystone.namespace));
             afterConnectedView.setVisibility(View.VISIBLE);
           }
         });
@@ -142,7 +93,7 @@ public class CharacteristicsDemoActivity extends AppCompatActivity {
       @Override public void onAuthenticationError(final EstimoteDeviceException exception) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
-            statusView.setText("Status: Cannot connect to beacon. \n" +
+            statusView.setText("Status: Cannot connect to eddystone. \n" +
                 "Error: " + exception.getMessage() + "\n" +
                 "Did you change App ID and App Token in DemosApplication?");
           }
@@ -152,11 +103,46 @@ public class CharacteristicsDemoActivity extends AppCompatActivity {
       @Override public void onDisconnected() {
         runOnUiThread(new Runnable() {
           @Override public void run() {
-            statusView.setText("Status: Disconnected from beacon");
+            statusView.setText("Status: Disconnected from eddystone");
           }
         });
       }
     };
+  }
+
+  /**
+   * Returns click listener on update minor button.
+   * Triggers namespace or url value update on the eddystone.
+   */
+  private View.OnClickListener createUpdateButtonListener() {
+    return new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        String newValue = eddystoneEditView.getText().toString();
+          updateEddystone(newValue);
+      }
+    };
+  }
+
+  private void updateEddystone(String value) {
+    connection.edit()
+        .set(eddystone.isUrl() ? connection.eddystoneUrl() : connection.eddystoneNamespace(), value)
+        .commit(new BeaconConnection.WriteCallback() {
+          @Override public void onSuccess() {
+            runOnUiThread(new Runnable() {
+              @Override public void run() {
+                showToast("Value updated");
+              }
+            });
+          }
+
+          @Override public void onError(final EstimoteDeviceException exception) {
+            runOnUiThread(new Runnable() {
+              @Override public void run() {
+                showToast(exception.getLocalizedMessage());
+              }
+            });
+          }
+        });
   }
 
   private void showToast(String text) {

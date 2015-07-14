@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:orientation="vertical"
     >
 
-  <LinearLayout
+  <include layout="@layout/toolbar" android:id="@+id/toolbar" />
+
+  <ScrollView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
+      android:layout_height="match_parent"
+      android:padding="20dp"
       >
 
-    <TextView
-        android:id="@+id/nearable_static_details"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        />
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/nearable_dynamic_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        />
+      <TextView
+          android:id="@+id/nearable_static_details"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          />
 
-  </LinearLayout>
+      <TextView
+          android:id="@+id/nearable_dynamic_details"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          />
 
-</ScrollView>
+    </LinearLayout>
+
+  </ScrollView>
+
+</LinearLayout>

@@ -1,8 +1,9 @@
 package com.estimote.examples.demos.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import com.estimote.examples.demos.R;
 import com.estimote.sdk.BeaconManager;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class NearablesDemoActivity extends Activity {
+public class NearablesDemoActivity extends AppCompatActivity {
 
   private static final String TAG = NearablesDemoActivity.class.getSimpleName();
 
@@ -25,7 +26,15 @@ public class NearablesDemoActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.nearable_demo);
-    getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
+    toolbar.setTitle(getTitle());
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        onBackPressed();
+      }
+    });
 
     currentNearable = getIntent().getExtras().getParcelable(ListNearablesActivity.EXTRAS_NEARABLE);
     displayCurrentNearableInfo();
@@ -52,15 +61,6 @@ public class NearablesDemoActivity extends Activity {
   @Override protected void onStop() {
     beaconManager.disconnect();
     super.onStop();
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
-    }
-    return super.onOptionsItemSelected(item);
   }
 
   private void displayCurrentNearableInfo() {

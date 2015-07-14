@@ -7,12 +7,13 @@ The Estimote SDK for Android is a library that allows interaction with [Estimote
 It allows for:
 - beacon ranging (scans beacons and optionally filters them by their properties)
 - beacon monitoring (monitors regions for those devices that have entered/exited a region)
-- nearables (aka stickers) discovery
+- nearables (aka stickers) discovery (see [quickstart](#quick-start-for-nearables-discovery))
+- [Eddystone](https://developers.google.com/beacons) scanning (see [quickstart](#quick-start-for-eddystone))
 - beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
 
 Learn more: 
  - [Comprehensive JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/).
- - Play with [SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos).
+ - Play with [SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos) (includes scanning beacons, nearables, Eddystone beacons, connecting to Estimote beacons).
  - Download [Estimote app](https://play.google.com/store/apps/details?id=com.estimote.apps.main) from Play Store to see what SDK is capable of.
  - Check our [Estimote Forums](https://forums.estimote.com/c/android-sdk) where you can post your questions and get answers.
  - [Estimote Community Portal](http://community.estimote.com/hc/en-us)
@@ -143,6 +144,50 @@ Demos include samples for ranging beacons, monitoring beacons, nearable discover
 
   // Should be invoked in #onStop.
   beaconManager.stopBeaconDiscovery(scanId);
+
+  // When no longer needed. Should be invoked in #onDestroy.
+  beaconManager.disconnect();
+```
+
+## Quick start for Eddystone
+
+[Eddystone](https://developers.google.com/beacons) is an open protocol BLE protocol from Google. Estimote Beacons can broadcast the Eddystone packet.
+
+With Estimote SDK you can:
+ - find nearby Eddystone beacons (`BeaconManager#startEddystoneScanning`)
+ - configure Eddystone ralated properties:
+   - URL property of `Eddystone-URL` (see `BeaconConnection#eddystoneUrl`)
+   - namespace & instance properties of `Eddystone-UID` (see `BeaconConnection#eddystoneNamepsace`, `BeaconConnection#eddystoneInstance`)
+ - configure broadcasting scheme of beacon to `Estimote Default`, `Eddystone-UID` or `Eddystone-URL` (see `BeaconConnection#broadcastingScheme`)
+
+[SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos) contains Eddystone related samples.
+
+Note that you can play with Estimote Beacons broadcasting the Eddystone packet and change their configuration via [Estimote app on Google Play](https://play.google.com/store/apps/details?id=com.estimote.apps.main).
+
+In order to start playing with Eddystone you need to update firmware of your existing Estimote beacons to `3.1.1`. Easiest way is through [Estimote app on Google Play](https://play.google.com/store/apps/details?id=com.estimote.apps.main). Than you can change broadcasting scheme on your beacon to Eddystone-URL or Eddystone-UID.
+
+Following code snippet shows you how you can start discovering nearby Estimote beacons broadcasting Eddystone packet.
+
+```java
+  private BeaconManager beaconManager = new BeaconManager(context);
+  private String scanId;
+
+  // Should be invoked in #onCreate.
+  beaconManager.setEddystoneListener(new BeaconManager.EddystoneListener() {
+    @Override public void onEddystonesFound(List<Eddystone> eddystones) {
+      Log.d(TAG, "Nearby Eddystone beacons: " + eddystone);
+    }
+  });
+
+  // Should be invoked in #onStart.
+  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+    @Override public void onServiceReady() {
+      scanId = beaconManager.startEddystoneScanning();
+    }
+  });
+
+  // Should be invoked in #onStop.
+  beaconManager.stopEddystoneScanning(scanId);
 
   // When no longer needed. Should be invoked in #onDestroy.
   beaconManager.disconnect();

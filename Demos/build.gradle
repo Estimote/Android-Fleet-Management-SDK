@@ -20,8 +20,7 @@ repositories {
 
 android {
   compileSdkVersion 21
-  buildToolsVersion '22.0.0'
-
+  buildToolsVersion '22.0.1'
   defaultConfig {
     minSdkVersion 18
   }
@@ -34,6 +33,7 @@ android {
 
 dependencies {
   compile(name:'estimote-sdk-preview', ext:'aar')
+  compile 'com.android.support:appcompat-v7:22.2.0'
 }
 
 task wrapper(type: Wrapper) {

@@ -7,10 +7,7 @@
     android:orientation="vertical"
     >
 
-  <include
-      layout="@layout/toolbar"
-      android:id="@+id/toolbar"
-      />
+  <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
 
   <ScrollView
       android:layout_width="match_parent"
@@ -31,7 +28,7 @@
           />
 
       <TextView
-          android:id="@+id/beacon_details"
+          android:id="@+id/eddystone_details"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
@@ -48,9 +45,9 @@
           >
 
         <TextView
+            android:id="@+id/eddystone_id_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Beacon's minor:"
             />
 
         <LinearLayout
@@ -59,7 +56,7 @@
             android:orientation="horizontal"
             >
           <EditText
-              android:id="@+id/minor"
+              android:id="@+id/eddystone_id"
               android:layout_width="0dp"
               android:layout_weight="1"
               android:layout_height="wrap_content"

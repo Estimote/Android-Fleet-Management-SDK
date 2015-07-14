@@ -1,6 +1,18 @@
 Changelog
 =====================
 
+## 0.8 (June 18, 2015)
+ - Say hello to [Eddystone](https://developers.google.com/beacons) - an open protocol BLE protocol from Google.
+   - Estimote Beacons can broadcast Eddystone protocol.
+ - In order to start playing with Eddystone you need to update firmware of your existing Estimote beacons to `3.1.1`. Easiest way is through [Estimote app on Google Play](https://play.google.com/store/apps/details?id=com.estimote.apps.main). Than you can change broadcasting scheme on your beacon to Eddystone-URL or Eddystone-UID.
+ - *New in SDK*:
+   - find nearby Eddystone beacons (`BeaconManager#startEddystoneScanning`)
+   - configure Eddystone ralated properties:
+     - URL property of `Eddystone-URL` (see `BeaconConnection#eddystoneUrl`)
+     - namespace & instance properties of `Eddystone-UID` (see `BeaconConnection#eddystoneNamepsace`, `BeaconConnection#eddystoneInstance`)
+   - configure broadcasting scheme of beacon to `Estimote Default`, `Eddystone-UID` or `Eddystone-URL` (see `BeaconConnection#broadcastingScheme`)
+ - [SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos) have been updated to showcase Eddystone support.
+
 ## 0.7 (June 18, 2015)
  - Initial support for nearables. You can discover nearby nearables via `BeaconManager.startNearableDiscovery()`. With nearbles you can read temperature, motion, orientation without need to connect to it. Directly from discovered `Nearable` class.
  - You can change basic & smart power mode in your beacon via `BeaconConnection`. [Read more about power modes.](https://community.estimote.com/hc/en-us/articles/202552866-How-to-optimize-battery-performance-of-Estimote-Beacons-)

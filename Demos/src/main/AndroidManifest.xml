@@ -21,7 +21,7 @@
   <application
       android:name=".DemosApplication"
       android:label="Estimote Demos"
-      android:theme="@android:style/Theme.Holo.Light">
+      android:theme="@style/EstimoteTheme">
 
     <activity
         android:name=".activities.AllDemosActivity"
@@ -36,6 +36,11 @@
     <activity
         android:name=".activities.ListBeaconsActivity"
         android:label="Select Beacon"
+        android:screenOrientation="portrait"/>
+
+    <activity
+        android:name=".activities.ListEddystonesActivity"
+        android:label="Select Eddystone"
         android:screenOrientation="portrait"/>
 
     <activity
@@ -58,6 +63,10 @@
     <activity android:name=".activities.UpdateDemoActivity"
               android:label="Update Firmware Demo"
               android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.EddystonesDemoActivity"
+        android:label="Eddystones Demo"
+        android:screenOrientation="portrait"/>
 
     <activity android:name=".activities.NearablesDemoActivity"
         android:label="Nearables Demo"

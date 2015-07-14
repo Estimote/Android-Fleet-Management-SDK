@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author wiktor.gworek@estimote.com (Wiktor Gworek)
  */
-public class ListNearablesActivity extends Activity {
+public class ListNearablesActivity extends AppCompatActivity {
 
   private static final String TAG = ListNearablesActivity.class.getSimpleName();
 
@@ -35,13 +35,22 @@ public class ListNearablesActivity extends Activity {
 
   private BeaconManager beaconManager;
   private NearableListAdapter adapter;
+  private Toolbar toolbar;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    getActionBar().setDisplayHomeAsUpEnabled(true);
 
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
+    toolbar.setTitle(getTitle());
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        onBackPressed();
+      }
+    });
     // Configure device list.
     adapter = new NearableListAdapter(this);
     ListView list = (ListView) findViewById(R.id.device_list);
@@ -50,23 +59,6 @@ public class ListNearablesActivity extends Activity {
 
     //Initialize Beacon Manager
     beaconManager = new BeaconManager(this);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.scan_menu, menu);
-    MenuItem refreshItem = menu.findItem(R.id.refresh);
-    refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
-    }
-    return super.onOptionsItemSelected(item);
   }
 
   @Override
@@ -107,19 +99,19 @@ public class ListNearablesActivity extends Activity {
         connectToService();
       } else {
         Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
-        getActionBar().setSubtitle("Bluetooth not enabled");
+        toolbar.setSubtitle("Bluetooth not enabled");
       }
     }
     super.onActivityResult(requestCode, resultCode, data);
   }
 
   private void connectToService() {
-    getActionBar().setSubtitle("Scanning...");
+    toolbar.setSubtitle("Scanning...");
     adapter.replaceWith(Collections.<Nearable>emptyList());
 
     beaconManager.setNearableListener(new BeaconManager.NearableListener() {
       @Override public void onNearablesDiscovered(List<Nearable> nearables) {
-        getActionBar().setSubtitle("Found nearables: " + nearables.size());
+        toolbar.setSubtitle("Found nearables: " + nearables.size());
         adapter.replaceWith(nearables);
       }
     });
