@@ -7,7 +7,7 @@ Changelog
  - In order to start playing with Eddystone you need to update firmware of your existing Estimote beacons to `3.1.1`. Easiest way is through [Estimote app on Google Play](https://play.google.com/store/apps/details?id=com.estimote.apps.main). Than you can change broadcasting scheme on your beacon to Eddystone-URL or Eddystone-UID.
  - *New in SDK*:
    - find nearby Eddystone beacons (`BeaconManager#startEddystoneScanning`)
-   - configure Eddystone ralated properties:
+   - configure Eddystone related properties:
      - URL property of `Eddystone-URL` (see `BeaconConnection#eddystoneUrl`)
      - namespace & instance properties of `Eddystone-UID` (see `BeaconConnection#eddystoneNamepsace`, `BeaconConnection#eddystoneInstance`)
    - configure broadcasting scheme of beacon to `Estimote Default`, `Eddystone-UID` or `Eddystone-URL` (see `BeaconConnection#broadcastingScheme`)
