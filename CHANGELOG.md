@@ -1,7 +1,10 @@
 Changelog
 =====================
 
-## 0.8 (June 18, 2015)
+## 0.8.1 (July 15, 2015)
+ - Small fixes for Eddystone protocol.
+
+## 0.8 (July 14, 2015)
  - Say hello to [Eddystone](https://developers.google.com/beacons) - an open protocol BLE protocol from Google.
    - Estimote Beacons can broadcast Eddystone protocol.
  - In order to start playing with Eddystone you need to update firmware of your existing Estimote beacons to `3.1.1`. Easiest way is through [Estimote app on Google Play](https://play.google.com/store/apps/details?id=com.estimote.apps.main). Than you can change broadcasting scheme on your beacon to Eddystone-URL or Eddystone-UID.
