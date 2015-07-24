@@ -5,8 +5,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +24,7 @@ import java.util.List;
  *
  * @author wiktor.gworek@estimote.com (Wiktor Gworek)
  */
-public class ListBeaconsActivity extends AppCompatActivity {
+public class ListBeaconsActivity extends BaseActivity {
 
   private static final String TAG = ListBeaconsActivity.class.getSimpleName();
 
@@ -38,20 +36,13 @@ public class ListBeaconsActivity extends AppCompatActivity {
 
   private BeaconManager beaconManager;
   private BeaconListAdapter adapter;
-  private Toolbar toolbar;
+
+  @Override protected int getLayoutResId() {
+    return R.layout.main;
+  }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     // Configure device list.
     adapter = new BeaconListAdapter(this);

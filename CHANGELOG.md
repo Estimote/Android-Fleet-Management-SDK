@@ -1,6 +1,12 @@
 Changelog
 =====================
 
+## 0.8.2 (July 24, 2015)
+ - This is mainly a bugfix release.
+ - Fixed (https://github.com/Estimote/Android-SDK/issues/109): Documentation Bug.
+ - Fixed (https://github.com/Estimote/Android-SDK/issues/117): Crash after update to 0.8 version.
+ - SDK demos are now using Material Design (h/t @RingoMckraken).
+
 ## 0.8.1 (July 15, 2015)
  - Small fixes for Eddystone protocol.
 

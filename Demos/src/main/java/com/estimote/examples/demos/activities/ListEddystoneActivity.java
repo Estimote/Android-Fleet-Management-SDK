@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,9 +22,9 @@ import java.util.List;
  *
  * @author wiktor.gworek@estimote.com (Wiktor Gworek)
  */
-public class ListEddystonesActivity extends AppCompatActivity {
+public class ListEddystoneActivity extends BaseActivity {
 
-  private static final String TAG = ListEddystonesActivity.class.getSimpleName();
+  private static final String TAG = ListEddystoneActivity.class.getSimpleName();
 
   public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
   public static final String EXTRAS_EDDYSTONE = "extrasEddystone";
@@ -35,20 +33,13 @@ public class ListEddystonesActivity extends AppCompatActivity {
 
   private BeaconManager beaconManager;
   private EddystonesListAdapter adapter;
-  private Toolbar toolbar;
+
+  @Override protected int getLayoutResId() {
+    return R.layout.main;
+  }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     // Configure device list.
     adapter = new EddystonesListAdapter(this);
@@ -106,7 +97,7 @@ public class ListEddystonesActivity extends AppCompatActivity {
 
     beaconManager.setEddystoneListener(new BeaconManager.EddystoneListener() {
       @Override public void onEddystonesFound(List<Eddystone> eddystones) {
-        toolbar.setSubtitle("Found eddystones: " + eddystones.size());
+        toolbar.setSubtitle("Found beacons with Eddystone protocol: " + eddystones.size());
         adapter.replaceWith(eddystones);
       }
     });
@@ -124,7 +115,7 @@ public class ListEddystonesActivity extends AppCompatActivity {
         if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
           try {
             Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
-            Intent intent = new Intent(ListEddystonesActivity.this, clazz);
+            Intent intent = new Intent(ListEddystoneActivity.this, clazz);
             intent.putExtra(EXTRAS_EDDYSTONE, adapter.getItem(position));
             startActivity(intent);
           } catch (ClassNotFoundException e) {

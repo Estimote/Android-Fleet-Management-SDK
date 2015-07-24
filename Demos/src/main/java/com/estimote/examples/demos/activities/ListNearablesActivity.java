@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author wiktor.gworek@estimote.com (Wiktor Gworek)
  */
-public class ListNearablesActivity extends AppCompatActivity {
+public class ListNearablesActivity extends BaseActivity {
 
   private static final String TAG = ListNearablesActivity.class.getSimpleName();
 
@@ -35,22 +35,15 @@ public class ListNearablesActivity extends AppCompatActivity {
 
   private BeaconManager beaconManager;
   private NearableListAdapter adapter;
-  private Toolbar toolbar;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.main;
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
 
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
     // Configure device list.
     adapter = new NearableListAdapter(this);
     ListView list = (ListView) findViewById(R.id.device_list);

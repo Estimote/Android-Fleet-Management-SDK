@@ -15,26 +15,20 @@ import java.util.List;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class NearablesDemoActivity extends AppCompatActivity {
+public class NearablesDemoActivity extends BaseActivity {
 
   private static final String TAG = NearablesDemoActivity.class.getSimpleName();
 
   private Nearable currentNearable;
   private BeaconManager beaconManager;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.nearable_demo;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.nearable_demo);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     currentNearable = getIntent().getExtras().getParcelable(ListNearablesActivity.EXTRAS_NEARABLE);
     displayCurrentNearableInfo();

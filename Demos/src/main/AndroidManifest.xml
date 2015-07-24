@@ -39,7 +39,7 @@
         android:screenOrientation="portrait"/>
 
     <activity
-        android:name=".activities.ListEddystonesActivity"
+        android:name=".activities.ListEddystoneActivity"
         android:label="Select Eddystone"
         android:screenOrientation="portrait"/>
 
@@ -64,8 +64,8 @@
               android:label="Update Firmware Demo"
               android:screenOrientation="portrait"/>
 
-    <activity android:name=".activities.EddystonesDemoActivity"
-        android:label="Eddystones Demo"
+    <activity android:name=".activities.EddystoneDemoActivity"
+        android:label="Eddystone Demo"
         android:screenOrientation="portrait"/>
 
     <activity android:name=".activities.NearablesDemoActivity"

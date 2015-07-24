@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class DistanceBeaconActivity extends AppCompatActivity {
+public class DistanceBeaconActivity extends BaseActivity {
 
   private static final String TAG = DistanceBeaconActivity.class.getSimpleName();
 
@@ -36,19 +36,13 @@ public class DistanceBeaconActivity extends AppCompatActivity {
   private int startY = -1;
   private int segmentLength = -1;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.distance_view;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.distance_view);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     dotView = findViewById(R.id.dot);
     beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);

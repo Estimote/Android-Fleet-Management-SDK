@@ -20,7 +20,7 @@ import com.estimote.sdk.exception.EstimoteException;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class UpdateDemoActivity extends AppCompatActivity {
+public class UpdateDemoActivity extends BaseActivity {
 
   private Beacon beacon;
   private BeaconConnection connection;
@@ -29,19 +29,13 @@ public class UpdateDemoActivity extends AppCompatActivity {
   private TextView beaconDetailsView;
   private Button updateButton;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.update_demo;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.update_demo);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     statusView = (TextView) findViewById(R.id.status);
     beaconDetailsView = (TextView) findViewById(R.id.beacon_details);

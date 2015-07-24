@@ -30,7 +30,7 @@ import static com.estimote.sdk.BeaconManager.MonitoringListener;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class NotifyDemoActivity extends AppCompatActivity {
+public class NotifyDemoActivity extends BaseActivity {
 
   private static final String TAG = NotifyDemoActivity.class.getSimpleName();
   private static final int NOTIFICATION_ID = 123;
@@ -39,19 +39,13 @@ public class NotifyDemoActivity extends AppCompatActivity {
   private NotificationManager notificationManager;
   private Region region;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.notify_demo;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.notify_demo);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     Beacon beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
     region = new Region("regionId", beacon.getProximityUUID(), beacon.getMajor(), beacon.getMinor());

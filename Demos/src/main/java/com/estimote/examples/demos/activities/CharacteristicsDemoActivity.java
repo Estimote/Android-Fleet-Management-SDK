@@ -18,7 +18,7 @@ import com.estimote.sdk.exception.EstimoteDeviceException;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class CharacteristicsDemoActivity extends AppCompatActivity {
+public class CharacteristicsDemoActivity extends BaseActivity {
 
   private Beacon beacon;
   private BeaconConnection connection;
@@ -28,19 +28,13 @@ public class CharacteristicsDemoActivity extends AppCompatActivity {
   private EditText minorEditView;
   private View afterConnectedView;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.characteristics_demo;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.characteristics_demo);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     statusView = (TextView) findViewById(R.id.status);
     beaconDetailsView = (TextView) findViewById(R.id.beacon_details);

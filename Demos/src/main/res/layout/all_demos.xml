@@ -9,48 +9,57 @@
 
   <Button
       android:id="@+id/distance_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:text="Distance Demo"
-      style="@style/EstimoteButton"
       />
 
   <Button
       android:id="@+id/notify_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:text="Notify Demo"
-      style="@style/EstimoteButton"
       />
 
   <Button
       android:id="@+id/characteristics_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:text="Change Beacon's Minor Demo"
-      style="@style/EstimoteButton"
       />
 
   <Button
       android:id="@+id/update_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:text="Update beacon's firmware demo"
-      style="@style/EstimoteButton"
       />
 
   <Button
-      android:id="@+id/eddystones_demo_button"
+      android:id="@+id/eddystone_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Eddystones Demo"
-      style="@style/EstimoteButton"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Eddystone Demo"
       />
 
   <Button
       android:id="@+id/nearables_demo_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:text="Nearables Demo"
-      style="@style/EstimoteButton"
       />
 
 </LinearLayout>

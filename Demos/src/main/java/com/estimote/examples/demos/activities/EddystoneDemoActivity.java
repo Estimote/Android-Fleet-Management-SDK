@@ -1,8 +1,6 @@
 package com.estimote.examples.demos.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,7 +17,7 @@ import com.estimote.sdk.exception.EstimoteDeviceException;
  *
  * @author wiktor@estimote.com (Wiktor Gworek)
  */
-public class EddystonesDemoActivity extends AppCompatActivity {
+public class EddystoneDemoActivity extends BaseActivity {
 
   private Eddystone eddystone;
   private BeaconConnection connection;
@@ -29,18 +27,12 @@ public class EddystonesDemoActivity extends AppCompatActivity {
   private EditText eddystoneEditView;
   private View afterConnectedView;
 
+  @Override protected int getLayoutResId() {
+    return R.layout.eddystones_demo;
+  }
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.eddystones_demo);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setNavigationIcon(R.drawable.ic_action_navigation_arrow_back);
-    toolbar.setTitle(getTitle());
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        onBackPressed();
-      }
-    });
 
     statusView = (TextView) findViewById(R.id.status);
     eddystoneDetailsView = (TextView) findViewById(R.id.eddystone_details);
@@ -48,7 +40,7 @@ public class EddystonesDemoActivity extends AppCompatActivity {
     afterConnectedView = findViewById(R.id.after_connected);
     eddystoneEditView = (EditText) findViewById(R.id.eddystone_id);
 
-    eddystone = getIntent().getParcelableExtra(ListEddystonesActivity.EXTRAS_EDDYSTONE);
+    eddystone = getIntent().getParcelableExtra(ListEddystoneActivity.EXTRAS_EDDYSTONE);
     connection = new BeaconConnection(this, eddystone.macAddress, createConnectionCallback());
 
     eddystoneIdLabel.setText(eddystone.isUrl() ? "Eddystone's url" : "Eddystone's namespace");

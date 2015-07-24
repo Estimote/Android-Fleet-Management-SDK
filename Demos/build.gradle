@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-  compile(name:'estimote-sdk-preview', ext:'aar')
+  compile(name:'estimote-sdk', ext:'aar')
   compile 'com.android.support:appcompat-v7:22.2.0'
 }
 
