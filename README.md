@@ -175,7 +175,7 @@ Following code snippet shows you how you can start discovering nearby Estimote b
   // Should be invoked in #onCreate.
   beaconManager.setEddystoneListener(new BeaconManager.EddystoneListener() {
     @Override public void onEddystonesFound(List<Eddystone> eddystones) {
-      Log.d(TAG, "Nearby Eddystone beacons: " + eddystone);
+      Log.d(TAG, "Nearby Eddystone beacons: " + eddystones);
     }
   });
 
