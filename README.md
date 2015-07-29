@@ -11,7 +11,7 @@ It allows for:
 - [Eddystone](https://developers.google.com/beacons) scanning (see [quickstart](#quick-start-for-eddystone))
 - beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
 
-Learn more: 
+Learn more:
  - [Comprehensive JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/).
  - Play with [SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos) (includes scanning beacons, nearables, Eddystone beacons, connecting to Estimote beacons).
  - Download [Estimote app](https://play.google.com/store/apps/details?id=com.estimote.apps.main) from Play Store to see what SDK is capable of.
@@ -143,7 +143,7 @@ Demos include samples for ranging beacons, monitoring beacons, nearable discover
   });
 
   // Should be invoked in #onStop.
-  beaconManager.stopBeaconDiscovery(scanId);
+  beaconManager.stopNearableDiscovery(scanId);
 
   // When no longer needed. Should be invoked in #onDestroy.
   beaconManager.disconnect();
