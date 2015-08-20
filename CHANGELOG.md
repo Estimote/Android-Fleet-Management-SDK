@@ -1,6 +1,10 @@
 Changelog
 =====================
 
+## 0.8.5 (August 20, 2015)
+ - Security improvements in the beacon authorization mechanism.
+ - Beacon update is more stable.
+
 ## 0.8.2 (July 24, 2015)
  - This is mainly a bugfix release.
  - Fixed (https://github.com/Estimote/Android-SDK/issues/109): Documentation Bug.
