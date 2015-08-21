@@ -1,6 +1,9 @@
 Changelog
 =====================
 
+## 0.8.6 (August 21, 2015)
+ - Authentication to beacon is more robust than ever (requires updating beacon to firmware 3.2.0).
+
 ## 0.8.5 (August 20, 2015)
  - Security improvements in the beacon authorization mechanism.
  - Beacon update is more stable.
