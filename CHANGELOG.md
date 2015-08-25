@@ -1,6 +1,9 @@
 Changelog
 =====================
 
+** 0.8.7 (August 25, 2015)
+ - Finally Estimote SDK is available on Maven Central (`com.estimote:sdk:0.8.7@aar`).
+
 ## 0.8.6 (August 21, 2015)
  - Authentication to beacon is more robust than ever (requires updating beacon to firmware 3.2.0).
 
