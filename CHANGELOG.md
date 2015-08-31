@@ -1,7 +1,7 @@
 Changelog
 =====================
 
-** 0.8.7 (August 25, 2015)
+## 0.8.7 (August 25, 2015)
  - Finally Estimote SDK is available on Maven Central (`com.estimote:sdk:0.8.7@aar`).
 
 ## 0.8.6 (August 21, 2015)
