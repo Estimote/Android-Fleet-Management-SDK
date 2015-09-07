@@ -1,6 +1,6 @@
 # Estimote SDK for Android #
 
-## Overview ##
+## Overview
 
 The Estimote SDK for Android is a library that allows interaction with [Estimote beacons & stickers](http://estimote.com/#jump-to-products). The SDK system works on Android 4.3 or above and requires device with Bluetooth Low Energy (SDK's min Android SDK version is 9).
 
@@ -18,33 +18,24 @@ Learn more:
  - Check our [Estimote Forums](https://forums.estimote.com/c/android-sdk) where you can post your questions and get answers.
  - [Estimote Community Portal](http://community.estimote.com/hc/en-us)
 
-**What is ranging?**
+## Beacon ranging and monitoring
 
-Ranging allows apps to know the relative distance between a device and beacons. This can be very valuable – consider for example an indoor location app of a department store. The app can determine which department (such as footwear, clothing, accessories etc) you're closest by. Information about this proximity can be used within the app to show fitting guides or offer discounts.
+iBeacon allows for two basic interactions between apps and individual beacons or groups of beacons called regions:
+- *Region monitoring*: actions triggered on entering/exiting region’s range; works in the foreground, background, and even when the app is killed.
+- *Ranging*: actions triggered based on proximity to a beacon; works only in the foreground
 
-As Bluetooth Low Energy ranging depends on detecting radio signals, results will vary depending on the placement of Estimote beacons and whether a user's mobile device is in-hand, in a bag or a pocket. Clear line of sight between a mobile device and a beacon will yield better results so it is recommended that Estimote beacons not be hidden between shelves.
+[Learn more about beacon ranging and monitoring](https://community.estimote.com/hc/en-us/articles/203356607-What-are-region-Monitoring-and-Ranging-)
 
-To enjoy consistent ranging it is good practice to use the app in the foreground while the user is holding the device in-hand (which means the app is on and running).
-
+### Ranging
 Apps can use the `startRanging` method of the `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with the `setRangingListener` method of the `BeaconManager` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
 
-Ranging is designed to be used for apps running in the foreground.
-
-**What is monitoring?**
-
-Region monitoring is a term used to describe a Bluetooth device's usage and detect when a user is in the vicinity of beacons. You can use this functionality to show alerts or provide contextually aware information as a user enters or exits a beacon region. Beacon regions are defined by the following beacon properties:
-
-- proximity UUID: 128-bit unique identifier,
-- major: 16-bit unsigned integer to differentiate between beacons within the same proximity UUID,
-- minor: 16-bit unsigned integer to differentiate between beacons with the same proximity UUID and major value.
-
-Note that all of these values are optional, meaning that a single region can encompass multiple beacons — which creates interesting use cases. Consider for example a department store that is identified by a particular proximity UUID and major value. Different sections of the store are differentiated further by a different minor value. An app can monitor region defined by their proximity UUID and major value to provide location-relevant information by distinguishing minor values.
+### Monitoring
 
 Apps can use the `startMonitoring` method of the `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with the `setMonitoringListener` method of the `BeaconsManager` class.
 
 Monitoring is designed to perform periodic scans in the background. By default it scans for 5 seconds and sleeps for 25 seconds. This means that it can take by default up to 30 seconds to detect entering or exiting a region. Default behaviour can be changed via `BeaconManager#setBackgroundScanPeriod`.
 
-## Installation ##
+## Installation
 
 *Note*: SDK version 0.5 switched from jar distribution to [aar archive](http://tools.android.com/tech-docs/new-build-system/aar-format). There is no longer need to change your `AndroidManifest.xml` as it is being done automatically.
 
@@ -79,13 +70,13 @@ Monitoring is designed to perform periodic scans in the background. By default i
   EstimoteSDK.enableDebugLogging(true);
   ```
 
-## Usage and demos ##
+## Usage and demos
 
 SDK Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` (or `gradlew.bat installDebug` on Windows) in terminal when your device is connected to computer. If you use [Android Studio](http://developer.android.com/tools/studio/index.html) you can just simply open `build.gradle`.
 
 Demos include samples for ranging beacons, monitoring beacons, nearable discovery, calculating distance between beacon and the device and also changing minor value of the beacon.
 
-## Quick start for beacon ranging ##
+## Quick start for beacon ranging
 
 ```java
   private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
@@ -122,7 +113,7 @@ Demos include samples for ranging beacons, monitoring beacons, nearable discover
   beaconManager.disconnect();
 ```
 
-## Quick start for nearables discovery ##
+## Quick start for nearables discovery
 
 ```java
   private BeaconManager beaconManager = new BeaconManager(context);
@@ -193,12 +184,12 @@ Following code snippet shows you how you can start discovering nearby Estimote b
   beaconManager.disconnect();
 ```
 
-## FAQ ##
+## FAQ
 
 There is [Estimote SDK FAQ on wiki](https://github.com/Estimote/Android-SDK/wiki/FAQ).
 There is also [Estimote SDK for Android forum](https://forums.estimote.com/c/android-sdk) where you can post your questions.
 
-## Changelog ##
+## Changelog
 
 To see what has changed in recent versions of Estimote SDK for Android, see the [CHANGELOG](CHANGELOG.md).
 
