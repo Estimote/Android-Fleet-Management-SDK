@@ -1,5 +1,19 @@
 # Estimote SDK for Android #
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Beacon ranging and monitoring](#beacon-ranging-and-monitoring)
+  - [Ranging](#ranging)
+  - [Monitoring](#monitoring)
+- [Installation](#installation)
+- [Usage and demos](#usage-and-demos)
+- [Quick start for beacon ranging](#quick-start-for-beacon-ranging)
+- [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
+- [Quick start for Eddystone](#Quick start for Eddystone)
+- [FAQ](#faq)
+- [Changelog](#changelog)
+
 ## Overview
 
 The Estimote SDK for Android is a library that allows interaction with [Estimote beacons & stickers](http://estimote.com/#jump-to-products). The SDK system works on Android 4.3 or above and requires device with Bluetooth Low Energy (SDK's min Android SDK version is 9).
