@@ -12,7 +12,7 @@
 - [Usage and demos](#usage-and-demos)
 - [Quick start for beacon ranging](#quick-start-for-beacon-ranging)
 - [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
-- [Quick start for Eddystone](#Quick start for Eddystone)
+- [Quick start for Eddystone](#quick-start-for-eddystone)
 - [FAQ](#faq)
 - [Changelog](#changelog)
 
@@ -61,6 +61,15 @@ Estimote Android SDK is available on [Maven Central](http://search.maven.org/#se
 dependencies {
   compile 'com.estimote:sdk:0.8.7@aar'
 }
+```
+
+Initialize Estimote SDK in your Application class.
+
+```java
+//  App ID & App Token can be taken from App section of Estimote Cloud.
+EstimoteSDK.initialize(applicationContext, appId, appToken);
+// Optional, debug logging.
+EstimoteSDK.enableDebugLogging(true);
 ```
 
 ### Manual installation
