@@ -7,6 +7,8 @@
   - [Ranging](#ranging)
   - [Monitoring](#monitoring)
 - [Installation](#installation)
+  - [Gradle via Maven Central](#gradle-via-maven-central)
+  - [Manual installation](#manual-installation)
 - [Usage and demos](#usage-and-demos)
 - [Quick start for beacon ranging](#quick-start-for-beacon-ranging)
 - [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
@@ -51,11 +53,19 @@ Monitoring is designed to perform periodic scans in the background. By default i
 
 ## Installation
 
-*Note*: SDK version 0.5 switched from jar distribution to [aar archive](http://tools.android.com/tech-docs/new-build-system/aar-format). There is no longer need to change your `AndroidManifest.xml` as it is being done automatically.
+### Gradle via Maven Central
+
+Estimote Android SDK is available on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.estimote%22). Declare in your Gradle's `build.gradle` dependency to this library.
+
+```gradle
+dependencies {
+  compile 'com.estimote:sdk:0.8.7@aar'
+}
+```
+
+### Manual installation
 
 *Eclipse users:* Mark Murphy [on his blog explained](https://commonsware.com/blog/2014/07/03/consuming-aars-eclipse.html) how to use `aar` format in Eclipse.
-
-*Note about AAR Manifest Merger*: SDK's `AndroidManifest.xml` will be automatically merged into your app. Right now it declared min SDK level 18. You can override this declaration as [described here](http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger#TOC-tools:overrideLibrary-marker).
 
 1. Create `libs` directory inside your project and copy there [estimote-sdk.aar](https://github.com/Estimote/Android-SDK/blob/master/EstimoteSDK/estimote-sdk.aar).
 2. In your `build.gradle` add `flatDir` entry to your repositories
