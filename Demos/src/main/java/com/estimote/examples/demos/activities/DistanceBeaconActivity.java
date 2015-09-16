@@ -50,6 +50,7 @@ public class DistanceBeaconActivity extends BaseActivity {
     if (beacon == null) {
       Toast.makeText(this, "Beacon not found in intent extras", Toast.LENGTH_LONG).show();
       finish();
+      return;
     }
 
     beaconManager = new BeaconManager(this);

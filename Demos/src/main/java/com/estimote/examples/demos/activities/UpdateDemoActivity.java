@@ -109,7 +109,7 @@ public class UpdateDemoActivity extends BaseActivity {
 
   private BeaconConnection.ConnectionCallback createConnectionCallback() {
     return new BeaconConnection.ConnectionCallback() {
-      @Override public void onAuthenticated(final BeaconInfo beaconInfo) {
+      @Override public void onConnected(final BeaconInfo beaconInfo) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
             statusView.setText("Status: Connected to beacon, checking firmware status");
@@ -135,6 +135,10 @@ public class UpdateDemoActivity extends BaseActivity {
             });
           }
         });
+      }
+
+      @Override public void onAuthorized(BeaconInfo beaconInfo) {
+        //Do nothing
       }
 
       @Override public void onAuthenticationError(final EstimoteDeviceException exception) {

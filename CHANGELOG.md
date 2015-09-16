@@ -1,6 +1,49 @@
 Changelog
 =====================
 
+## 0.8.8 (September 16, 2015)
+ - Finally support for built-in sensors: motion and temperature.
+ - Motion sensor readout with notifications. Note that you need to make sure it is enabled (separate property do enable/disable motion) sensor.
+  ```java
+  connection = new BeaconConnection(...);
+
+  // Make sure to enable motion sensor first.
+  connection.edit().set(connection.motionDetectionEnabled(), true).commit(...callback...);
+
+  connection.setMotionListener(new Property.Callback<MotionState>() {
+    @Override public void onValueReceived(final MotionState value) {
+      // Motion state in value argument.
+    }
+  
+    @Override public void onFailure() {
+      // Error handling.
+    }
+  });
+  ```
+ - Temperature sensor readout and calibration (two separate properies added to BeaconConnection).
+ ```java
+ // Temperature calibration (see also docs for BeaconConnection#temperatureCalibration()).
+ connection.edit().set(connection.temperatureCalibration(), 21).commit(...);
+ 
+ // If you want to measure temperature from beacon on demand.
+ connection.temperature().getAsync(new Property.Callback<Float>() {
+      @Override public void onValueReceived(final Float value) {
+        // updateTemperatureValue(value);
+      }
+
+      @Override public void onFailure() {
+        // Error handling.
+      }
+    });
+```
+
+Bug fixes:
+- Negative temperature is properly interpreted in EddystoneTelemetry packet.
+- BeaconManager crash when there are Eddystone beacons with bad packet.
+
+**Breaking changes**
+- `BeaconConnection.ConnectionCallback` has been changed to indicate that that your access to beacon had been authorised (`ConnectionCallback#onAuthorized(BeaconInfo)`).
+
 ## 0.8.7 (August 25, 2015)
  - Finally Estimote SDK is available on Maven Central (`com.estimote:sdk:0.8.7@aar`).
 

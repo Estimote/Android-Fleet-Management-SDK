@@ -115,7 +115,7 @@ public class CharacteristicsDemoActivity extends BaseActivity {
 
   private BeaconConnection.ConnectionCallback createConnectionCallback() {
     return new BeaconConnection.ConnectionCallback() {
-      @Override public void onAuthenticated(final BeaconInfo beaconInfo) {
+      @Override public void onConnected(final BeaconInfo beaconInfo) {
         runOnUiThread(new Runnable() {
           @Override public void run() {
             statusView.setText("Status: Connected to beacon");
@@ -131,6 +131,10 @@ public class CharacteristicsDemoActivity extends BaseActivity {
             afterConnectedView.setVisibility(View.VISIBLE);
           }
         });
+      }
+
+      @Override public void onAuthorized(BeaconInfo beaconInfo) {
+        //Do nothing
       }
 
       @Override public void onAuthenticationError(final EstimoteDeviceException exception) {
