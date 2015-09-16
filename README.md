@@ -11,7 +11,7 @@
   - [Manual installation](#manual-installation)
 - [Usage and demos](#usage-and-demos)
 - [Tutorials](#tutorials)
-  - [Quick start for beacon ranging](#quick-start-for-beacon-ranging)
+  - [Android tutorial for monitoring & ranging beacons](#android-tutorial-for-monitoring--ranging-beacons)
   - [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
   - [Quick start for Eddystone](#quick-start-for-eddystone)
 - [FAQ](#faq)
@@ -27,6 +27,8 @@ It allows for:
 - nearables (aka stickers) discovery (see [quickstart](#quick-start-for-nearables-discovery))
 - [Eddystone](https://developers.google.com/beacons) scanning (see [quickstart](#quick-start-for-eddystone))
 - beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
+
+Start with [Android tutorial for monitoring & ranging beacons](http://developer.estimote.com/android/tutorial/part-1-setting-up/).
 
 Learn more:
  - [Comprehensive JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/).
