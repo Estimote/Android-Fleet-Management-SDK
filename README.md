@@ -10,9 +10,10 @@
   - [Gradle via Maven Central](#gradle-via-maven-central)
   - [Manual installation](#manual-installation)
 - [Usage and demos](#usage-and-demos)
-- [Quick start for beacon ranging](#quick-start-for-beacon-ranging)
-- [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
-- [Quick start for Eddystone](#quick-start-for-eddystone)
+- [Tutorials](#tutorials)
+  - [Quick start for beacon ranging](#quick-start-for-beacon-ranging)
+  - [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
+  - [Quick start for Eddystone](#quick-start-for-eddystone)
 - [FAQ](#faq)
 - [Changelog](#changelog)
 
@@ -109,42 +110,14 @@ SDK Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/ma
 
 Demos include samples for ranging beacons, monitoring beacons, nearable discovery, calculating distance between beacon and the device and also changing minor value of the beacon.
 
-## Quick start for beacon ranging
+## Tutorials
 
-```java
-  private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
-  private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", ESTIMOTE_PROXIMITY_UUID, null, null);
+## Android tutorial for monitoring & ranging beacons
 
-  private BeaconManager beaconManager = new BeaconManager(context);
-
-  // Should be invoked in #onCreate.
-  beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-    @Override public void onBeaconsDiscovered(Region region, List<Beacon> beacons) {
-      Log.d(TAG, "Ranged beacons: " + beacons);
-    }
-  });
-
-  // Should be invoked in #onStart.
-  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-    @Override public void onServiceReady() {
-      try {
-        beaconManager.startRanging(ALL_ESTIMOTE_BEACONS);
-      } catch (RemoteException e) {
-        Log.e(TAG, "Cannot start ranging", e);
-      }
-    }
-  });
-
-  // Should be invoked in #onStop.
-  try {
-    beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS);
-  } catch (RemoteException e) {
-    Log.e(TAG, "Cannot stop but it does not matter now", e);
-  }
-
-  // When no longer needed. Should be invoked in #onDestroy.
-  beaconManager.disconnect();
-```
+Android tutorial is available on [Estimote Developer Docs](http://developer.estimote.com/android/tutorial/part-1-setting-up/). Tutorial is divided into three parts:
+ - [Part 1: Setting Up](http://developer.estimote.com/android/tutorial/part-1-setting-up/)
+ - [Part 2: Background monitoring](http://developer.estimote.com/android/tutorial/part-2-background-monitoring/)
+ - [Part 3: Ranging beacons](http://developer.estimote.com/android/tutorial/part-3-ranging-beacons/)
 
 ## Quick start for nearables discovery
 
