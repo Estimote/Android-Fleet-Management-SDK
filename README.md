@@ -114,14 +114,14 @@ Demos include samples for ranging beacons, monitoring beacons, nearable discover
 
 ## Tutorials
 
-## Android tutorial for monitoring & ranging beacons
+### Android tutorial for monitoring & ranging beacons
 
 Android tutorial is available on [Estimote Developer Docs](http://developer.estimote.com/android/tutorial/part-1-setting-up/). Tutorial is divided into three parts:
  - [Part 1: Setting Up](http://developer.estimote.com/android/tutorial/part-1-setting-up/)
  - [Part 2: Background monitoring](http://developer.estimote.com/android/tutorial/part-2-background-monitoring/)
  - [Part 3: Ranging beacons](http://developer.estimote.com/android/tutorial/part-3-ranging-beacons/)
 
-## Quick start for nearables discovery
+### Quick start for nearables discovery
 
 ```java
   private BeaconManager beaconManager = new BeaconManager(context);
@@ -148,7 +148,7 @@ Android tutorial is available on [Estimote Developer Docs](http://developer.esti
   beaconManager.disconnect();
 ```
 
-## Quick start for Eddystone
+### Quick start for Eddystone
 
 [Eddystone](https://developers.google.com/beacons) is an open protocol BLE protocol from Google. Estimote Beacons can broadcast the Eddystone packet.
 
