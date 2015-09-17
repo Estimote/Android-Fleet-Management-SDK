@@ -63,5 +63,13 @@ public class AllDemosActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
+    findViewById(R.id.sensors_demo_button).setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
+        intent.putExtra(ListNearablesActivity.EXTRAS_TARGET_ACTIVITY, SensorsActivity.class.getName());
+        startActivity(intent);
+      }
+    });
   }
 }
