@@ -1,6 +1,9 @@
 Changelog
 =====================
 
+## 0.9.1 (September 29. 2015)
+- Fixes problem when not initializing SDK caused problems with ranging & monitoring.
+
 ## 0.9 (September 29, 2015)
 - This release brings [**Secure UUID**](https://community.estimote.com/hc/en-us/articles/201371053-What-security-features-does-Estimote-offer-How-does-Secure-UUID-work-) – a security mechanism to protect your beacons from spoofing (where someone tries to ‘impersonate’ your beacons, by broadcasting the same UUID, Major and Minor). Using _Secure UUID_, the UUID, Major and Minor values that your beacon broadcasts will change unpredictably over time. The only way to resolve the values we generate to a particular beacon is via authorized access to Estimote Cloud.
 
