@@ -58,7 +58,7 @@ public class BeaconListAdapter extends BaseAdapter {
 
   private void bind(Beacon beacon, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
+    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress().toStandardString(), Utils.computeAccuracy(beacon)));
     holder.majorTextView.setText("Major: " + beacon.getMajor());
     holder.minorTextView.setText("Minor: " + beacon.getMinor());
     holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());

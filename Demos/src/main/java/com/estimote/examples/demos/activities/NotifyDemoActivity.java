@@ -6,11 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
@@ -32,7 +27,6 @@ import static com.estimote.sdk.BeaconManager.MonitoringListener;
  */
 public class NotifyDemoActivity extends BaseActivity {
 
-  private static final String TAG = NotifyDemoActivity.class.getSimpleName();
   private static final int NOTIFICATION_ID = 123;
 
   private BeaconManager beaconManager;
@@ -77,11 +71,7 @@ public class NotifyDemoActivity extends BaseActivity {
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override
       public void onServiceReady() {
-        try {
-          beaconManager.startMonitoring(region);
-        } catch (RemoteException e) {
-          Log.d(TAG, "Error while starting monitoring");
-        }
+        beaconManager.startMonitoring(region);
       }
     });
   }

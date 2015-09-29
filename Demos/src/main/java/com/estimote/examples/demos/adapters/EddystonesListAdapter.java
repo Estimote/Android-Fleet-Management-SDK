@@ -57,7 +57,7 @@ public class EddystonesListAdapter extends BaseAdapter {
 
   private void bind(Eddystone eddystone, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", eddystone.macAddress, Utils.computeAccuracy(eddystone)));
+    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", eddystone.macAddress.toStandardString(), Utils.computeAccuracy(eddystone)));
     holder.rssiTextView.setText("RSSI: " + eddystone.rssi);
     holder.eddystoneNamespaceTextView.setText("Namespace: " + (eddystone.namespace == null ? "-" : eddystone.namespace));
     holder.eddystoneInstanceIdTextView.setText("Instance ID: " + (eddystone.instance == null ? "-" : eddystone.instance));

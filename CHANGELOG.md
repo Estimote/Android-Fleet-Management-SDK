@@ -1,6 +1,41 @@
 Changelog
 =====================
 
+## 0.9 (September 29, 2015)
+- This release brings [**Secure UUID**](https://community.estimote.com/hc/en-us/articles/201371053-What-security-features-does-Estimote-offer-How-does-Secure-UUID-work-) – a security mechanism to protect your beacons from spoofing (where someone tries to ‘impersonate’ your beacons, by broadcasting the same UUID, Major and Minor). Using _Secure UUID_, the UUID, Major and Minor values that your beacon broadcasts will change unpredictably over time. The only way to resolve the values we generate to a particular beacon is via authorized access to Estimote Cloud.
+
+- You can enable _Secure UUID_ via [Estimote app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en) from Google Play or via SDK
+   ```java
+  connection = new BeaconConnection(...);
+  connection.edit().set(connection.secureUUID(), true).commit(...);
+   ```
+
+- Ranging and region monitoring works transparently with _Secure UUID_ enabled beacons. All you need is:
+
+  - Make sure you have initialised SDK with your App ID & App Token.
+    ```java
+    //  App ID & App Token can be taken from App section of Estimote Cloud.
+    EstimoteSDK.initialize(applicationContext, appId, appToken);
+    ```
+
+  - Use `SecureRegion` instead of `Region` when starting ranging or monitoring.
+
+    ```java
+    // Initialise BeaconManager as before.
+    // Find all *your* Secure UUID beacons in the vicinity.
+    beaconManager.startRanging(new SecureRegion(“regionId”, null, null, null));
+
+    // Remember that you can also range for other regions as well.
+    beaconManager.startRanging(new Region("otherRegion", null, null, null);
+    ```
+
+- **Breaking changes**:
+ - `BeaconManager` methods for ranging & monitoring (`startRanging`, `stopRanging`, `startMonitoring`, `stopMonitoring`) no longer throws `RemoteException`. We heard that it caused lots of boilerplate code. We agree and removed it.
+
+ - Formatting MAC address was always pain (`aabbccddeeff` or `AA:BB:CC:DD:EE:FF`?). That's why we removed all `String` representation of MAC address and introduced `MacAddress` class.
+
+ - For the same reason we removed all usages of `String` representation [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) and used Java's `java.util.UUID` class instead.
+
 ## 0.8.8 (September 16, 2015)
  - Finally support for built-in sensors: motion and temperature.
  - Motion sensor readout with notifications. Note that you need to make sure it is enabled (separate property do enable/disable motion) sensor.
@@ -14,7 +49,7 @@ Changelog
     @Override public void onValueReceived(final MotionState value) {
       // Motion state in value argument.
     }
-  
+
     @Override public void onFailure() {
       // Error handling.
     }
@@ -24,7 +59,7 @@ Changelog
  ```java
  // Temperature calibration (see also docs for BeaconConnection#temperatureCalibration()).
  connection.edit().set(connection.temperatureCalibration(), 21).commit(...);
- 
+
  // If you want to measure temperature from beacon on demand.
  connection.temperature().getAsync(new Property.Callback<Float>() {
       @Override public void onValueReceived(final Float value) {
@@ -127,7 +162,7 @@ connection.edit()
  EstimoteSDK.enableDebugLogging(true);
  ```
  - All exceptions within the SDK has been unified and exposed in `com.estimote.sdk.exception` package.
- 
+
  - That means some **breaking changes**:
 	 - `L` class is no longer available, in order to turn on debug logging use `EstimoteSDK` class.
 	 - `BeaconConnection.ConnectionCallback` & `BeaconConnection.WriteCallback` methods have been changed to contain apropriate exception when happens.

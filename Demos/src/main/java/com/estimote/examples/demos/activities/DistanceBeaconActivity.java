@@ -1,10 +1,6 @@
 package com.estimote.examples.demos.activities;
 
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
@@ -112,13 +108,7 @@ public class DistanceBeaconActivity extends BaseActivity {
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override
       public void onServiceReady() {
-        try {
-          beaconManager.startRanging(region);
-        } catch (RemoteException e) {
-          Toast.makeText(DistanceBeaconActivity.this, "Cannot start ranging, something terrible happened",
-              Toast.LENGTH_LONG).show();
-          Log.e(TAG, "Cannot start ranging", e);
-        }
+        beaconManager.startRanging(region);
       }
     });
   }

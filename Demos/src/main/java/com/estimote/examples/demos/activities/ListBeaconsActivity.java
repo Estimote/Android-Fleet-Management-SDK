@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -92,11 +91,7 @@ public class ListBeaconsActivity extends BaseActivity {
   }
 
   @Override protected void onStop() {
-    try {
-      beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
-    } catch (RemoteException e) {
-      Log.d(TAG, "Error while stopping ranging", e);
-    }
+    beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
 
     super.onStop();
   }
@@ -118,12 +113,7 @@ public class ListBeaconsActivity extends BaseActivity {
     adapter.replaceWith(Collections.<Beacon>emptyList());
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override public void onServiceReady() {
-        try {
-          beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
-        } catch (RemoteException e) {
-          Toast.makeText(ListBeaconsActivity.this, "Cannot start ranging, something terrible happened", Toast.LENGTH_LONG).show();
-          Log.e(TAG, "Cannot start ranging", e);
-        }
+        beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
       }
     });
   }
