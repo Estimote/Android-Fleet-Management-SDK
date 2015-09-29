@@ -12,6 +12,7 @@
 - [Usage and demos](#usage-and-demos)
 - [Tutorials](#tutorials)
   - [Android tutorial for monitoring & ranging beacons](#android-tutorial-for-monitoring--ranging-beacons)
+  - [Quick start for Secure UUID](#quick-start-for-secure-uuid)
   - [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
   - [Quick start for Eddystone](#quick-start-for-eddystone)
 - [FAQ](#faq)
@@ -147,6 +148,33 @@ Android tutorial is available on [Estimote Developer Docs](http://developer.esti
   // When no longer needed. Should be invoked in #onDestroy.
   beaconManager.disconnect();
 ```
+
+### Quick start for Secure UUID
+
+Ranging and region monitoring works transparently with [Secure UUID](https://community.estimote.com/hc/en-us/articles/201371053-What-security-features-does-Estimote-offer-How-does-Secure-UUID-work-) enabled beacons. All you need is:
+
+1. Enable _Secure UUID_ via [Estimote app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en) from Google Play or via SDK
+   ```java
+  connection = new BeaconConnection(…);
+  connection.edit().set(connection.secureUUID(), true).commit(…);
+   ```
+
+2. Make sure you have initialised SDK with your App ID & App Token.
+  ```java
+  //  App ID & App Token can be taken from App section of Estimote Cloud.
+  EstimoteSDK.initialize(applicationContext, appId, appToken);
+  ```
+
+3. Use `SecureRegion` instead of `Region` when starting ranging or monitoring.
+
+  ```java
+  // Initialise BeaconManager as before.
+  // Find all *your* Secure UUID beacons in the vicinity.
+  beaconManager.startRanging(new SecureRegion(“regionId”, null, null, null));
+
+  // Remember that you can also range for other regions as well.
+  beaconManager.startRanging(new Region(“otherRegion”, null, null, null);
+  ```
 
 ### Quick start for Eddystone
 
