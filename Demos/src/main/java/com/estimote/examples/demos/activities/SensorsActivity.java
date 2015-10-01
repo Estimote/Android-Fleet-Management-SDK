@@ -56,7 +56,7 @@ public class SensorsActivity extends BaseActivity {
           }
         });
         // First step after connection is to enable motion detection on beacon. Otherwise no
-        // motion notifications fill be sent.
+        // motion notifications will be sent.
         connection.edit().set(connection.motionDetectionEnabled(), true).commit(new BeaconConnection.WriteCallback() {
           @Override public void onSuccess() {
             // After on beacon connect all values are read so we can read them immediately and update UI.
@@ -64,7 +64,7 @@ public class SensorsActivity extends BaseActivity {
             setTemperature(connection.temperature().get());
             // Motion sensor sends status updates on physical state change.
             enableMotionListner();
-            // Temperature mut be read periodically.
+            // Temperature must be read periodically.
             refreshTemperature();
           }
 
