@@ -28,6 +28,7 @@ public class AllDemosActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
     findViewById(R.id.notify_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
@@ -35,6 +36,7 @@ public class AllDemosActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
     findViewById(R.id.characteristics_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
@@ -42,6 +44,7 @@ public class AllDemosActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
     findViewById(R.id.update_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
@@ -49,6 +52,7 @@ public class AllDemosActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
     findViewById(R.id.eddystone_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListEddystoneActivity.class);
@@ -56,6 +60,7 @@ public class AllDemosActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
     findViewById(R.id.nearables_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListNearablesActivity.class);
@@ -67,7 +72,7 @@ public class AllDemosActivity extends AppCompatActivity {
     findViewById(R.id.sensors_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-        intent.putExtra(ListNearablesActivity.EXTRAS_TARGET_ACTIVITY, SensorsActivity.class.getName());
+        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, SensorsActivity.class.getName());
         startActivity(intent);
       }
     });
