@@ -23,33 +23,25 @@ public class AllDemosActivity extends AppCompatActivity {
 
     findViewById(R.id.distance_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, DistanceBeaconActivity.class.getName());
-        startActivity(intent);
+        startListBeaconsActivity(DistanceBeaconActivity.class.getName());
       }
     });
 
     findViewById(R.id.notify_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, NotifyDemoActivity.class.getName());
-        startActivity(intent);
+        startListBeaconsActivity(NotifyDemoActivity.class.getName());
       }
     });
 
     findViewById(R.id.characteristics_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, CharacteristicsDemoActivity.class.getName());
-        startActivity(intent);
+        startListBeaconsActivity(CharacteristicsDemoActivity.class.getName());
       }
     });
 
     findViewById(R.id.update_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, UpdateDemoActivity.class.getName());
-        startActivity(intent);
+        startListBeaconsActivity(UpdateDemoActivity.class.getName());
       }
     });
 
@@ -71,10 +63,14 @@ public class AllDemosActivity extends AppCompatActivity {
 
     findViewById(R.id.sensors_demo_button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, SensorsActivity.class.getName());
-        startActivity(intent);
+        startListBeaconsActivity(SensorsActivity.class.getName());
       }
     });
+  }
+
+  private void startListBeaconsActivity(String extra) {
+    Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
+    intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, extra);
+    startActivity(intent);
   }
 }
