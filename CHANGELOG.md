@@ -1,6 +1,10 @@
 Changelog
 =====================
 
+## 0.9.3 (October 20, 2015)
+Bug fix:
+ - `EstimoteCloud#fetchBeaconDetails(UUID, major, minor, callback)` under certain circumstances could yield beacon not found.
+
 ## 0.9.2 (October 20, 2015)
 New:
  - Beacon *signal filtering* for smoothing [RSSI](https://en.wikipedia.org/wiki/Received_signal_strength_indication) readings. What does it mean for you? The RSSI values returned by `RangingListener#onBeaconsDiscovered` are much more stable now, which should enable you to predict proximity to a beacon more accurately and without having to write complex filtering algorithms yourself. The dinner's on us\*.
