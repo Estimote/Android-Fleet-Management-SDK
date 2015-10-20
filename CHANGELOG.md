@@ -1,7 +1,21 @@
 Changelog
 =====================
 
-## 0.9.1 (September 29. 2015)
+## 0.9.2 (October 20, 2015)
+New:
+ - Beacon *signal filtering* for smoothing [RSSI](https://en.wikipedia.org/wiki/Received_signal_strength_indication) readings. What does it mean for you? The RSSI values returned by `RangingListener#onBeaconsDiscovered` are much more stable now, which should enable you to predict proximity to a beacon more accurately and without having to write complex filtering algorithms yourself. The dinner's on us\*.
+
+  \* The dinner is not really on us, but the RSSI smoothing code is.
+ - You can add and remove multiple callbacks in `BeaconConnection` (new methods `addConnectionCallback`, `removeConnectionCallback`, `clearCallbacks`).
+ - Added `EstimoteCloud#fetchBeaconDetails(UUID, major, minor, callback)` method to fetch details of your beacon in Estimote Cloud using UUID, major, minor values.
+
+Bug fixes:
+ - Secure UUID introduced in `v0.9` got lots of good improvements. Fixes https://github.com/Estimote/Android-SDK/issues/127.
+
+Breaking changes:
+ - Removed `Beacon#getName` method. It was name of the Bluetooth device and was often confused with name given to a beacon in Estimote Cloud. Beacon's  name can be fetched using `EstimoteCloud#fetchBeaconDetails` method.
+
+## 0.9.1 (September 29, 2015)
 - Fixes problem when not initializing SDK caused problems with ranging & monitoring.
 
 ## 0.9 (September 29, 2015)
