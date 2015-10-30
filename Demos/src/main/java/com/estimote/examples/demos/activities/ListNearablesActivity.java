@@ -1,20 +1,16 @@
 package com.estimote.examples.demos.activities;
 
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import com.estimote.examples.demos.R;
 import com.estimote.examples.demos.adapters.NearableListAdapter;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Nearable;
+import com.estimote.sdk.SystemRequirementsChecker;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,8 +26,6 @@ public class ListNearablesActivity extends BaseActivity {
 
   public static final String EXTRAS_TARGET_ACTIVITY = "extrasTargetActivity";
   public static final String EXTRAS_NEARABLE = "extrasNearable";
-
-  private static final int REQUEST_ENABLE_BT = 1234;
 
   private BeaconManager beaconManager;
   private NearableListAdapter adapter;
@@ -60,22 +54,11 @@ public class ListNearablesActivity extends BaseActivity {
     super.onDestroy();
   }
 
-  @Override
-  protected void onStart() {
-    super.onStart();
+  @Override protected void onResume() {
+    super.onResume();
 
-    // Check if device supports Bluetooth Low Energy.
-    if (!beaconManager.hasBluetooth()) {
-      Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
-      return;
-    }
-
-    // If Bluetooth is not enabled, let user enable it.
-    if (!beaconManager.isBluetoothEnabled()) {
-      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-      startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-    } else {
-      connectToService();
+    if (SystemRequirementsChecker.checkWithDefaultDialogs(this)) {
+      startScanning();
     }
   }
 
@@ -85,20 +68,7 @@ public class ListNearablesActivity extends BaseActivity {
     super.onStop();
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == REQUEST_ENABLE_BT) {
-      if (resultCode == Activity.RESULT_OK) {
-        connectToService();
-      } else {
-        Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
-        toolbar.setSubtitle("Bluetooth not enabled");
-      }
-    }
-    super.onActivityResult(requestCode, resultCode, data);
-  }
-
-  private void connectToService() {
+  protected void startScanning() {
     toolbar.setSubtitle("Scanning...");
     adapter.replaceWith(Collections.<Nearable>emptyList());
 

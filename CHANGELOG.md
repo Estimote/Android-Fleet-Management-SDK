@@ -1,6 +1,21 @@
 Changelog
 =====================
 
+## 0.9.4 (October 30, 2015)
+
+ - This release features support for Android Marshmallow runtime permissions and helps you meet all the requirements necessary for beacon detection (Bluetooth, Location, runtime permissions).
+ - Full description of all requirements for beacon detection are described in JavaDoc for `SystemRequirementsChecker`.
+ - Demos have been updated to target API 23 (M) and uses `SystemRequirementsChecker` to meet all requirements.
+ - From time to time SDK will put warning in device logs what is missing.
+
+New tools
+ - `SystemRequirementsChecker`: use the `check` method to determine which requirements are not met for beacon detection
+ - `SystemRequirementsChecker`: use the `checkWithDefaultDialogs` method in your activity for a convenient way to ask for all permissions and rights. It's all handled by the SDK, and should be of great help if you want to get up and running quickly.
+ - `SystemRequirementsHelper`: a grab bag of static methods to determine status of Bluetooth, Location Services, granted required permissions
+
+Breaking changes:
+ - `BeaconManager`: not longer included the following methods `checkPermissionsAndService`, `isBluetoothEnabled`, `hasBluetooth`. You can find them in `SystemRequirementsHelper`.
+
 ## 0.9.3 (October 20, 2015)
 Bug fix:
  - `EstimoteCloud#fetchBeaconDetails(UUID, major, minor, callback)` under certain circumstances could yield beacon not found.
