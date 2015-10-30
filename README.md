@@ -10,6 +10,7 @@
   - [Gradle via Maven Central](#gradle-via-maven-central)
   - [Manual installation](#manual-installation)
 - [Usage and demos](#usage-and-demos)
+- [Android M and runtime permissions](#android-m-and-runtime-permissions)
 - [Tutorials](#tutorials)
   - [Android tutorial for monitoring & ranging beacons](#android-tutorial-for-monitoring--ranging-beacons)
   - [Quick start for Secure UUID](#quick-start-for-secure-uuid)
@@ -27,6 +28,7 @@ It allows for:
 - beacon monitoring (monitors regions for those devices that have entered/exited a region)
 - nearables (aka stickers) discovery (see [quickstart](#quick-start-for-nearables-discovery))
 - [Eddystone](https://developers.google.com/beacons) scanning (see [quickstart](#quick-start-for-eddystone))
+- easy way to meet [all requirements for beacon detection](http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/SystemRequirementsChecker.html) (runtime permissions, acquiring all rights),
 - beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
 
 Start with [Android tutorial for monitoring & ranging beacons](http://developer.estimote.com/android/tutorial/part-1-setting-up/).
@@ -63,7 +65,7 @@ Estimote Android SDK is available on [Maven Central](http://search.maven.org/#se
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:0.9.3@aar'
+  compile 'com.estimote:sdk:0.9.4@aar'
 }
 ```
 
@@ -112,6 +114,21 @@ EstimoteSDK.enableDebugLogging(true);
 SDK Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` (or `gradlew.bat installDebug` on Windows) in terminal when your device is connected to computer. If you use [Android Studio](http://developer.android.com/tools/studio/index.html) you can just simply open `build.gradle`.
 
 Demos include samples for ranging beacons, monitoring beacons, nearable discovery, calculating distance between beacon and the device and also changing minor value of the beacon.
+
+## Android M and runtime permissions
+
+Depending on Android platform you need different permissions to be granted. It is recommended to implement future proof Android M runtime permissions model.
+ 
+ In order to reliably detect beacons following conditions must be met:
+  - Bluetooth permissions are granted (android.permission.BLUETOOTH and android.permission.BLUETOOTH_ADMIN). This is done automatically if you use Estimote SDK.
+  - `BeaconService` is declared in `AndroidManifest.xml`. This is done automatically if you use Estimote SDK.
+  - If running on Android M or later, Location Services must be turned on.
+  -  If running on Android M or later and your app is targeting SDK < 23 (M), any location permission (`ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION`) must be granted for <b>background</b> beacon detection.
+  - If running on Android M or later and your app is targeting SDK >= 23 (M), any location permission (`ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION` must be granted.
+
+Sounds difficult? No worries. From time to time SDK will put warning in device logs what is missing. You can use the `SystemRequirementsChecker#check` method to determine which requirements are not met for beacon detection.
+
+ Use `SystemRequirementsChecker#checkWithDefaultDialogs` method in your activity for a convenient way to ask for all permissions and rights. It's all handled by the SDK, and should be of great help if you want to get up and running quickly.
 
 ## Tutorials
 
