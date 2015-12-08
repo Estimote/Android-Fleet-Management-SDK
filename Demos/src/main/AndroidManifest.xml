@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.estimote.examples.demos"
+          android:versionCode="1"
+          android:versionName="1.0">
+
+<!--
+  You do not longer need to declare those permissions. Since SDK declares them,
+  there is no need for you to add those since SDK's AndroidManifest.xml will be merged
+  with app's AndroidManifest.xml.
+
+  <uses-permission android:name="android.permission.BLUETOOTH"/>
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+-->
+
+  <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+  <application
+      android:name=".DemosApplication"
+      android:label="Estimote Demos"
+      android:theme="@style/EstimoteTheme">
+
+    <activity
+        android:name=".activities.AllDemosActivity"
+        android:label="Estimote Demos"
+        android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+
+    <activity
+        android:name=".activities.ListBeaconsActivity"
+        android:label="Select Beacon"
+        android:screenOrientation="portrait"/>
+
+    <activity
+        android:name=".activities.ListEddystoneActivity"
+        android:label="Select Eddystone"
+        android:screenOrientation="portrait"/>
+
+    <activity
+        android:name=".activities.ListNearablesActivity"
+        android:label="Select Beacon"
+        android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.DistanceBeaconActivity"
+              android:label="Distance Demo"
+              android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.NotifyDemoActivity"
+              android:label="Notify Demo"
+              android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.CharacteristicsDemoActivity"
+              android:label="Characteristics Demo"
+              android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.UpdateDemoActivity"
+              android:label="Update Firmware Demo"
+              android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.EddystoneDemoActivity"
+        android:label="Eddystone Demo"
+        android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.NearablesDemoActivity"
+        android:label="Nearables Demo"
+        android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.SensorsActivity"
+        android:label="Sensors Demo"
+        android:screenOrientation="portrait"/>
+<!--
+    There is no need any longer to declare BeaconService. It is declared in SDK's AndroidManifest.xml
+    and it will be merged to your app's AndroidManifest.xml.
+
+    <service android:name="com.estimote.sdk.service.BeaconService"
+             android:exported="false"/>
+-->
+  </application>
+
+</manifest>

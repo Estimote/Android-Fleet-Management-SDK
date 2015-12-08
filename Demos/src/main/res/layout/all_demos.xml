@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <include layout="@layout/toolbar" android:id="@+id/toolbar" />
+
+  <Button
+      android:id="@+id/distance_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Distance Demo"
+      />
+
+  <Button
+      android:id="@+id/notify_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Notify Demo"
+      />
+
+  <Button
+      android:id="@+id/characteristics_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Change Beacon's Minor Demo"
+      />
+
+  <Button
+      android:id="@+id/update_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Update beacon's firmware demo"
+      />
+
+  <Button
+      android:id="@+id/eddystone_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Eddystone Demo"
+      />
+
+  <Button
+      android:id="@+id/nearables_demo_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Nearables Demo"
+      />
+
+  <Button
+     android:id="@+id/sensors_demo_button"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginLeft="8dp"
+     android:layout_marginRight="8dp"
+     android:text="Sensors Demo"
+     />
+</LinearLayout>

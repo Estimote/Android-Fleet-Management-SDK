@@ -1,0 +1,41 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
+    classpath 'com.android.tools.build:gradle:1.3.1'
+  }
+}
+
+apply plugin: 'android-sdk-manager'
+apply plugin: 'com.android.application'
+
+repositories {
+  mavenCentral()
+  flatDir {
+    dirs '../EstimoteSDK'
+  }
+}
+
+android {
+  compileSdkVersion 21
+  buildToolsVersion '22.0.1'
+  defaultConfig {
+    minSdkVersion 18
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+}
+
+dependencies {
+  compile(name:'estimote-sdk', ext:'aar')
+  compile 'com.android.support:appcompat-v7:22.2.0'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.4'
+}
