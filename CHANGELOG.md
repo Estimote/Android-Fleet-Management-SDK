@@ -1,6 +1,9 @@
 Changelog
 =====================
-
+## 0.9.5 (December 8, 2015)
+  
+  - This version uses new Lollipop BLE scanning API. Previous API is still supported on older phones. It uses features like batch scanning and hardware filtering (if particular device supports them). No need to change your code, those features are enabled automatically.
+    
 ## 0.9.4 (October 30, 2015)
 
  - This release features support for Android Marshmallow runtime permissions and helps you meet all the requirements necessary for beacon detection (Bluetooth, Location, runtime permissions).
