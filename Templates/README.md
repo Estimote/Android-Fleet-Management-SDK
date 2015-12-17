@@ -18,3 +18,9 @@ You can generate yourself a ready-made project from one of these templates on ht
   > Uses: ranging beacons, Estimote Cloud API to fetch the beacon's name & color
 
   Change the background color and text on the screen depending on which of the ranged beacons is the closest.
+
+- **Showroom**
+
+  > Uses: [sticker beacons](http://developer.estimote.com/nearables/stickers-vs-beacons/), Nearable packet
+
+  Change the text on screen when user picks up a nearable (motion detection). Imagine, e.g., a tablet mounted in a showroom, and products with Estimote Stickers attached to them. Whenever a visitor picks an item up, the iPad shows information about the product.
