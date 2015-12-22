@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="error_no_location_permission">To use this app you need to grant location permission</string>
+  <string name="requesting_location_access">Requesting location access</string>
+  <string name="requesting_location_access_rationale">
+    Detecting beacons requires Location to be enabled. We\'ll never access your GPS location without your knowledge.
+  </string>
+  <string name="requesting_location_permission">Requesting location permission</string>
+  <string name="requesting_location_permission_rationale">
+    Detecting beacons requires Location permission. Please "Allow" so app can detect beacons.
+  </string>
+  <string name="requesting_location_access_cancel">I don\'t want to do this now</string>
+  <string name="requesting_location_access_ok">Go to settings to enable</string>
+</resources>

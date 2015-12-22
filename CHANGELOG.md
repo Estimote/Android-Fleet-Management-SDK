@@ -1,5 +1,27 @@
 Changelog
 =====================
+## 0.9.6 (December 22, 2015)
+
+- Added ScanStatusListner to BeaconManager. This allows to find you when scanning really started and when it stopped. User may switch the Bluetooth off and then turn it on when
+  application is running. This listener allows to track this events and react properly to them (eg. gray out device list). See ListBeaconsActivity to see sample code. 
+  ```java
+    beaconManager.setScanStatusListener(new BeaconManager.ScanStatusListener() {
+      @Override public void onScanStart() {
+        // Unlock UI
+		list.setEnabled(true);
+        list.setAlpha(1.0f);
+      }
+
+      @Override public void onScanStop() {
+        // Lock UI
+		list.setEnabled(false);
+        list.setAlpha(0.5f);
+      }
+    });
+  ```
+- Fixed (https://github.com/Estimote/Android-SDK/issues/134): java.lang.NullPointerException when using SDK on Emulator
+
+
 ## 0.9.5 (December 8, 2015)
   
   - This version uses new Lollipop BLE scanning API. Previous API is still supported on older phones. It uses features like batch scanning and hardware filtering (if particular device supports them). No need to change your code, those features are enabled automatically.

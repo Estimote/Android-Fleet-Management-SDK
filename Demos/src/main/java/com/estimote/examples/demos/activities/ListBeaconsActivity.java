@@ -42,7 +42,7 @@ public class ListBeaconsActivity extends BaseActivity {
 
     // Configure device list.
     adapter = new BeaconListAdapter(this);
-    ListView list = (ListView) findViewById(R.id.device_list);
+    final ListView list = (ListView) findViewById(R.id.device_list);
     list.setAdapter(adapter);
     list.setOnItemClickListener(createOnItemClickListener());
 
@@ -59,6 +59,17 @@ public class ListBeaconsActivity extends BaseActivity {
             adapter.replaceWith(beacons);
           }
         });
+      }
+    });
+    beaconManager.setScanStatusListener(new BeaconManager.ScanStatusListener() {
+      @Override public void onScanStart() {
+        list.setEnabled(true);
+        list.setAlpha(1.0f);
+      }
+
+      @Override public void onScanStop() {
+        list.setEnabled(false);
+        list.setAlpha(0.5f);
       }
     });
   }
