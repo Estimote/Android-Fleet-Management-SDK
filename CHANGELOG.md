@@ -1,5 +1,14 @@
 Changelog
 =====================
+
+## 0.9.7 (January 19, 2016)
+
+- Packet parser errors are logged and should not crash whole application.
+- Fixed threading issue that cause scanning to continue when service was stopped (on some devices).
+- onExitRegion should be now working on devices with pre-Lollipop Androids. 
+- Fixed (https://github.com/Estimote/Android-SDK/issues/135): Fails getting RSSI on Android >=5.0 (Samsung Galaxies)
+- Fixed (https://github.com/Estimote/Android-SDK/issues/137): IllegalStateException when starting monitoring on SDK 0.9.6
+
 ## 0.9.6 (December 22, 2015)
 
 - Added ScanStatusListner to BeaconManager. This allows to find you when scanning really started and when it stopped. User may switch the Bluetooth off and then turn it on when
