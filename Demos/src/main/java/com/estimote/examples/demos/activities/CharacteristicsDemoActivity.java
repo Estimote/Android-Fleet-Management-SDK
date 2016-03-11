@@ -122,7 +122,7 @@ public class CharacteristicsDemoActivity extends BaseActivity {
             StringBuilder sb = new StringBuilder()
                 .append("Major: ").append(beacon.getMajor()).append("\n")
                 .append("Minor: ").append(beacon.getMinor()).append("\n")
-                .append("Advertising interval: ").append(connection.advertisingIntervalMillis().get()).append("ms\n")
+                .append("Advertising advertisingInterval: ").append(connection.advertisingIntervalMillis().get()).append("ms\n")
                 .append("Broadcasting power: ").append(connection.broadcastingPower().get()).append(" dBm\n")
                 .append("Battery: ").append(connection.getBatteryPercent()).append(" %\n")
                 .append("Firmware: ").append(connection.getSoftwareVersion());

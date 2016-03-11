@@ -1,26 +1,5 @@
 # Estimote SDK for Android #
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Beacon ranging and monitoring](#beacon-ranging-and-monitoring)
-  - [Ranging](#ranging)
-  - [Monitoring](#monitoring)
-- [Installation](#installation)
-  - [Gradle via Maven Central](#gradle-via-maven-central)
-  - [Manual installation](#manual-installation)
-- [Usage and demos](#usage-and-demos)
-- [Android M and runtime permissions](#android-m-and-runtime-permissions)
-- [Tutorials](#tutorials)
-  - [Android tutorial for monitoring & ranging beacons](#android-tutorial-for-monitoring--ranging-beacons)
-  - [Quick start for Secure UUID](#quick-start-for-secure-uuid)
-  - [Quick start for nearables discovery](#quick-start-for-nearables-discovery)
-  - [Quick start for Eddystone](#quick-start-for-eddystone)
-- [FAQ](#faq)
-- [Changelog](#changelog)
-
-## Overview
-
 The Estimote SDK for Android is a library that allows interaction with [Estimote beacons & stickers](http://estimote.com/#jump-to-products). The SDK system works on Android 4.3 or above and requires device with Bluetooth Low Energy (SDK's min Android SDK version is 9).
 
 It allows for:
@@ -40,23 +19,6 @@ Learn more:
  - Check our [Estimote Forums](https://forums.estimote.com/c/android-sdk) where you can post your questions and get answers.
  - [Estimote Community Portal](http://community.estimote.com/hc/en-us)
 
-## Beacon ranging and monitoring
-
-iBeacon allows for two basic interactions between apps and individual beacons or groups of beacons called regions:
-- *Region monitoring*: actions triggered on entering/exiting region’s range; works in the foreground, background, and even when the app is killed.
-- *Ranging*: actions triggered based on proximity to a beacon; works only in the foreground
-
-[Learn more about beacon ranging and monitoring](https://community.estimote.com/hc/en-us/articles/203356607-What-are-region-Monitoring-and-Ranging-)
-
-### Ranging
-Apps can use the `startRanging` method of the `BeaconManager` class to determine relative proximity of beacons in the region and can be updated when this distance changes. Ranging updates come every second to listeners registered with the `setRangingListener` method of the `BeaconManager` class. Ranging updates contain a list of currently found beacons. If a beacon goes out of range it will not be presented on this list.
-
-### Monitoring
-
-Apps can use the `startMonitoring` method of the `BeaconManager` class to start monitoring regions. Monitoring updates come to listeners registered with the `setMonitoringListener` method of the `BeaconManager` class.
-
-Monitoring is designed to perform periodic scans in the background. By default it scans for 5 seconds and sleeps for 25 seconds. This means that it can take by default up to 30 seconds to detect entering or exiting a region. Default behaviour can be changed via `BeaconManager#setBackgroundScanPeriod`.
-
 ## Installation
 
 ### Gradle via Maven Central
@@ -65,7 +27,7 @@ Estimote Android SDK is available on [Maven Central](http://search.maven.org/#se
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:0.9.4@aar'
+  compile 'com.estimote:sdk:0.10.0@aar'
 }
 ```
 
@@ -115,7 +77,7 @@ SDK Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/ma
 
 Demos include samples for ranging beacons, monitoring beacons, nearable discovery, calculating distance between beacon and the device and also changing minor value of the beacon.
 
-## Android M and runtime permissions
+## Android 6.0 and runtime permissions
 
 Depending on Android platform you need different permissions to be granted. It is recommended to implement future proof Android M runtime permissions model.
  
@@ -132,12 +94,17 @@ Sounds difficult? No worries. From time to time SDK will put warning in device l
 
 ## Tutorials
 
-### Android tutorial for monitoring & ranging beacons
-
 Android tutorial is available on [Estimote Developer Docs](http://developer.estimote.com/android/tutorial/part-1-setting-up/). Tutorial is divided into three parts:
  - [Part 1: Setting Up](http://developer.estimote.com/android/tutorial/part-1-setting-up/)
  - [Part 2: Background monitoring](http://developer.estimote.com/android/tutorial/part-2-background-monitoring/)
  - [Part 3: Ranging beacons](http://developer.estimote.com/android/tutorial/part-3-ranging-beacons/)
+
+In addition, we suggest you to check our guides for using **Location Beacons** and **Proximity Beacons**:
+ - [Scanning and monitoring](/DOC_monitoring_scanning.md)
+ - [Beacon connection](/DOC_deviceConnection.md)
+ - [Multiple advertisers in Location Beacons](/DOC_multiadvertisers.md)
+ - [Using telemetry packets](/DOC_telemetry.md)
+
 
 ### Quick start for nearables discovery
 
@@ -172,8 +139,19 @@ Ranging and region monitoring works transparently with [Secure UUID](https://com
 
 1. Enable _Secure UUID_ via [Estimote app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en) from Google Play or via SDK
    ```java
-  connection = new BeaconConnection(…);
-  connection.edit().set(connection.secureUUID(), true).commit(…);
+DeviceConnection connection = connectionProvider.getConnection(device);
+boolean enable = true;
+connection.settings.beacon.secure().set(enable, new SettingCallback<Boolean>() {
+ @Override
+ public void onSuccess(Boolean value) {
+   // Handle success here
+ }
+
+ @Override
+ public void onFailure(DeviceConnectionException exception) {
+   // Handle failure here
+ }
+});
    ```
 
 2. Make sure you have initialised SDK with your App ID & App Token.

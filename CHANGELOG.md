@@ -1,6 +1,22 @@
 Changelog
 =====================
 
+## 0.10.0 (March 11, 2016)
+
+- New SDK for configuring Location and Proximity beacons
+  * supports more sensors (temperature, motion, light)
+  * advertising multiple packet types 
+  * 
+- Improved monitoring using batch mode and hardware filtering.
+- Support for observing Estimote Telemetry packets
+- Support for observing Estimote Location packets
+- More information can be found in following docs:
+   * [Scanning and monitoring](/DOC_monitoring_scanning.md)
+   * [Beacon connection](/DOC_deviceConnection.md)
+   * [Multiple advertisers in Location Beacons](/DOC_multiadvertisers.md)
+   * [Using telemetry packets](/DOC_telemetry.md)
+
+
 ## 0.9.7 (January 19, 2016)
 
 - Packet parser errors are logged and should not crash whole application.

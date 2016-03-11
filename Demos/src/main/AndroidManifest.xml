@@ -77,6 +77,14 @@
     <activity android:name=".activities.SensorsActivity"
         android:label="Sensors Demo"
         android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.ConfigurableDevicesListActivity"
+        android:label="Configurable devices list"
+        android:screenOrientation="portrait"/>
+
+    <activity android:name=".activities.ConfigureDeviceActivity"
+        android:label="Configure Device Demo"
+        android:screenOrientation="portrait"/>
 <!--
     There is no need any longer to declare BeaconService. It is declared in SDK's AndroidManifest.xml
     and it will be merged to your app's AndroidManifest.xml.

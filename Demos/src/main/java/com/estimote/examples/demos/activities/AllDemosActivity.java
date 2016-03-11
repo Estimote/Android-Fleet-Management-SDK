@@ -66,6 +66,14 @@ public class AllDemosActivity extends AppCompatActivity {
         startListBeaconsActivity(SensorsActivity.class.getName());
       }
     });
+
+    findViewById(R.id.configure_device_button).setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        Intent intent = new Intent(AllDemosActivity.this, ConfigurableDevicesListActivity.class);
+        intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, ConfigureDeviceActivity.class.getName());
+        startActivity(intent);
+      }
+    });
   }
 
   private void startListBeaconsActivity(String extra) {

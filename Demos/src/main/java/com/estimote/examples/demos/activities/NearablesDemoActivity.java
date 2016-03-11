@@ -62,7 +62,7 @@ public class NearablesDemoActivity extends BaseActivity {
         .append("Identifier: ").append(currentNearable.identifier).append("\n")
         .append("Major: ").append(currentNearable.region.getMajor()).append("\n")
         .append("Minor: ").append(currentNearable.region.getMinor()).append("\n")
-        .append("Advertising interval: ").append("2000").append("ms\n")
+        .append("Advertising advertisingInterval: ").append("2000").append("ms\n")
         .append("Broadcasting power: ").append(currentNearable.power.powerInDbm).append(" dBm\n")
         .append("Battery level: ").append(currentNearable.batteryLevel.toString()).append("\n")
         .append("Firmware: ").append(currentNearable.firmwareVersion).append("\n\n")
