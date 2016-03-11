@@ -2,6 +2,12 @@ com.estimote.sdk
 com.estimote.sdk.cloud
 com.estimote.sdk.cloud.model
 com.estimote.sdk.connection
+com.estimote.sdk.connection.errors
+com.estimote.sdk.connection.exceptions
+com.estimote.sdk.connection.scanner
+com.estimote.sdk.connection.settings
 com.estimote.sdk.eddystone
 com.estimote.sdk.exception
+com.estimote.sdk.location
 com.estimote.sdk.service
+com.estimote.sdk.telemetry
