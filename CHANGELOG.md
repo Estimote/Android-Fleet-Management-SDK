@@ -6,7 +6,6 @@ Changelog
 - New SDK for configuring Location and Proximity beacons
   * supports more sensors (temperature, motion, light)
   * advertising multiple packet types 
-  * 
 - Improved monitoring using batch mode and hardware filtering.
 - Support for observing Estimote Telemetry packets
 - Support for observing Estimote Location packets
