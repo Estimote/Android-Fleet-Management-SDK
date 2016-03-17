@@ -1,6 +1,16 @@
 Changelog
 =====================
 
+## 0.10.1 (March 17, 2016)
+- Added value validation for each setting
+- Added RSSI read from connected beacon (for Proximity & Location beacons)
+- Fixed enabling Secure UUID
+- Fixed (https://github.com/Estimote/Android-SDK/issues/144): Wrong scan period while ranging/monitoring.
+- Fixed duplicated listener notification while ranging/monitoring
+- Fixed rare crash on closing bluetooth gatt
+- Fixed triggering scan cycle in Doze mode (Android 6.0+)
+- Beacon firmware is now cached properly
+
 ## 0.10.0 (March 11, 2016)
 
 - New SDK for configuring Location and Proximity beacons
