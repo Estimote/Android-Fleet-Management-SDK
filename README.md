@@ -104,6 +104,7 @@ In addition, we suggest you to check our guides for using **Location Beacons** a
  - [Beacon connection](/DOC_deviceConnection.md)
  - [Multiple advertisers in Location Beacons](/DOC_multiadvertisers.md)
  - [Using telemetry packets](/DOC_telemetry.md)
+ - [Monitoring after system restart](/DOC_monitoring_after_restart.md)
 
 
 ### Quick start for nearables discovery
