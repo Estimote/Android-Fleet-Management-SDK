@@ -55,7 +55,7 @@ public class MyApp extends Application {
   }
 }
 ```
-* Don't forget to add you Application class to AndroidManifest.xml in <application> tag.
+* Don't forget to add your Application class to AndroidManifest.xml in the `<application>` tag.
 ```xml
  <application
       android:allowBackup="true"
@@ -65,7 +65,7 @@ public class MyApp extends Application {
       android:name=".MyApp"
       >
 ```
-* In one of your activities check permission for Bluetooth and Location. Access must be granted by the user before system is rebooted. If not monitoring will not start.
+* In one of your activities check permission for Bluetooth and Location. Access must be granted by the user before system is rebooted. If not, monitoring will not start.
 ```java
     SystemRequirementsChecker.checkWithDefaultDialogs(this);
 ```
