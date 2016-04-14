@@ -1,6 +1,11 @@
 Changelog
 =====================
 
+## 0.10.2 (April 14, 2016)
+- Added support for Eddystone Ephemeral ID (EID)
+- 'Check for firmware updates' now properly compare firmware version values
+- ScanResultItem is now Parcelable
+
 ## 0.10.1 (March 17, 2016)
 - Added value validation for each setting
 - Added RSSI read from connected beacon (for Proximity & Location beacons)
