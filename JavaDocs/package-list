@@ -1,6 +1,7 @@
 com.estimote.sdk
 com.estimote.sdk.cloud
 com.estimote.sdk.cloud.model
+com.estimote.sdk.cloud.model.google
 com.estimote.sdk.connection
 com.estimote.sdk.connection.errors
 com.estimote.sdk.connection.exceptions
