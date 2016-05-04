@@ -1,6 +1,14 @@
 Changelog
 =====================
 
+## 0.10.3 (May 4, 2016)
+- Added support for Analytics - can be enabled via EstimoteSDK class and offers monitoring and ranging statistics.
+- Fixed (https://github.com/Estimote/Android-SDK/issues/149): crash : com.estimote.sdk.internal.utils.AsyncCache$1.onFailure (AsyncCache.java:106)
+- Fixed rare bug where reading beacon characteristic caused crash
+- Fixed errors with RecoveryHelper while connecting to beacons
+- Optimized beacon connection
+- Unresolved Eddystone EID packets are now reported by scanner
+
 ## 0.10.2 (April 14, 2016)
 - Added support for Eddystone Ephemeral ID (EID)
 - 'Check for firmware updates' now properly compare firmware version values
