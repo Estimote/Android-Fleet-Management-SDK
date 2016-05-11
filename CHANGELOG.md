@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.10.4 (May 11, 2016)
+- Fixed problems with Advertising Interval setting update on Proximity Beacons
+- Fixed (https://github.com/Estimote/Android-SDK/issues/151): Context problems with Analytics where NPE was thrown.
 
 ## 0.10.3 (May 4, 2016)
 - Added support for Analytics - can be enabled via EstimoteSDK class and offers monitoring and ranging statistics.
