@@ -1,5 +1,15 @@
 Changelog
 =====================
+## 0.10.5 (May 25, 2016)
+- Ranging results are now reported at exact time
+- Default beacon expiration time after which onExitRegion events are called is now set to 20s (was 10s). This should help with random short onExit/onEnter events. If you need to tweak this by yourself, beaconManager has new method for changing this to value from 1-60s range:
+```java
+ beaconManager.setRegionExitExpiration(TimeUnit.SECONDS.toMillis(20));
+```
+Bear in mind, that high beacon advertising interval is also causing random short onEnter/onExit events. You can try lowering it to 200-300ms to gain better user experience.
+- Added support for Eddystone Configuration Service (ECS)
+- Minor optimizations
+
 ## 0.10.4 (May 11, 2016)
 - Fixed problems with Advertising Interval setting update on Proximity Beacons
 - Fixed (https://github.com/Estimote/Android-SDK/issues/151): Context problems with Analytics where NPE was thrown.
