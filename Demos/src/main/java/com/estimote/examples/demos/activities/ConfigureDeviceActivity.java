@@ -74,24 +74,7 @@ public class ConfigureDeviceActivity extends BaseActivity {
         connection.checkForFirmwareUpdate(new DeviceConnection.CheckFirmwareCallback() {
 
           @Override public void onDeviceUpToDate(DeviceFirmware firmware) {
-            setStatus("Firmware is up to date");
-            connection.updateDevice(new DeviceConnection.FirmwareUpdateCallback() {
-              @Override
-              public void onSuccess() {
-                setStatus("Device firmware updated");
-                connection.reconnect();
-              }
-
-              @Override
-              public void onProgress(float progress, String message) {
-                setStatus("" + (int) (progress * 100.0f) + "%: " + message);
-              }
-
-              @Override
-              public void onFailure(DeviceConnectionException e) {
-                handleError(e);
-              }
-            });
+            setStatus("Device is up to date. Current firmware version is " + firmware.software);
           }
 
           @Override public void onDeviceNeedsUpdate(DeviceFirmware firmware) {
@@ -249,11 +232,7 @@ public class ConfigureDeviceActivity extends BaseActivity {
   }
 
   private void setStatus(final String status) {
-    runOnUiThread(new Runnable() {
-      @Override public void run() {
-        statusView.setText("Status: " + status);
-      }
-    });
+    statusView.setText("Status: " + status);
   }
 
   public void readSensors() {

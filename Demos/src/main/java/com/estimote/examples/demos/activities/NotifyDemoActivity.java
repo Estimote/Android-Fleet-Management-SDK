@@ -7,10 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import com.estimote.examples.demos.R;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -48,8 +50,16 @@ public class NotifyDemoActivity extends BaseActivity {
 
     // Default values are 5s of scanning and 25s of waiting time to save CPU cycles.
     // In order for this demo to be more responsive and immediate we lower down those values.
-    beaconManager.setBackgroundScanPeriod(TimeUnit.SECONDS.toMillis(1), 0);
+    beaconManager.setBackgroundScanPeriod(TimeUnit.SECONDS.toMillis(1), TimeUnit.SECONDS.toMillis(0));
 
+    // Changes expiration time for beacons. The longer this period is, the less responsive onExit events are.
+    // On the other hand, there is less possible to throw short onExit/onEnter events during monitoring.
+    // Please bear in mind, that this is strictly connected to beacon advertising interval - the lower the value is,
+    // the more possible for device is to find an advertised packet. The clue is to find a sweet spot between advertising interval
+    // and expiration time.
+    beaconManager.setRegionExitExpiration(TimeUnit.SECONDS.toMillis(20));
+
+    // Set monitoring listener to handle incoming beacon events
     beaconManager.setMonitoringListener(new MonitoringListener() {
       @Override
       public void onEnteredRegion(Region region, List<Beacon> beacons) {

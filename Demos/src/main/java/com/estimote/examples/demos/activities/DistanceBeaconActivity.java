@@ -9,6 +9,7 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.Utils;
+
 import java.util.List;
 
 /**
@@ -50,27 +51,6 @@ public class DistanceBeaconActivity extends BaseActivity {
     }
 
     beaconManager = new BeaconManager(this);
-    beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-      @Override
-      public void onBeaconsDiscovered(Region region, final List<Beacon> rangedBeacons) {
-        // Note that results are not delivered on UI thread.
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            // Just in case if there are multiple beacons with the same uuid, major, minor.
-            Beacon foundBeacon = null;
-            for (Beacon rangedBeacon : rangedBeacons) {
-              if (rangedBeacon.getMacAddress().equals(beacon.getMacAddress())) {
-                foundBeacon = rangedBeacon;
-              }
-            }
-            if (foundBeacon != null) {
-              updateDistanceView(foundBeacon);
-            }
-          }
-        });
-      }
-    });
 
     final View view = findViewById(R.id.sonar);
     view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -105,16 +85,41 @@ public class DistanceBeaconActivity extends BaseActivity {
   protected void onStart() {
     super.onStart();
 
+    beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+      @Override
+      public void onBeaconsDiscovered(Region region, final List<Beacon> rangedBeacons) {
+        // Note that results are not delivered on UI thread.
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            // Just in case if there are multiple beacons with the same uuid, major, minor.
+            Beacon foundBeacon = null;
+            for (Beacon rangedBeacon : rangedBeacons) {
+              if (rangedBeacon.getMacAddress().equals(beacon.getMacAddress())) {
+                foundBeacon = rangedBeacon;
+              }
+            }
+            if (foundBeacon != null) {
+              updateDistanceView(foundBeacon);
+            }
+          }
+        });
+      }
+    });
+
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override
       public void onServiceReady() {
         beaconManager.startRanging(region);
       }
     });
+
+
   }
 
   @Override
   protected void onStop() {
+    beaconManager.stopRanging(region);
     beaconManager.disconnect();
 
     super.onStop();
