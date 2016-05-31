@@ -8,7 +8,7 @@ It allows for:
 - nearables (aka stickers) discovery (see [quickstart](#quick-start-for-nearables-discovery))
 - [Eddystone](https://developers.google.com/beacons) scanning (see [quickstart](#quick-start-for-eddystone))
 - easy way to meet [all requirements for beacon detection](http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/SystemRequirementsChecker.html) (runtime permissions, acquiring all rights),
-- beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval), see [BeaconConnection] (http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/connection/BeaconConnection.html) class and [demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) in the SDK
+- Estimote Proximity beacon & Location beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval and many more)
 
 Start with [Android tutorial for monitoring & ranging beacons](http://developer.estimote.com/android/tutorial/part-1-setting-up/).
 
@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 
-Initialize Estimote SDK in your Application class.
+Initialize Estimote SDK in your Application class onCreate() method:
 
 ```java
 //  App ID & App Token can be taken from App section of Estimote Cloud.
@@ -62,7 +62,7 @@ EstimoteSDK.enableDebugLogging(true);
     compile(name:'estimote-sdk', ext:'aar')
   }
 ```
-4. Initialize Estimote SDK in your Application class if you are using [Estimote Cloud](http://cloud.estimote.com).
+4. Initialize Estimote SDK in your Application class onCreate() method - if you are using [Estimote Cloud](http://cloud.estimote.com):
 
   ```java
   //  App ID & App Token can be taken from App section of Estimote Cloud.
