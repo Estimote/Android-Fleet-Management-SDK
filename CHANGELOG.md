@@ -1,5 +1,12 @@
 Changelog
 =====================
+## 0.10.6 (June 23, 2016)
+- Added support for connectiong to Nearables
+	* There are some issues on some phones due to different implementations of bluetooth stack. We're working on it and it should be improved really soon. We recommend using Nexus devices for stable connection.
+- Added support for Nearables Eddystone URL
+- Nearables reported by scanner now have their type and color resolved (only for logged user otherwise all is UNKNOWN)
+- Removed some unnecessary scan logs.
+
 ## 0.10.5 (May 25, 2016)
 - Ranging results are now reported at exact time
 - Default beacon expiration time after which onExitRegion events are called is now set to 20s (was 10s). This should help with random short onExit/onEnter events. If you need to tweak this by yourself, beaconManager has new method for changing this to value from 1-60s range:
