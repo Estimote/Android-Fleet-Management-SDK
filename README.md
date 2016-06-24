@@ -71,12 +71,6 @@ EstimoteSDK.enableDebugLogging(true);
   EstimoteSDK.enableDebugLogging(true);
   ```
 
-## Usage and demos
-
-SDK Demos are located in [Demos](https://github.com/Estimote/Android-SDK/tree/master/Demos) directory. You can easily build it with [Gradle](http://www.gradle.org/) by typing `gradlew installDebug` (or `gradlew.bat installDebug` on Windows) in terminal when your device is connected to computer. If you use [Android Studio](http://developer.android.com/tools/studio/index.html) you can just simply open `build.gradle`.
-
-Demos include samples for ranging beacons, monitoring beacons, nearable discovery, calculating distance between beacon and the device and also changing minor value of the beacon.
-
 ## Android 6.0 and runtime permissions
 
 Depending on Android platform you need different permissions to be granted. It is recommended to implement future proof Android M runtime permissions model.
