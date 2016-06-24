@@ -238,6 +238,40 @@ connection.updateDevice(new DeviceConnection.FirmwareUpdateCallback() {
 
 Please keep in mind that firmware update is an **asynchronous long-term** process. Be sure to inform your user about it, and take care of UI reports - you can use `onProgress(float progress, String message)` to get current update progress. 
 
+###Accessing Nearable settings
+
+All nearables have their own advertisers assigned to setting tree. You can access each setting via calling `connection.settings.estimote.nearable`. You can change advertised packet by switching broadcasting scheme setting:
+```Java
+ connection.settings.estimote.nearable.broadcastingScheme().set(NearableMode.IBEACON, new SettingCallback<NearableMode>() {
+      @Override
+      public void onSuccess(NearableMode value) {
+        // Handle success
+        Log.d("BroadcastingScheme","Changed nearable broadcastung scheme. ");
+      }
+
+      @Override
+      public void onFailure(DeviceConnectionException exception) {
+        // Handle errors here
+        Log.d("Broadcasting Scheme","Error setting broadcasting scheme: " + exception.getMessage());
+      }
+    });
+```
+In addition, from Sticker firmware version 1.3 there is a possiblity to setup Eddystone URL using our SDK. You can simply achieve that by accessing proper setting: 
+```Java
+connection.settings.estimote.nearable.eddystoneUrl().set("http://estimote.com", new SettingCallback<String>() {
+      @Override
+      public void onSuccess(String value) {
+        // Handle success
+        Log.d("Eddystone URL","Changed nearable eddystone url. ");
+      }
+
+      @Override
+      public void onFailure(DeviceConnectionException exception) {
+        // Handle errors here
+        Log.d("Eddystone URL Scheme","Error changing eddystone url: " + exception.getMessage());
+      }
+    });
+```
 
 
 
