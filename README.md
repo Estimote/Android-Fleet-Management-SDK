@@ -9,6 +9,7 @@ It allows for:
 - [Eddystone](https://developers.google.com/beacons) scanning (see [quickstart](#quick-start-for-eddystone))
 - easy way to meet [all requirements for beacon detection](http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/SystemRequirementsChecker.html) (runtime permissions, acquiring all rights),
 - Estimote Proximity beacon & Location beacon characteristic reading and writing (proximity UUID, major & minor values, broadcasting power, advertising interval and many more)
+- Collecting analytics data - from version 0.10.7 enabled by default.
 
 Start with [Android tutorial for monitoring & ranging beacons](http://developer.estimote.com/android/tutorial/part-1-setting-up/).
 
