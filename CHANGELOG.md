@@ -1,5 +1,13 @@
 Changelog
 =====================
+## 0.10.7(July 1, 2016)
+- Added motion only and flip to sleep as a separate settings (instead of Conditional Broadcasting)
+- Fixed bugs with SettingEditor
+- Fixed Motion Only/Flip to sleep problems on older devices
+- Fixed EID tx power setting
+- Analytics from now on is enabled by default. 
+
+
 ## 0.10.6 (June 23, 2016)
 - Added support for connectiong to Nearables
 	* There are some issues on some phones due to different implementations of bluetooth stack. We're working on it and it should be improved really soon. We recommend using Nexus devices for stable connection.
