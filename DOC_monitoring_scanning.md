@@ -213,6 +213,13 @@ private void setMonitoringListener() {
 }
 ```
 
+####  Dealing with many onExit/onEnter events 
+
+Accuracy of monitoring mostly depends on device's hardware and low level bluetooth stack implementation. Because of that, monitoring sometimes calls many onExit/onEnter events millis apart. There is no golden rule which applies to every Android device, so you need to tweak this by yourself - but don't worry, our SDK provides you with tools for doing that.
+First of all, you need to know, that beacon advertising interval is also affecting user experience. Setting your beacon to `200ms-300ms` interval is the best practice. Greater values might cause user phone to be less effective while scanning.
+On SDK side, you can tweak your background scan interval and wait period. The shorter they are, the more accurate scaning will be. Keep in mind, that short interval increases battery drain. 
+Our internal engine tracks each beacon occurance, applies smoothing algorithms and does a lot of job to provide you with the best result possible. Unfortunately, we are not responsible for scan results returned by low-level bluetooth stack. We tested that on many devices, and some returns proper scan values, and some returns scans with large delay. To deal with that, we encourage you to play with public method `setRegionExitExpiration(long period)` in BeaconManager class. In that way, once visible beacon must not be seen for more then `long period` time. Bear in mind, that this will affect accuracy of onExit region event. For your information, our SDK default value for region expiration is set to `20s`. 
+
 ## Scanning
 
 Android SDK supports scanning for devices that broadcast [Eddystone](http://developer.estimote.com/eddystone/), Estimote Telemetry, Estimote Location, and [Nearable](http://developer.estimote.com/nearables/) packets.
