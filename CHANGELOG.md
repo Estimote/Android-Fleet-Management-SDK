@@ -1,6 +1,12 @@
 Changelog
 =====================
-## 0.10.7(July 1, 2016)
+## 0.10.8 (July 6, 2016)
+- Fixed problems while updating firmware
+- Fixed old firmware version reported by SDK while checking device firmware. 
+- Fixed "server error 200: null" bug with connecting to nearables
+- Removed unnecessary logs
+
+## 0.10.7 (July 1, 2016)
 - Added motion only and flip to sleep as a separate settings (instead of Conditional Broadcasting)
 - Fixed bugs with SettingEditor
 - Fixed Motion Only/Flip to sleep problems on older devices
