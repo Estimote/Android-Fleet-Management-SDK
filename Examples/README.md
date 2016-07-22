@@ -19,6 +19,12 @@ You can generate yourself a ready-made project from one of these templates on ht
 
   Change the background color and text on the screen depending on which of the ranged beacons is the closest.
 
+- **NFCStamps**
+
+  > Uses: NFC (requires [new Proximity Beacons](http://blog.estimote.com/post/147038205465/announcing-next-gen-proximity-beacons-with), hardware revision "G")
+
+  Tap your phone to a beacon to automatically open the app & collect a coffee stamp.
+
 - **Showroom**
 
   > Uses: [sticker beacons](http://developer.estimote.com/nearables/stickers-vs-beacons/), Nearable packet

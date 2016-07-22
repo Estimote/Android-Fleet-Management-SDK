@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NFC Stamps</string>
+
+    <string name="activity_profile_cafe_name">Fav Coffee</string>
+    <string name="activity_profile_cafe_tagline">Your favorite coffee shop</string>
+    <string name="activity_profile_collect">Collect stamps to earn rewards!</string>
+    <string name="activity_profile_instructions">When paying for coffee, just tap your phone to the beacon next to the cash register to get your stamp.</string>
+    <string name="activity_profile_not_collected">You haven\'t collected all the stamps yet!</string>
+    <string name="activity_profile_redeem">Redeem</string>
+
+    <string name="activity_points_collect">You\'ve collected a stamp!</string>
+    <string name="activity_points_stamps_left">Collect %d more to get a free coffee!</string>
+    <string name="activity_points_stamps_collected">10 stamps has been collected—get the reward!</string>
+
+    <string name="shared_pref_key">NFC Demo Shared Prefs</string>
+    <string name="shared_pref_stamps_amount">Stamps amount</string>
+</resources>
