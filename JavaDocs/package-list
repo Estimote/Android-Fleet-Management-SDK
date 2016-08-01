@@ -11,5 +11,6 @@ com.estimote.sdk.connection.settings
 com.estimote.sdk.eddystone
 com.estimote.sdk.exception
 com.estimote.sdk.location
+com.estimote.sdk.nfc
 com.estimote.sdk.service
 com.estimote.sdk.telemetry
