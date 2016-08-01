@@ -1,5 +1,12 @@
 Changelog
 =====================
+## 0.11.0 (August 1, 2016)
+- Added NFC support for changing NFC data transmited by beacon.
+	* You can set your own URI or Android Application Package Name as an EstimoteNdefRecord
+	* Your data can take up to 256 bytes.
+	* Beacon Id and Mac address are added automatically 
+- Fixed Analytics problems with sending data (https://github.com/Estimote/Android-SDK/issues/157)
+
 ## 0.10.8 (July 6, 2016)
 - Fixed problems while updating firmware
 - Fixed old firmware version reported by SDK while checking device firmware. 
