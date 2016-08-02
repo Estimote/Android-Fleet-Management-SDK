@@ -9,6 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+//
+// Running into any issues? Drop us an email to: contact@estimote.com
+//
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

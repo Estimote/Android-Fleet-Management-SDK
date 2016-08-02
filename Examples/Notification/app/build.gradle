@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.estimote.notification"
@@ -25,5 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
 
-    compile 'com.estimote:sdk:0.10.5@aar'
+    compile 'com.estimote:sdk:0.10.+@aar'
 }

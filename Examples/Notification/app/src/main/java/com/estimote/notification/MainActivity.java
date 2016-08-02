@@ -6,6 +6,10 @@ import android.util.Log;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 
+//
+// Running into any issues? Drop us an email to: contact@estimote.com
+//
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";

@@ -14,6 +14,10 @@ import com.estimote.showroom.estimote.ShowroomManager;
 import java.util.HashMap;
 import java.util.Map;
 
+//
+// Running into any issues? Drop us an email to: contact@estimote.com
+//
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
