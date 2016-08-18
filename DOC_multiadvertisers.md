@@ -48,17 +48,17 @@ connection.settings.estimote.telemetry.advertisingInterval().set(txPower, new Se
 ###Estimote Location
 Beacon measured power advertiser. For getting distance to device.
 ```Java
-connection.settings.estimote.proximity.enable()
+connection.settings.estimote.location.enable()
 ```
 Modifying transmit power:
 ```Java
 int txPower = -8;
-connection.settings.estimote.proximity.transmitPower().set(txPower, new SettingCallback<Integer>() {...});
+connection.settings.estimote.location.transmitPower().set(txPower, new SettingCallback<Integer>() {...});
 ```
 Modifying advertising interval:
 ```Java
 int advertisingInterval = 1000;
-connection.settings.estimote.proximity.advertisingInterval().set(txPower, new SettingCallback<Integer>() {...});
+connection.settings.estimote.location.advertisingInterval().set(txPower, new SettingCallback<Integer>() {...});
 ```
 
 ###iBeacon
