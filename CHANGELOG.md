@@ -1,5 +1,12 @@
 Changelog
 =====================
+## 0.11.1 (September 1, 2016)
+- Added Firmware version to ConfigurableDevice object
+- Fixed wrong NFC cloud data 
+- Fixed Flip to Sleep problems on some devices
+- Fixed GPIO wrong data saving
+- Fixed rare bug when NPE was thrown when closing connection while connecting
+
 ## 0.11.0 (August 1, 2016)
 - Added NFC support for changing NFC data transmited by beacon.
 	* You can set your own URI or Android Application Package Name as an EstimoteNdefRecord
