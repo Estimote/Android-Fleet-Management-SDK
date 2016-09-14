@@ -1,5 +1,13 @@
 Changelog
 =====================
+## 0.12.0 (September 14, 2016)
+- Added support for monitoring and ranging on Android Nougat devices. 
+	* Due to new Android restrictions, we can only start/stop scanning no more than 5 times per 30 seconds. 
+	* It is strongly recommended, to set your foreground/background scanning periods according to the new specification. If you forgot to do so, SDK will automatically update periods to avoid scan block by Nougat.
+	
+- Flag DISABLE_BATCH_SCANNING is from set to 'true' from now on. Batch scan implementation varies on many phones, and it is usually causing badly delayed scan results. If you really want to use it, just set it to 'false' in your android manifest file. 
+- Fixed (https://github.com/Estimote/Android-SDK/issues/168) - FATAL EXCEPTION: BeaconServiceThread 
+
 ## 0.11.1 (September 1, 2016)
 - Added Firmware version to ConfigurableDevice object
 - Fixed wrong NFC cloud data 
