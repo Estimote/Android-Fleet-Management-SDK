@@ -28,7 +28,7 @@ Estimote Android SDK is available on [Maven Central](http://search.maven.org/#se
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:0.11.1@aar'
+  compile 'com.estimote:sdk:0.12.0@aar'
 }
 ```
 
