@@ -1,5 +1,19 @@
 Changelog
 =====================
+
+## 0.13.0 (September 28, 2016)
+- Added support for Shake-to-connect:
+	* Enabling/Disabling this setting on device via sdk
+	* ConfigurableDevice has now property isShaken
+- Added support for Near-to-connect:
+	* Enabling/Disabling this setting on device via sdk
+	* ConfigurableDevice has now property isClose
+- Added Bulk Updater functionality to ConfigurableDevicesScanner:
+	* You can enable it via `configurableDevicesScanner.enableBulkFirmwareUpdate(BulkUpdater.BulkUpdaterCallback);`
+	* When enabled, bulk updater will update firmware and settings to all devices around you. This will make sure your beacons are always up to date. 
+	* Availabe for use in foreground, or in background if you run your ConfigurableDevicesScanner in a service/or non-main thread.
+	* Returns result via one callback, so you are able to be constantly notified about process.
+	
 ## 0.12.0 (September 14, 2016)
 - Added support for monitoring and ranging on Android Nougat devices. 
 	* Due to new Android restrictions, we can only start/stop scanning no more than 5 times per 30 seconds. 
