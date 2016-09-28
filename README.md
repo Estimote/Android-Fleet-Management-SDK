@@ -28,7 +28,7 @@ Estimote Android SDK is available on [Maven Central](http://search.maven.org/#se
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:0.12.0@aar'
+  compile 'com.estimote:sdk:0.13.0@aar'
 }
 ```
 
@@ -86,6 +86,14 @@ Depending on Android platform you need different permissions to be granted. It i
 Sounds difficult? No worries. From time to time SDK will put warning in device logs what is missing. You can use the `SystemRequirementsChecker#check` method to determine which requirements are not met for beacon detection.
 
  Use `SystemRequirementsChecker#checkWithDefaultDialogs` method in your activity for a convenient way to ask for all permissions and rights. It's all handled by the SDK, and should be of great help if you want to get up and running quickly.
+ 
+## Android 7.0 and BLE scan restrictions
+ 
+Since Nougat, every application is allowed to start/stop BLE scan maximum 5 times per 30s. Due to this restriction, if you set your *monitoring* period to be lower than 6s (for example `1000ms scan + 0ms wait`) our sdk will automatically set your scan time to be `6000ms`. You should still be getting onEnter/onExit results properly. We strongly recommend you to verify your monitoring periods according to Android N. 
+
+This restriction does not affect *ranging* times - when running in foreground, your ranging will deliver constant results according to your declared period. The only change is that scan is running constantly throughout the whole ranging process, which will drain.
+
+You can read more about the difference between *ranging* and *monitoring* in tutorials below.
 
 ## Tutorials
 
