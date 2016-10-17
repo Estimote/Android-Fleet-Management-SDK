@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/mint_2</color>
+    <color name="colorPrimaryDark">@color/mint_2</color>
+    <color name="colorAccent">@color/blueberry</color>
+
+    <color name="mint">#c4dcc7</color>
+    <color name="mint_2">#8eaa92</color>
+
+    <color name="white">#ffffff</color>
+
+    <color name="blueberry">#902866</color>
+    <color name="blueberry_2">#a52b75</color>
+
+    <color name="lemon_tart">#e9dd00</color>
+    <color name="lemon_tart_2">#ccc300</color>
+</resources>
