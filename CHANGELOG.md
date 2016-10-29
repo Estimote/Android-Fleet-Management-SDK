@@ -1,5 +1,8 @@
 Changelog - beta releases
 =====================
+## 0.14.1-beta (October 29, 2016)
+- Added fixes for NFC 
+- Added MOTION_ADVERTISING_DELAY setting. 
 
 ## 0.14.0-beta (October 17, 2016)
 - Added support for key-value storage on devices with firmware 4.9.0+
