@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout      xmlns:android="http://schemas.android.com/apk/res/android"
+                     xmlns:tools="http://schemas.android.com/tools"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:background="@color/background_green">
+
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/layoutMain"
+                  android:layout_below="@+id/toolbar"
+                  android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewInfo"
+            android:textAlignment="center"
+            android:textColor="@color/text_white"
+            android:text="When enabled, bulk updater will update firmware and settings to all your devices nearby. This will make sure your beacons are always up to date."
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDetails"
+            android:textAlignment="center"
+            android:text="-/-"
+            android:textColor="@color/text_white"
+            android:padding="10dp"
+            android:textSize="30sp"/>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler"
+        android:layout_toStartOf="@+id/layoutMain"
+        android:layout_below="@+id/layoutMain"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
+
+</RelativeLayout>

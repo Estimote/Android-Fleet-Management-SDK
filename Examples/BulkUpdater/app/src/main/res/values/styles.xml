@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EstimoteTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/action_bar</item>
+        <item name="colorPrimaryDark">@color/action_bar_dark</item>
+        <item name="toolbarStyle">@style/EstimoteToolbar</item>
+    </style>
+
+    <style name="EstimoteToolbar" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/action_bar</item>
+    </style>
+
+</resources>
