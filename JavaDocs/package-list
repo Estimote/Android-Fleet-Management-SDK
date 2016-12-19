@@ -3,11 +3,13 @@ com.estimote.sdk.cloud
 com.estimote.sdk.cloud.model
 com.estimote.sdk.cloud.model.analytics
 com.estimote.sdk.cloud.model.google
+com.estimote.sdk.cloud.model.mesh
 com.estimote.sdk.connection
 com.estimote.sdk.connection.errors
 com.estimote.sdk.connection.exceptions
 com.estimote.sdk.connection.scanner
 com.estimote.sdk.connection.settings
+com.estimote.sdk.connection.settings.storage
 com.estimote.sdk.eddystone
 com.estimote.sdk.exception
 com.estimote.sdk.location
