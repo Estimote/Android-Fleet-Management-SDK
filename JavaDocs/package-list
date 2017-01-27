@@ -9,6 +9,7 @@ com.estimote.sdk.connection.errors
 com.estimote.sdk.connection.exceptions
 com.estimote.sdk.connection.scanner
 com.estimote.sdk.connection.settings
+com.estimote.sdk.connection.settings.mesh
 com.estimote.sdk.connection.settings.storage
 com.estimote.sdk.eddystone
 com.estimote.sdk.exception
