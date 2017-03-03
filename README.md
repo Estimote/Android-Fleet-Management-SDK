@@ -15,7 +15,7 @@ Start with [Android tutorial for monitoring & ranging beacons](http://developer.
 
 Learn more:
  - [Comprehensive JavaDoc documentation](http://estimote.github.io/Android-SDK/JavaDocs/).
- - Play with [SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos) (includes scanning beacons, nearables, Eddystone beacons, connecting to Estimote beacons).
+ - Play with [SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Examples) (includes scanning beacons, nearables, Eddystone beacons, connecting to Estimote beacons).
  - Download [Estimote app](https://play.google.com/store/apps/details?id=com.estimote.apps.main) from Play Store to see what SDK is capable of.
  - Check our [Estimote Forums](https://forums.estimote.com/c/android-sdk) where you can post your questions and get answers.
  - [Estimote Community Portal](http://community.estimote.com/hc/en-us)
