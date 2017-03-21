@@ -186,7 +186,7 @@ With Estimote SDK you can:
    - namespace & instance properties of `Eddystone-UID` (see `BeaconConnection#eddystoneNamepsace`, `BeaconConnection#eddystoneInstance`)
  - configure broadcasting scheme of beacon to `Estimote Default`, `Eddystone-UID` or `Eddystone-URL` (see `BeaconConnection#broadcastingScheme`)
 
-[SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Demos) contains Eddystone related samples.
+[SDK Examples](https://github.com/Estimote/Android-SDK/tree/master/Examples) contains Eddystone related samples.
 
 Note that you can play with Estimote Beacons broadcasting the Eddystone packet and change their configuration via [Estimote app on Google Play](https://play.google.com/store/apps/details?id=com.estimote.apps.main).
 
