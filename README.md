@@ -75,7 +75,7 @@ You can define a region using the iBeacon protocol, or any other set of rules an
 
 ## Tutorials
 
-*If you are in hurry, you can check our [ultra quick guide with ready-to-copy snippets](quick_snippets.md)*
+*If you are in hurry, you can check our [ultra quick guide with ready-to-copy snippets](Docs/quick_snippets.md)*
 
 Otherwise, we encourage you to dig deeper into our available tutorials:
 
@@ -85,7 +85,7 @@ The Android tutorial is available under our [Estimote Developer Docs](http://dev
  - [Part 3: Ranging beacons](http://developer.estimote.com/android/tutorial/part-3-ranging-beacons/)
 
 In addition, we suggest you check out our guides for using **Location Beacons** and **Proximity Beacons**:
- - [Scanning and monitoring](/Docs/DOC_monitoring_scanning.md)
+ - [Ranging and monitoring](/Docs/DOC_monitoring_scanning.md)
  - [Beacon connection](/Docs/DOC_deviceConnection.md)
  - [Multiple advertisers in Location Beacons](/Docs/DOC_multiadvertisers.md)
  - [Using telemetry packets](/Docs/DOC_telemetry.md)
