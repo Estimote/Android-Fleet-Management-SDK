@@ -5,8 +5,8 @@ The Estimote SDK for Android is a library that allows interaction with [Estimote
 It allows for:
 - Beacon ranging (scans beacons and optionally filters them by their properties)
 - Beacon monitoring (monitors regions for those devices that have entered/exited a region)
-- Nearables (aka stickers) discovery (see [quickstart](#quick-start-for-nearables-discovery))
-- [Eddystone](https://developers.google.com/beacons) discovery (see [quickstart](#quick-start-for-eddystone))
+- Nearables (aka stickers) discovery
+- [Eddystone](https://developers.google.com/beacons) discovery 
 - Easy way to meet [all requirements for beacon detection](http://estimote.github.io/Android-SDK/JavaDocs/com/estimote/sdk/SystemRequirementsChecker.html) (runtime permissions, acquiring all rights),
 - Estimote beacons management - changing proximity UUID, major & minor values, broadcasting power, advertising interval and many more!
 - Collecting analytics data
@@ -20,9 +20,9 @@ dependencies {
   compile 'com.estimote:sdk:1.0.0@aar'
 }
 ```
-*Important: If you are migrating from the old sdk (0.16.0), [here are some handy tips](LINK HERE) to help you adopt to breaking changes.*
+*Important: If you are migrating from the old sdk (0.16.0), [here are some handy tips](Docs/switching_to_1.0.0.md) to help you adopt to breaking changes.*
 
-Still using `Eclipse`? [Here is how](LINK HERE) to import our sdk to your project.
+Still using `Eclipse`? Or you just want to add our sdk as .aar library? [Here is how](Docs/manual_installation.md) to import our sdk to your project.
 
 ## Initializing Estimote SDK
 
@@ -77,7 +77,7 @@ or bunch of Mirror devices. The region is used mostly to catch enter/exit events
 
 ## Tutorials
 
-*If you are in hurry, you can check our [ultra quick guide with ready-to-copy snippets](LINK HERE)*
+*If you are in hurry, you can check our [ultra quick guide with ready-to-copy snippets](Docs/quick_snippets.md)*
 
 Otherwise, we encourage you to dig deeper into our available tutorials:
 
@@ -87,11 +87,11 @@ Android tutorial is available on [Estimote Developer Docs](http://developer.esti
  - [Part 3: Ranging beacons](http://developer.estimote.com/android/tutorial/part-3-ranging-beacons/)
 
 In addition, we suggest you to check our guides for using **Location Beacons** and **Proximity Beacons**:
- - [Scanning and monitoring](/DOC_monitoring_scanning.md)
- - [Beacon connection](/DOC_deviceConnection.md)
- - [Multiple advertisers in Location Beacons](/DOC_multiadvertisers.md)
- - [Using telemetry packets](/DOC_telemetry.md)
- - [Monitoring after system restart](/DOC_monitoring_after_restart.md)
+ - [Scanning and monitoring](Docs/DOC_monitoring_scanning.md)
+ - [Beacon connection](Docs/DOC_deviceConnection.md)
+ - [Multiple advertisers in Location Beacons](Docs/DOC_multiadvertisers.md)
+ - [Using telemetry packets](Docs/DOC_telemetry.md)
+ - [Monitoring after system restart](Docs/DOC_monitoring_after_restart.md)
 
 If you need to know absolutely everything, take a look at our [JAVADOC](http://estimote.github.io/Android-SDK/JavaDocs/).
 
@@ -121,7 +121,7 @@ You can read more about the difference between *ranging* and *monitoring* in tut
 
 ## Your feedback and questions
 At estimote we're massive believers in feedback! Here are common ways to share your thoughts with us:
-  - Posting issue/question/enhancement at our [issues page](https://github.com/Estimote/Android-SDK/issues).
+  - Posting an issue/question/enhancement at our [issues page](https://github.com/Estimote/Android-SDK/issues).
   - Asking our community managers at our [Estimote SDK for Android forum](https://forums.estimote.com/c/android-sdk).
 
 ## Changelog
