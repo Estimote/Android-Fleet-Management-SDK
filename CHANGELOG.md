@@ -1,6 +1,17 @@
 Changelog
 =====================
-## 0.16.0 (January 27, 2016)
+## 1.0.0 (March 29, 2017)
+- Changed package names to clean messy things, see [migration guide](https://github.com/Estimote/Android-SDK/blob/master/Docs/switching_to_1.0.0.md)
+- Added new bulk updater, see [tutorial](https://github.com/Estimote/Android-SDK/blob/master/Docs/quick_snippets.md#bulk-updater-quick-start)
+- Added discovery, ranging and monitoring for Estimote Mirror packets
+- Updated [javadocs](https://estimote.github.io/Android-SDK/JavaDocs/)
+- Scanning for configurable devices is now a part of `BeaconManager`. See [quick start guide](https://github.com/Estimote/Android-SDK/blob/master/Docs/quick_snippets.md#connecting-to-your-devices-quick-start) for more info.
+- Fixed Estimote Location packets not being reported 
+- Fixed problem with duplicated telemetry packets
+- Fixed access to `Vector` x,y,z fields
+- Fixed the problem with mesh_key when synchronising beacon data
+ 
+## 0.16.0 (January 27, 2017)
 - Added support for mesh via MeshManager 
 - Added firmware update through mesh
 - Fixed Motion Only broadcasting problems
