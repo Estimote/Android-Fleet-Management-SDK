@@ -1,5 +1,11 @@
 Changelog
 =====================
+## 0.16.0 (January 27, 2016)
+- Added support for mesh via MeshManager 
+- Added firmware update through mesh
+- Fixed Motion Only broadcasting problems
+- Added minor fixes for stability and bugfixes.
+
 ## 0.15.0 (December 19, 2016)
 - Added minor fixes to Secure UUID resolving.
 - Fixed wrong parceling in EstimoteTelemetry packets
