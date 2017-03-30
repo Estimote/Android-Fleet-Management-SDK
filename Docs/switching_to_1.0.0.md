@@ -3,6 +3,13 @@
 To help you migrate your old project to our new API, we prepared a short how-to-switch guide!
 We did a lot of work to improve the quality of our SDK. We introduced some changes to our documentation (and will add more over time). We appreciate your feedback, so feel free to post any issue/improvement ideas on our Github page.
 
+Be sure you add new line to your build.gradle file:
+
+```gradle
+dependencies {
+  compile 'com.estimote:sdk:1.0.0:release@aar'
+}
+```
 
 ## New packages and fixing imports
 Some classes are now in different packages. You compiler will not see the old classes and will highlight them.
