@@ -1,5 +1,12 @@
 Changelog
 =====================
+## 1.0.1 (April 11, 2017)
+- Fixed [#206](https://github.com/Estimote/Android-SDK/issues/206) when changing scan period after starting scan was not applied 
+- Fixed [#205](https://github.com/Estimote/Android-SDK/issues/205) when scan results were not sorted by RSSI.
+- Fixed [#187](https://github.com/Estimote/Android-SDK/issues/187) when Estimote telemetry packets were reported as duplicates after getting out of beacon's range.
+- Fixed "ClassNotFoundException" being thrown on pre-Lollipop devices when using `ScanFilter` class.
+- Improved low-level filtering for Estimote devices.
+
 ## 1.0.0 (March 29, 2017)
 - Changed package names to clean messy things, see [migration guide](https://github.com/Estimote/Android-SDK/blob/master/Docs/switching_to_1.0.0.md)
 - Added new bulk updater, see [tutorial](https://github.com/Estimote/Android-SDK/blob/master/Docs/quick_snippets.md#bulk-updater-quick-start)
