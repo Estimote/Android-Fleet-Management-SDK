@@ -1,4 +1,4 @@
-#Connecting to beacons in Android SDK
+# Connecting to beacons in Android SDK
 
 Connecting to a device lets you change its settings (Minor, Major, advertising interval etc.).
 To edit seetings you need to be an owner of the beacon in Estimote Cloud. 
@@ -14,7 +14,7 @@ Here is a brief list of actions that should be taken in order to acquire direct 
  7. Once you are connected to provider, you can connect to your device - declare callback and wait for device connection.
  8. Use your device connection to configure settings.
 
-##Discovering configurable devices
+## Discovering configurable devices
 You can easily scan your environment for your own devices, using **ConfigurableDeviceScanner** object. 
 Please notice that it does not create a connection by itself, but provides **ConfigurableDevice** data object 
 that can be used to obtain **DeviceConnection** later on. Here is how you can create basic configurable device discovery:
@@ -41,7 +41,7 @@ deviceScanner.scanForDevices(new ConfigurableDevicesScanner.ScannerCallback() {
 This scanner should not be used for long term scanning in the background. It uses low latency scanning which drains the battery. It is intended for displaying available devices in the UI. 
 It should be started in your Activity's `OnResume()`  and stopped in `onPause()`. 
 
-##Connecting to the ConnectionProvider service
+## Connecting to the ConnectionProvider service
 Once you have your **ConfigurableDevice** object, you want to acquire **DeviceConnection** for it. To do that, you need to be connected to **DeviceConnectionProvider**. It creates simple service that lets you handle multiple connections at once. This provider is bound to your context, so you only need to connect once during your context lifetime. Here is how to do that in your activity `onCreate` method:
 
 ```Java
@@ -66,7 +66,7 @@ Remember to call `connectionProvider.destroy()` method in your activity `onDestr
  }
 ```
  
-##Getting direct connection to your configurable device
+## Getting direct connection to your configurable device
 When your Activity is connected to **ConnectionProvider**, and you got your **ConfigurableDevice** object, you can now try to establish device connection. Doing that is really easy from now on:
 ```Java
 // Pass your ConfigurableDevice to connection provider method
@@ -95,7 +95,7 @@ connection.connect(new DeviceConnectionCallback() {
 ```
 Now you can use **DeviceConnection** object to communicate with a configurable device. Remember that every time your connection fails, your **DeviceConnectionCallback** needs to handle that. 
 
-###Dealing with multiple activities 
+### Dealing with multiple activities 
 Don't worry about connection state while switching application context - after first creation, your connection is always kept in the underlying service. Launching new activity and creating new **DeviceConnection** object for the same **ConfigurableDevice** only adds new observers to current connection. 
 If you only want to detach your activity callbacks from connection, just use `connection.destroy()` method in your activity `onDestroy()` method:
 ```Java
@@ -120,7 +120,7 @@ Unfortunately due to the differences between Bluetooth implementations on many A
 ##Basic operations on connected device
 Just after your device is connected, you can perform actions to read or write data to it. Please bear in mind that all these actions are performed **asynchronously**. For each operation you will need to define a callback object that will handle all possible results for you.
 
-###Reading device setting
+### Reading device setting
 You can access all reading methods via `connection.settings` object. It holds references for many objects containing device data. Feel free to choose what you need, and then call `get(SettingCallback<T> callback)` on it. Be sure to implement callback methods! Take a look at that example:
 
 ```Java 
@@ -139,7 +139,7 @@ connection.settings.deviceInfo.firmware().get(new SettingCallback<Version>() {
   }
 });
 ```
-###Writing device setting
+### Writing device setting
 Writing data to device is similar - in this case you need to call `set(SettingCallback<T> callback)` instead of get.
 Keep in mind that some device settings are read only!
 Writing device eddystone interval example:
@@ -163,7 +163,7 @@ connection.settings.eddystone.tlm.advertisingInterval().set(advertisingInterval,
 If entered value is invalid, the **DeviceConnectionException** object will contain information about possible values.
 Once you got the idea how to read/write device setting, let's learn how to make advanced operations.
 
-##Advanced operations on connected device
+## Advanced operations on connected device
 It might come in handy to update firmware or multiple settings at once - we've got you covered!
 ### Bulk setting write
 In order to make bulk settings write, you have to create **SettingsEditor** object. Take a look at example:
@@ -189,7 +189,7 @@ edit.commit(new SettingCallback() {
 }
 ```
 
-###Updating firmware
+### Updating firmware
 To check if a device i up to date - use `checkForFirmwareUpdate()` method on your **Connection** object.
 ```Java
 connection.checkForFirmwareUpdate(new DeviceConnection.CheckFirmwareCallback() {
@@ -238,7 +238,7 @@ connection.updateDevice(new DeviceConnection.FirmwareUpdateCallback() {
 
 Please keep in mind that firmware update is an **asynchronous long-term** process. Be sure to inform your user about it, and take care of UI reports - you can use `onProgress(float progress, String message)` to get current update progress. 
 
-###Accessing Nearable settings
+### Accessing Nearable settings
 
 All nearables have their own advertisers assigned to setting tree. You can access each setting via calling `connection.settings.estimote.nearable`. You can change advertised packet by switching broadcasting scheme setting:
 ```Java
