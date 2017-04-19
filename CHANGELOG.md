@@ -3,6 +3,7 @@ Changelog
 ## 1.0.2 (April 19, 2017)
 - Fixed [#211](https://github.com/Estimote/Android-SDK/issues/211) when SecureBeacon region with null UUID thrown NPE. Also fixed problem with filtering secure regions on some devices.
 - Fixed [#207](https://github.com/Estimote/Android-SDK/issues/207) where Nearables and old Proximity beacons were not scanned as a ConfigurableDevice.
+- Fixed [#213](https://github.com/Estimote/Android-SDK/issues/213) where temperature values in Estimote Telemetry were wrongly parsed.
 - Added improvements for Nougat+ devices. Since Nougat, every application is allowed to start/stop BLE scan a maximum of 5 times per 30s. New improvements prevents many scan start/stop events, which resulted in "App XXX is scanning too frequently" logs. All start/stop requests are buffered and the most recent is executed after the delay time. You can play with the setting by yourself using new method in `BeaconManager` class, but we recommend using the default one (1,5s)
 ```Java
 beaconManager.setScanRequestDelay(delayInMillis);
