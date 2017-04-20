@@ -4,48 +4,32 @@ Connecting to a device lets you change its settings (Minor, Major, advertising i
 To edit seetings you need to be an owner of the beacon in Estimote Cloud. 
 Every attempt to connect with device that is not linked to your Estimote Account will fail.
 
-Here is a brief list of actions that should be taken in order to acquire direct device connection:
- 1. Create **ConfigurableDevicesScanner** object.
- 2. Provide it with filters.
- 3. Declare callback and start scanning.
- 4. Once your callback gets a list of **ScanResultItem**, you can acquire your **ConfigurableDevice** object from each item.
- 5. Create **ConnectionProvider** object - this connects your activity with an asynchronous service that will take care of      creating **DeviceConnection** for you. The reason for using **ConnectionProvider** is explained later on.
- 6. Declare callback for provider and wait for service connection.
- 7. Once you are connected to provider, you can connect to your device - declare callback and wait for device connection.
- 8. Use your device connection to configure settings.
-
 ## Discovering configurable devices
-You can easily scan your environment for your own devices, using **ConfigurableDeviceScanner** object. 
-Please notice that it does not create a connection by itself, but provides **ConfigurableDevice** data object 
-that can be used to obtain **DeviceConnection** later on. Here is how you can create basic configurable device discovery:
+At first, you will need to scan for configurable devices around you:
 
 ```Java
-ConfigurableDevicesScanner deviceScanner = new ConfigurableDevicesScanner(context);
-// Scan for devices own by currently logged user.
-deviceScanner.setOwnDevicesFiltering(true);
-// Scan only for Location Beacons. You can set here different types of devices, such as Proximity Beacons or Nearables.
-deviceScanner.setDeviceTypes(DeviceType.LOCATION_BEACON);
-// Pass callback object and start scanning. If scanner finds something, it will notify your callback.
-deviceScanner.scanForDevices(new ConfigurableDevicesScanner.ScannerCallback() {
-    @Override 
-    public void onDevicesFound(List<ConfigurableDevicesScanner.ScanResultItem> devices) {
-       for(ScanResultItem item : devices) {
-          // Do something with your object.
-          // ScanResultItem contains basic info about device discovery - such as RSSI, TX power, or discovery time.
-          // It also contains ConfigurableDevice object. You can easily acquire it via item.configurableDevice
-         }
-  }
-});
-  
+BeaconManager beaconManager = new BeaconManager(this);
+  // set foreground scan periods. This one will scan for 2s and wait 2s
+  beaconManager.setForegroundScanPeriod(2000, 2000);
+  // connects beacon manager to underlying service
+  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+    @Override
+    public void onServiceReady() {
+      // add listener for ConfigurableDevice objects
+      beaconManager.setConfigurableDevicesListener(new BeaconManager.ConfigurableDevicesListener() {
+        @Override
+        public void onConfigurableDevicesFound(List<ConfigurableDevice> configurableDevices) {
+          // handle the configurable device here. You can use it to acquire connection from DeviceConnectionProvider
+        }
+      });
+     beaconManager.startConfigurableDevicesDiscovery();
 ```
-This scanner should not be used for long term scanning in the background. It uses low latency scanning which drains the battery. It is intended for displaying available devices in the UI. 
-It should be started in your Activity's `OnResume()`  and stopped in `onPause()`. 
 
-## Connecting to the ConnectionProvider service
-Once you have your **ConfigurableDevice** object, you want to acquire **DeviceConnection** for it. To do that, you need to be connected to **DeviceConnectionProvider**. It creates simple service that lets you handle multiple connections at once. This provider is bound to your context, so you only need to connect once during your context lifetime. Here is how to do that in your activity `onCreate` method:
+Once you have your `ConfigurableDevice` object, you want to acquire `DeviceConnection` for it. To do that, you need to be connected to `DeviceConnectionProvider`.
+It creates simple service that lets you handle multiple connections at once. This provider is bound to your context, so you only need to connect once during your context lifetime. Here is how to do that in your activity `onCreate` method:
 
 ```Java
- @Override 
+ @Override
  protected void onCreate(Bundle savedInstanceState) {
    DeviceConnectionProvider connectionProvider = new DeviceConnectionProvider(this);
    connectionProvider.connectToService(new DeviceConnectionProvider.ConnectionProviderCallback() {
@@ -57,7 +41,7 @@ Once you have your **ConfigurableDevice** object, you want to acquire **DeviceCo
  }
  ```
 Remember to call `connectionProvider.destroy()` method in your activity `onDestroy()`:
- 
+
 ```Java
  @Override
  protected void onDestroy() {
@@ -65,9 +49,8 @@ Remember to call `connectionProvider.destroy()` method in your activity `onDestr
   super.onDestroy();
  }
 ```
- 
-## Getting direct connection to your configurable device
-When your Activity is connected to **ConnectionProvider**, and you got your **ConfigurableDevice** object, you can now try to establish device connection. Doing that is really easy from now on:
+
+When your Activity is connected to `ConnectionProvider`, and you got your `ConfigurableDevice` object, you can now try to establish device connection. Doing that is really easy from now on:
 ```Java
 // Pass your ConfigurableDevice to connection provider method
 DeviceConnection connection = connectionProvider.getConnection(device);
@@ -81,22 +64,21 @@ connection.connect(new DeviceConnectionCallback() {
 
   @Override
   public void onDisconnected() {
-    // Every time your device gets disconnected, you can handle that here. 
-    // For example: in this state you can try reconnecting to your device. 
+    // Every time your device gets disconnected, you can handle that here.
+    // For example: in this state you can try reconnecting to your device.
     Log.d("DeviceConnection", "onDisconnected");
   }
 
   @Override
   public void onConnectionFailed(DeviceConnectionException exception) {
-    // Handle every connection error here. 
+    // Handle every connection error here.
     Log.d("DeviceConnection", "onConnectionFailed");
   }
 });
 ```
-Now you can use **DeviceConnection** object to communicate with a configurable device. Remember that every time your connection fails, your **DeviceConnectionCallback** needs to handle that. 
+Now you can use `DeviceConnection` object to communicate with a configurable device. Remember that every time your connection fails, your `DeviceConnectionCallback` needs to handle that.
 
-### Dealing with multiple activities 
-Don't worry about connection state while switching application context - after first creation, your connection is always kept in the underlying service. Launching new activity and creating new **DeviceConnection** object for the same **ConfigurableDevice** only adds new observers to current connection. 
+Don't worry about connection state while switching application context - after first creation, your connection is always kept in the underlying service. Launching new activity and creating new `DeviceConnection` object for the same `ConfigurableDevice` only adds new observers to current connection.
 If you only want to detach your activity callbacks from connection, just use `connection.destroy()` method in your activity `onDestroy()` method:
 ```Java
 @Override
@@ -110,7 +92,7 @@ To completely close the underlying connection just call:
 ```Java
 connection.close()
 ```
-From now on, if any application context holds active **DeviceConnectionCallback**, it will have it's `onDisconnected()` called. Of course, it will only happen when you haven't called `connection.destroy()` on that context. Be sure to handle that!
+From now on, if any application context holds active `DeviceConnectionCallback`, it will have it's `onDisconnected()` called. Of course, it will only happen when you haven't called `connection.destroy()` on that context. Be sure to handle that!
 
 
 ###### Known issues
