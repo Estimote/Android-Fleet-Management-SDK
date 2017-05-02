@@ -7,9 +7,10 @@ Be sure you add new line to your build.gradle file:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:1.0.0:release@aar'
+  compile 'com.estimote:sdk:{PUT HERE THE MOST RECENT VERSION}:release@aar'
 }
 ```
+
 
 ## New packages and fixing imports
 Some classes are now in different packages. You compiler will not see the old classes and will highlight them.
