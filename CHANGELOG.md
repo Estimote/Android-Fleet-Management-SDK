@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 1.0.3 (May 2, 2017)
+- BeaconRegion should be now properly ranged/monitored. Related to [#211](https://github.com/Estimote/Android-SDK/issues/211)
+- Added Mirror Access Control flag to packet. 
+- Fixed NPE being thrown by KitKatScanScheduler on API 18 devices.
+
 ## 1.0.2 (April 19, 2017)
 - Fixed [#211](https://github.com/Estimote/Android-SDK/issues/211) when SecureBeacon region with null UUID thrown NPE. Also fixed problem with filtering secure regions on some devices.
 - Fixed [#207](https://github.com/Estimote/Android-SDK/issues/207) where Nearables and old Proximity beacons were not scanned as a ConfigurableDevice.
