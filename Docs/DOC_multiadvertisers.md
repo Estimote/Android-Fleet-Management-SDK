@@ -1,4 +1,4 @@
-#Multiple advertisers
+# Multiple advertisers
 Estimote Location Beacons are able to advertise multiple data packets simultaneously. Here is a full list of featured advertisers:
   1. Connectivity 
   2. Estimote Telemetry
@@ -9,7 +9,7 @@ Estimote Location Beacons are able to advertise multiple data packets simultaneo
   7. Eddystone Telemetry
   
 You can adjust each advertiser to have its own Tx power and advertising interval. You can set advertising interval in the range of `100 - 10000 ms` and Tx power as one of the allowed values: `-30, -20, -16, -12, -8, -4, 0, 4 dBm` 
-###Connectivity
+### Connectivity
 Estimote Connectivity packet lets you connect to a beacon. You can adjust its interval and power using `get()` and `set()` methods. This advertiser is always on and cannot be disabled.
 ```Java
 int txPower = -8;
@@ -19,7 +19,7 @@ connection.settings.estimote.connectivity.transmitPower().set(txPower, new Setti
 int advertisingInterval = 1000;
 connection.settings.estimote.connectivity.advertisingInterval().set(advertisingInterval, new SettingCallback<Integer>(){...});
 ```
-###Estimote Telemetry
+### Estimote Telemetry
 Estimote Telemetry advertiser provides information from beacon's sensors and GPIO. You can enable/disable it by using `set()` method:
 ```Java
 boolean enable = true;
@@ -45,7 +45,7 @@ int advertisingInterval = 1000;
 connection.settings.estimote.telemetry.advertisingInterval().set(txPower, new SettingCallback<Integer>() {...});
 ```
 
-###Estimote Location
+### Estimote Location
 Beacon measured power advertiser. For getting distance to device.
 ```Java
 connection.settings.estimote.location.enable()
@@ -61,7 +61,7 @@ int advertisingInterval = 1000;
 connection.settings.estimote.location.advertisingInterval().set(txPower, new SettingCallback<Integer>() {...});
 ```
 
-###iBeacon
+### iBeacon
 Using and modifying iBeacon advertiser is also possible with our SDK. Here is how you can enable your iBeacon advertising:
 ```Java
 boolean enable = true;
@@ -178,10 +178,10 @@ connection.settings.beacon.enableMotionUUID().set(enable, new SettingCallback<Bo
 });
 ```
 
-###Eddystone
+### Eddystone
 Eddystone packets can be modified using `set()` and `get()` methods as in examples above. For more info about each Eddystone packet please read [our article](http://developer.estimote.com/eddystone/).
 
-####Eddystone UID
+#### Eddystone UID
 ```Java
 boolean enable = true;
 connection.settings.eddystone.uid.enable().set(enable, new SettingCallback<Boolean>() {...});
@@ -226,7 +226,7 @@ connection.settings.eddystone.uid.instance().set(instance, new SettingCallback<S
   }
 });
 ```
-####Eddystone URL
+#### Eddystone URL
 ```Java
 boolean enable = true;
 connection.settings.eddystone.url.enable().set(enable, new SettingCallback<Boolean>() {
@@ -266,7 +266,7 @@ connection.settings.eddystone.url.url().set(url, new SettingCallback<String>() {
   }
 });
 ```
-####Eddystone Telemetry
+#### Eddystone Telemetry
 ```Java
 boolean enable = true;
 connection.settings.eddystone.tlm.enable().set(enable, new SettingCallback<Boolean>() {
