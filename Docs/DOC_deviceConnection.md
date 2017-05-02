@@ -99,7 +99,7 @@ From now on, if any application context holds active `DeviceConnectionCallback`,
 
 Unfortunately due to the differences between Bluetooth implementations on many Android devices, you may facem problems with achieving stable connection to devices. It often occurs as randomly thrown `BluetoothGatt error 133`. We are trying our best to find a workaround, but the issue is linked to low-level libraries we cannot modify.
 
-##Basic operations on connected device
+## Basic operations on connected device
 Just after your device is connected, you can perform actions to read or write data to it. Please bear in mind that all these actions are performed **asynchronously**. For each operation you will need to define a callback object that will handle all possible results for you.
 
 ### Reading device setting
