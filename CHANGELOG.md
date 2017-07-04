@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 1.0.8 (Jul 4, 2017)
+ - Added support for routed mesh immmplementation
+ - Minor bug-fixes
+
 ## 1.0.3 (May 2, 2017)
 - BeaconRegion should be now properly ranged/monitored. Related to [#211](https://github.com/Estimote/Android-SDK/issues/211)
 - Added Mirror Access Control flag to packet. 
