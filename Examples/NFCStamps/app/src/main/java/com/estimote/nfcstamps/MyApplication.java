@@ -2,7 +2,8 @@ package com.estimote.nfcstamps;
 
 import android.app.Application;
 
-import com.estimote.sdk.EstimoteSDK;
+import com.estimote.coresdk.common.config.EstimoteSDK;
+
 
 public class MyApplication extends Application {
 

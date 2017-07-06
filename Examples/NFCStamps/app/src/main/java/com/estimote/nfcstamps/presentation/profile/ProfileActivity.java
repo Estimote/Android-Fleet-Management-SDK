@@ -7,10 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.nfcstamps.R;
 import com.estimote.nfcstamps.SharedPrefHelper;
 import com.estimote.nfcstamps.Utils;
-import com.estimote.sdk.SystemRequirementsChecker;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
