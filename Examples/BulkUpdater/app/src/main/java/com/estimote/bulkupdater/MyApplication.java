@@ -1,7 +1,8 @@
 package com.estimote.bulkupdater;
 
 import android.app.Application;
-import com.estimote.sdk.EstimoteSDK;
+
+import com.estimote.coresdk.common.config.EstimoteSDK;
 
 
 /**
@@ -20,6 +21,6 @@ public class MyApplication extends Application {
 
     // uncomment to enable debug-level logging
     // it's usually only a good idea when troubleshooting issues with the Estimote SDK
-//        EstimoteSDK.enableDebugLogging(true);");
+    // EstimoteSDK.enableDebugLogging(true);");
   }
 }

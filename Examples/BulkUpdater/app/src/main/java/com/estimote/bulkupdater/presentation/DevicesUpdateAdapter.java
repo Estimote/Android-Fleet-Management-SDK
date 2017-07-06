@@ -9,8 +9,9 @@ import android.widget.TextView;
 
 import com.estimote.bulkupdater.R;
 import com.estimote.bulkupdater.model.UpdateStatus;
-import com.estimote.sdk.DeviceId;
-import com.estimote.sdk.connection.scanner.BulkUpdater;
+import com.estimote.coresdk.recognition.utils.DeviceId;
+import com.estimote.mgmtsdk.feature.bulk_updater.BulkUpdater;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,16 @@ public class DevicesUpdateAdapter extends RecyclerView.Adapter<DevicesUpdateAdap
     }
     this.dataset = dataset;
     notifyDataSetChanged();
+  }
+
+  public boolean isDeviceOnList(DeviceId id){
+    for (int i = 0; i < dataset.size(); i++) {
+      UpdateStatus us = dataset.get(i);
+      if (us.deviceId.equals(id)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public void changeStatus(DeviceId id, BulkUpdater.Status status, String message) {

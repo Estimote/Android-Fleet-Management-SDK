@@ -1,7 +1,8 @@
 package com.estimote.bulkupdater.model;
 
-import com.estimote.sdk.DeviceId;
-import com.estimote.sdk.connection.scanner.BulkUpdater;
+
+import com.estimote.coresdk.recognition.utils.DeviceId;
+import com.estimote.mgmtsdk.feature.bulk_updater.BulkUpdater;
 
 /**
  * A simple model for holding info about each device update status.
