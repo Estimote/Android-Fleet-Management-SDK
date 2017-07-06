@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.estimote.sdk.SystemRequirementsChecker;
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
+
 
 //
 // Running into any issues? Drop us an email to: contact@estimote.com

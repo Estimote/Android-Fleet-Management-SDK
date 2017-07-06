@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
+import com.estimote.coresdk.recognition.packets.Beacon;
+import com.estimote.coresdk.service.BeaconManager;
 import com.estimote.notification.MainActivity;
-import com.estimote.sdk.Beacon;
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class BeaconNotificationsManager {
 
     private BeaconManager beaconManager;
 
-    private List<Region> regionsToMonitor = new ArrayList<>();
+    private List<BeaconRegion> regionsToMonitor = new ArrayList<>();
     private HashMap<String, String> enterMessages = new HashMap<>();
     private HashMap<String, String> exitMessages = new HashMap<>();
 
@@ -33,9 +33,9 @@ public class BeaconNotificationsManager {
     public BeaconNotificationsManager(Context context) {
         this.context = context;
         beaconManager = new BeaconManager(context);
-        beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
+        beaconManager.setMonitoringListener(new BeaconManager.BeaconMonitoringListener() {
             @Override
-            public void onEnteredRegion(Region region, List<Beacon> list) {
+            public void onEnteredRegion(BeaconRegion region, List<Beacon> list) {
                 Log.d(TAG, "onEnteredRegion: " + region.getIdentifier());
                 String message = enterMessages.get(region.getIdentifier());
                 if (message != null) {
@@ -44,7 +44,7 @@ public class BeaconNotificationsManager {
             }
 
             @Override
-            public void onExitedRegion(Region region) {
+            public void onExitedRegion(BeaconRegion region) {
                 Log.d(TAG, "onExitedRegion: " + region.getIdentifier());
                 String message = exitMessages.get(region.getIdentifier());
                 if (message != null) {
@@ -55,7 +55,7 @@ public class BeaconNotificationsManager {
     }
 
     public void addNotification(BeaconID beaconID, String enterMessage, String exitMessage) {
-        Region region = beaconID.toBeaconRegion();
+        BeaconRegion region = beaconID.toBeaconRegion();
         enterMessages.put(region.getIdentifier(), enterMessage);
         exitMessages.put(region.getIdentifier(), exitMessage);
         regionsToMonitor.add(region);
@@ -65,7 +65,7 @@ public class BeaconNotificationsManager {
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
-                for (Region region : regionsToMonitor) {
+                for (BeaconRegion region : regionsToMonitor) {
                     beaconManager.startMonitoring(region);
                 }
             }

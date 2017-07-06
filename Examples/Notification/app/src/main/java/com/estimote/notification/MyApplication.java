@@ -2,9 +2,9 @@ package com.estimote.notification;
 
 import android.app.Application;
 
+import com.estimote.coresdk.common.config.EstimoteSDK;
 import com.estimote.notification.estimote.BeaconID;
 import com.estimote.notification.estimote.BeaconNotificationsManager;
-import com.estimote.sdk.EstimoteSDK;
 
 //
 // Running into any issues? Drop us an email to: contact@estimote.com
