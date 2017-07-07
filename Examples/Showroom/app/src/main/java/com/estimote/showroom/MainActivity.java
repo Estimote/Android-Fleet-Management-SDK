@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.estimote.sdk.SystemRequirementsChecker;
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.showroom.estimote.NearableID;
 import com.estimote.showroom.estimote.Product;
 import com.estimote.showroom.estimote.ShowroomManager;

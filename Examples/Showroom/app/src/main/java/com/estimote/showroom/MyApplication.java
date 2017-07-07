@@ -2,7 +2,8 @@ package com.estimote.showroom;
 
 import android.app.Application;
 
-import com.estimote.sdk.EstimoteSDK;
+import com.estimote.coresdk.common.config.EstimoteSDK;
+
 
 //
 // Running into any issues? Drop us an email to: contact@estimote.com

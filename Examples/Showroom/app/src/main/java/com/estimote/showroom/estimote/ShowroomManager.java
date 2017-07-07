@@ -2,8 +2,9 @@ package com.estimote.showroom.estimote;
 
 import android.content.Context;
 
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Nearable;
+
+import com.estimote.coresdk.recognition.packets.Nearable;
+import com.estimote.coresdk.service.BeaconManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,6 @@ public class ShowroomManager {
     private Listener listener;
 
     private BeaconManager beaconManager;
-    private String scanId;
 
     private Map<NearableID, Boolean> nearablesMotionStatus = new HashMap<>();
 
@@ -55,13 +55,13 @@ public class ShowroomManager {
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
-                scanId = beaconManager.startNearableDiscovery();
+                beaconManager.startNearableDiscovery();
             }
         });
     }
 
     public void stopUpdates() {
-        beaconManager.stopNearableDiscovery(scanId);
+        beaconManager.stopNearableDiscovery();
     }
 
     public void destroy() {
