@@ -1,6 +1,7 @@
 package com.estimote.proximitycontent.estimote;
 
-import com.estimote.sdk.cloud.model.Color;
+
+import com.estimote.coresdk.cloud.model.Color;
 
 public class EstimoteCloudBeaconDetails {
 

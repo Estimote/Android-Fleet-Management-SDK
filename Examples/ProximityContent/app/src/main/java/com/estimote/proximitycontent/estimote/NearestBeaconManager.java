@@ -3,19 +3,21 @@ package com.estimote.proximitycontent.estimote;
 import android.content.Context;
 import android.util.Log;
 
-import com.estimote.sdk.Beacon;
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
-import com.estimote.sdk.Utils;
+
+import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
+import com.estimote.coresdk.recognition.packets.Beacon;
+import com.estimote.coresdk.service.BeaconManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.estimote.coresdk.observation.region.RegionUtils.computeAccuracy;
 
 public class NearestBeaconManager {
 
     private static final String TAG = "NearestBeaconManager";
 
-    private static final Region ALL_ESTIMOTE_BEACONS = new Region("all Estimote beacons", null, null, null);
+    private static final BeaconRegion ALL_ESTIMOTE_BEACONS = new BeaconRegion("all Estimote beacons", null, null, null);
 
     private List<BeaconID> beaconIDs;
 
@@ -30,9 +32,9 @@ public class NearestBeaconManager {
         this.beaconIDs = beaconIDs;
 
         beaconManager = new BeaconManager(context);
-        beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+        beaconManager.setRangingListener(new BeaconManager.BeaconRangingListener() {
             @Override
-            public void onBeaconsDiscovered(Region region, List<Beacon> list) {
+            public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> list) {
                 checkForNearestBeacon(list);
             }
         });
@@ -99,7 +101,7 @@ public class NearestBeaconManager {
         Beacon nearestBeacon = null;
         double nearestBeaconsDistance = -1;
         for (Beacon beacon : beacons) {
-            double distance = Utils.computeAccuracy(beacon);
+            double distance = computeAccuracy(beacon);
             if (distance > -1 &&
                     (distance < nearestBeaconsDistance || nearestBeacon == null)) {
                 nearestBeacon = beacon;

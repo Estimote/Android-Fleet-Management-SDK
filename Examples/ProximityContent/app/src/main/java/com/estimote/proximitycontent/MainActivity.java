@@ -5,12 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.estimote.coresdk.cloud.model.Color;
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.proximitycontent.estimote.BeaconID;
 import com.estimote.proximitycontent.estimote.EstimoteCloudBeaconDetails;
 import com.estimote.proximitycontent.estimote.EstimoteCloudBeaconDetailsFactory;
 import com.estimote.proximitycontent.estimote.ProximityContentManager;
-import com.estimote.sdk.SystemRequirementsChecker;
-import com.estimote.sdk.cloud.model.Color;
 
 import java.util.Arrays;
 import java.util.HashMap;

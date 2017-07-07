@@ -2,11 +2,11 @@ package com.estimote.proximitycontent.estimote;
 
 import android.util.Log;
 
-import com.estimote.sdk.cloud.CloudCallback;
-import com.estimote.sdk.cloud.EstimoteCloud;
-import com.estimote.sdk.cloud.model.BeaconInfo;
-import com.estimote.sdk.cloud.model.Color;
-import com.estimote.sdk.exception.EstimoteServerException;
+import com.estimote.coresdk.cloud.api.CloudCallback;
+import com.estimote.coresdk.cloud.api.EstimoteCloud;
+import com.estimote.coresdk.cloud.model.BeaconInfo;
+import com.estimote.coresdk.cloud.model.Color;
+import com.estimote.coresdk.common.exception.EstimoteCloudException;
 
 public class EstimoteCloudBeaconDetailsFactory implements BeaconContentFactory {
 
@@ -25,7 +25,7 @@ public class EstimoteCloudBeaconDetailsFactory implements BeaconContentFactory {
             }
 
             @Override
-            public void failure(EstimoteServerException e) {
+            public void failure(EstimoteCloudException e) {
                 Log.e(TAG, "Couldn't fetch data from Estimote Cloud for beacon " + beaconID
                         + ", will use default values instead. Double-check if the app ID and app "
                         + "token provided in the MyApplication are correct, and if the beacon with "
