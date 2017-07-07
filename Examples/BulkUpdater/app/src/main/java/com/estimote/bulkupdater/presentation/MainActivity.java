@@ -1,5 +1,6 @@
 package com.estimote.bulkupdater.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -108,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         // Setup requirements checker (bluetooth, permissions etc.)
         if (SystemRequirementsChecker.checkWithDefaultDialogs(this)) {
             changeSubtitle("Scanning...");
@@ -221,6 +222,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
