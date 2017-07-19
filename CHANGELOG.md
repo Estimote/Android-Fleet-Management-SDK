@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 1.0.9 (Jul 19, 2017)
+- Old proximity beacons (D3.4) iBeacon packets are now properly scanned using `BeaconManager`
+- Major improvements to monitoring/ranging on Nougat. The scanning relies now on internal Android mechanism, so scanning periods may slightly differ from those you set with `setForegroundScanningPeriod` and `setBackgroundScanningPeriod`. 
+
 ## 1.0.8 (Jul 4, 2017)
  - Added support for routed mesh immmplementation
  - Minor bug-fixes
