@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 1.0.10 (Jul 21, 2017)
+- Add "Here and Now" feature support. Now, "Here and Now" related settings are synchronized from Cloud in to the beacon.
+- Synchronize GPIO settings from Cloud.
+- Make it possible to reflect GPIO_0 state on Beacon's embeded LED.
+
 ## 1.0.9 (Jul 19, 2017)
 - Old proximity beacons (D3.4) iBeacon packets are now properly scanned using `BeaconManager`
 - Major improvements to monitoring/ranging on Nougat. The scanning relies now on internal Android mechanism, so scanning periods may slightly differ from those you set with `setForegroundScanningPeriod` and `setBackgroundScanningPeriod`. 
