@@ -7,7 +7,7 @@ Be sure you add new line to your build.gradle file:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:{PUT HERE THE MOST RECENT VERSION}:release@aar'
+  compile 'com.estimote:sdk:{PUT HERE THE MOST RECENT VERSION}'
 }
 ```
 
