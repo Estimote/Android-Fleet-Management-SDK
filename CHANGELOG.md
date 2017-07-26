@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 1.0.11 (Jul 26, 2017)
+- Bug fixes
+
 ## 1.0.10 (Jul 21, 2017)
 - Add "Here and Now" feature support. Now, "Here and Now" related settings are synchronized from Cloud in to the beacon.
 - Synchronize GPIO settings from Cloud.
