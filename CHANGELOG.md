@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 1.0.12 (Aug 01, 2017)
+- Bug fix: Ensure SDK is able to connect to the beacon without mesh network configured
+- Bug fix: Hardware filter for BeaconRegion for Nougat devices
+
 ## 1.0.11 (Jul 26, 2017)
 - Bug fixes
 
