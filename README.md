@@ -12,7 +12,18 @@ It allows for:
 
 ## Installation
 
-Add this line to your `build.gradle` file:
+Estimote SDK for Android is distributed via JCenter repository. To be able to grab necessary artifacts, ensure you have JCenter repository configured. Usually, it's done by the following lines in top-level build.gradle of your project:
+
+```gradle
+allprojects {
+    repositories {
+        jcenter()
+        (all other repositories you are using goes here)
+    }
+}
+```
+
+Once you have JCenter configured, add this line to your `build.gradle` file:
 
 ```gradle
 dependencies {
