@@ -1,9 +1,9 @@
 Changelog
 =====================
 ## 1.0.13 (Aug 08, 2017)
-- Bug fix: Use region exit expiration timout definded by teh user instead of default value
-- Cleanup SDK manifetst to make it easier to use SDK in non-java-gradle android projects 
-- Cleanup SDK resources to make it easier to use SDK in non-java-gradle android projects 
+- Bug fix: Use region exit expiration timeout defined by the user instead of default value
+- Cleanup SDK manifest to make it easier to use SDK in non-java-gradle android projects 
+- Cleanup SDK resources to make it easier to use SDK in non-java-gradle android projects
 
 ## 1.0.12 (Aug 01, 2017)
 - Bug fix: Ensure SDK is able to connect to the beacon without mesh network configured
