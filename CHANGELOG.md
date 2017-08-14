@@ -1,5 +1,11 @@
 Changelog
 =====================
+## 1.0.14 (Aug 14, 2017)
+- Use average advertising time to calculate expiration time when ranging beacons
+- Add timestamp field to all packets parsed from scanner
+- FIX: Ensure Here and now are synchronized to beacons with firmware 4.7.0 or newer
+- FIX: Use proper sdk version in when communicating with cloud
+
 ## 1.0.13 (Aug 08, 2017)
 - Bug fix: Use region exit expiration timeout defined by the user instead of default value
 - Cleanup SDK manifest to make it easier to use SDK in non-java-gradle android projects 
