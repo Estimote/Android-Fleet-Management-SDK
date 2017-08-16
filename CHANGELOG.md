@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 1.0.15 (Aug 16, 2017)
+- Revert buggy implementation  for: Use average advertising time to calculate expiration time when ranging beacons
+
 ## 1.0.14 (Aug 14, 2017)
 - Use average advertising time to calculate expiration time when ranging beacons
 - Add timestamp field to all packets parsed from scanner
