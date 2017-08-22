@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 1.1.0 (Aug 22, 2017)
+- Enable Magnetometer: Synchronize Magnetometer calibration data from cloud.
+- FIX: Use millivolts as battery voltage level unit
+- FIX: EstimoteLocation - changed timestamp to be public
+
 ## 1.0.15 (Aug 16, 2017)
 - Revert buggy implementation  for: Use average advertising time to calculate expiration time when ranging beacons
 
