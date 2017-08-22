@@ -27,7 +27,7 @@ Once you have JCenter configured, add this line to your `build.gradle` file:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:1.0.15'
+  compile 'com.estimote:sdk:1.1.0'
 }
 ```
 *Important: If you are migrating from the old sdk (0.16.0), [here are some handy tips](Docs/switching_to_1.0.0.md) to help you adopt to breaking changes.*
