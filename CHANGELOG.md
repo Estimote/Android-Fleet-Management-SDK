@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 1.2.0 (Sep 08, 2017)
+- Push start UWB commands into mesh when connecting to the beacon
+- Add possibility to set up 'start UWB' command on cloud for beacons in mesh
+- Fix: Make it possible to set 20dBm as transmit power value when configuring advertiser
+
 ## 1.1.0 (Aug 22, 2017)
 - Enable Magnetometer: Synchronize Magnetometer calibration data from cloud.
 - FIX: Use millivolts as battery voltage level unit
