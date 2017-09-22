@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 1.3.0 (Sep 22, 2017)
+- Mesh Management - Mesh Gateway beta version
+
 ## 1.2.0 (Sep 08, 2017)
 - Push start UWB commands into mesh when connecting to the beacon
 - Add possibility to set up 'start UWB' command on cloud for beacons in mesh
