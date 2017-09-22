@@ -284,3 +284,50 @@ beaconManager.setConfigurableDevicesListener(new BeaconManager.ConfigurableDevic
 And that's all! You can consider temporarily stopping `BeaconManager` scanning while device update is in progress - just check whether any device has changed its state to `Status.UPDATING` and invoke `beaconManager.stopConfigurableDeviceDiscovery()`.
 You can also play with scan periods - sometimes scanning every 1 s is not that efficient and is just a waste of energy. You can play with this settings using`beaconManager.setForegroundScanPeriod(long, long)`.
 
+### Mesh Gateway 
+Mesh gateway is a tool build especially to make process of configuration beacons in mesh smooth and easy. 
+Once you start Mesh Gateway it will automatically synchronize all changes you made on cloud straight to beacons in your mesh.
+When changes gets applied to particular beacon then Mesh Gateway will automatically confirm them up to cloud and thus pending settings will be confirmed - pure magic!
+ 
+ #### Prerequisites
+  - Android phone hosting Mesh Gateway needs to be in range of at least one beacon in your mesh network.
+  
+ #### Implementation
+ Just like for all other Estimote SDK components, you have to initialize EstimoteSDK to make Mesh Gateway able to work properly:
+ ```Java
+ EstimoteSDK.initialize(<Application Context>, "<Your API Key>", "<Your App Token>");
+ ```
+ It is also highly recommended to ensure all necessary requirements are granted - In your Activity's onCreate call: 
+ ```Java
+ SystemRequirementsChecker.checkWithDefaultDialogs(this)
+ ```
+ 
+ Now, lets do the fun part and launch mesh gateway:
+ ```Java
+ MeshGatewayHandler gatewayHandler = MeshGateway(applicationContext).startWithSimpleScanner()
+ ```
+ Above command will fire-up Mesh Gateway and give you handler object you can utilize later to stop running gateway:
+ ```Java
+ gatewayHandler.stop()
+ ```
+ Gateway - to be able to operate - require BeaconManager and DeviceConnectionManager instances. When Gateway is configured and launched as shown in above snippet then necessary instances will be created internally. No additional steps are required from your side.
+ However if You already have BeaconManager and/or DeviceConnectionManager instances and you'd like to reuse them, then you can launch Mesh gateway as follows:
+ 
+```Java
+MeshGatewayHandler gatewayHandler = MeshGateway(applicationContext)
+                .withBeaconManager(<YOUR BEACON MANAGER INSTANCE>)
+                .withDeviceConnectionProvider(<YOUR DEVICE CONNECTION PROVIDER INSTANCE)
+                startWithSimpleScanner()
+```
+ 
+Gateway - when started as shown on above snippets - will not schedule any underlying services. Thus, if you move your application into background, then most probably Android OS will force gateway to stop.
+To prevent this behaviour, you can launch Gateway in foreground mode:
+```Java
+ MeshGatewayHandler gatewayHandler = MeshGateway(applicationContext).startWithForegroundScanner(<YOUR NOTIFICATION>)
+ ```
+ 
+ When launched this way, Gateway will boot-up foreground service with notification you supplied and schedule it internal logic inside it.
+
+
+
+ 
