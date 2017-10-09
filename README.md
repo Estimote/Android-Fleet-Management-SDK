@@ -14,13 +14,42 @@ Why should you use it?
 - One or more [Estimote Proximity or Location Beacons](https://estimote.com/products/) with enabled `Estimote Location` packet advertising. 
 - An Android device with Bluetooth Low Energy support. We suggest using Android Lollipop or newer. 
 
-## 1. Installation
+## Installation
 
 Add this line to your `build.gradle` file:
 ```Gradle
 compile 'com.estimote:proximity-sdk:0.1.0-alpha.2'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
+
+## Attachment-based identification
+
+Details of each of your Estimote devices are available in Estimote Cloud. Each device has a unique identifier, but remembering it and using it for every one of your devices can be challenging. This is why Estimote Proximity SDK uses attachment-based identification.
+
+Each device has an associated JSON. When the SDK detects a proximity change of a device, it checks the device's attachment JSON to see which registered rule should be applied.
+
+During the pre-release stage of Estimote Proximity SDK, attachment JSONs are encoded in tags. The convention for a tag-encoded attachment is
+
+```
+{
+    "attachment" : {
+        // Attachment JSON goes here.
+        // You can put here any JSON you wish to use in your apps.
+    }
+}
+```
+
+## 0. Setting up attachments in cloud 
+1. Go to https://cloud.estimote.com/#/
+2. Click on the beacon you want to configure
+3. Click Edit settings button
+4. Click Tags field
+5. Click Create New Tag button
+6. Paste in the JSON with attachment that's going to represent your beacon
+7. Click Save changes
+Tags are Cloud-only settings — no additional connecting to the beacons with the Estimote app is required.
+
+![Cloud attachments](/images/adding_attachment_json_tag.png)
 
 ## 1. Build proximity observer
 The `ProximityObserver` is the main object for doing proximity observations. Build it using `ProximityObserverFactory` - and don't forget to put your cloud credentials!
@@ -45,7 +74,7 @@ val rule1 = proximityObserver.ruleBuilder()
 - **attachmentKey** - the key you want to trigger actions for. 
 - **onEnterAction** - action that will be triggered when the user enters the zone defined by given key. 
 - **onExitAction** - action that will be triggered when user exits the zone defined by given key. 
-- **onChangeAction** - triggers when there is a change in proximity attachments of given key. If the zone conststs of more than a one beacon, this will help tracking the ones that are nearby, while still remaining one `onEnter` and `onExit` event. 
+- **onChangeAction** - triggers when there is a change in proximity attachments of given key. If the zone consists of more than a one beacon, this will help tracking the ones that are nearby, while still remaining one `onEnter` and `onExit` event. 
 - **desiredMeanTriggerDistance** - the distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact". We are constantly improving the precision.
 
 ## 3. Start proximity observation
@@ -73,6 +102,24 @@ After start, the `ProximityObserver` will return `ProximityObserver.Handler` tha
         observationHandler.stop()
     }
 ```
+
+## Example app
+
+To get a working prototype, check out the example app. It's a single screen app with three labels that change background color when:
+
+- you are in close proximity to the first desk,
+- in close proximity to the second desk,
+- when you are in the venue in general.
+
+The demo requires at least two Proximity or Location beacons configured for Estimote Monitoring. It's enabled by default in dev kits shipped after mid-September 2017; to enable it on your own check out the [instructions](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring-).
+
+The demo expects beacons having specific tags assigned:
+
+- `{"attachment":{"blueberry_desk":true,"venue":"office"}}` for the first one,
+- `{"attachment":{"mint_desk":true,"venue":"office"}}` for the second one.
+
+These attachments can be used to define the zones presented below:
+![Zones](/images/demo_attachments.png)
 
 
 ## Documentation
