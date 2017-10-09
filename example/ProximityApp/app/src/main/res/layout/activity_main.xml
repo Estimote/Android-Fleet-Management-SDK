@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/main_layout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:visibility="visible">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Start proximity observation"
+            app:layout_constraintTop_toBottomOf="@+id/venue_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageView
+            android:id="@+id/venue_image"
+            android:layout_width="371dp"
+            android:layout_height="363dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@color/background_white"/>
+
+        <ImageView
+            android:id="@+id/mint_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="0dp"
+            android:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/venue_image"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintLeft_toLeftOf="@+id/venue_image"
+            app:layout_constraintRight_toRightOf="@+id/venue_image"
+            app:layout_constraintTop_toTopOf="@+id/venue_image"
+            app:layout_constraintVertical_bias="0.501"
+            app:srcCompat="@color/primary"/>
+
+        <ImageView
+            android:id="@+id/blueberry_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/venue_image"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintLeft_toLeftOf="@+id/venue_image"
+            app:layout_constraintRight_toRightOf="@+id/venue_image"
+            app:layout_constraintTop_toTopOf="@+id/venue_image"
+            app:layout_constraintVertical_bias="0.501"
+            app:srcCompat="@color/primary"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Venue"
+            android:textColor="@color/text_white"
+            app:layout_constraintLeft_toLeftOf="@+id/venue_image"
+            app:layout_constraintRight_toRightOf="@+id/venue_image"
+            app:layout_constraintTop_toTopOf="@+id/venue_image"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Blueberry desk"
+            android:textColor="@color/text_white"
+            app:layout_constraintLeft_toLeftOf="@+id/blueberry_image"
+            app:layout_constraintRight_toRightOf="@+id/blueberry_image"
+            app:layout_constraintTop_toTopOf="@+id/blueberry_image"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Mint desk"
+            android:textColor="@color/text_white"
+            app:layout_constraintHorizontal_bias="0.478"
+            app:layout_constraintLeft_toLeftOf="@+id/mint_image"
+            app:layout_constraintRight_toRightOf="@+id/mint_image"
+            app:layout_constraintTop_toTopOf="@+id/mint_image"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
