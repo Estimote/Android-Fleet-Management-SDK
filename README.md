@@ -93,7 +93,7 @@ When you are done defining your rules, you will need to start the observation pr
 - **lowPowerMode** - Battery efficient mode, but not that reliable.
 - **onErrorAction** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
 - **startWithForegroundScanner** - starts the observation proces with scanner wrapped in Foreground Service. This will display notification in notifications bar, but will ensure that the scanning won't be killed by the system. It may even work after user kills your app. 
-**startWithSimpleScanner** - starts the observation with scanner without any service. The scan will be destroyed when your app dies. Use this if you want to run quick and simple scan, or you want to implement service wrapper by yourself.
+- **startWithSimpleScanner** - starts the observation with scanner without any service. The scan will be destroyed when your app dies. Use this if you want to run quick and simple scan, or you want to implement service wrapper by yourself.
 
 After start, the `ProximityObserver` will return `ProximityObserver.Handler` that you can use to stop scanning later. For example:
 ```Kotlin
