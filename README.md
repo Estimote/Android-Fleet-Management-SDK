@@ -11,7 +11,7 @@ Why should you use it?
 
 ## Requirements
 
-- One or more [Estimote Proximity or Location Beacons](https://estimote.com/products/) with enabled `Estimote Location` packet advertising. 
+- One or more [Estimote Proximity or Location Beacon](https://estimote.com/products/) with the `Estimote Location` packet advertising enabled. 
 - An Android device with Bluetooth Low Energy support. We suggest using Android Lollipop or newer. 
 
 ## Installation
@@ -26,7 +26,7 @@ Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
 Details of each of your Estimote devices are available in Estimote Cloud. Each device has a unique identifier, but remembering it and using it for every one of your devices can be challenging. This is why Estimote Proximity SDK uses attachment-based identification.
 
-Each device has an associated JSON. When the SDK detects a proximity change of a device, it checks the device's attachment JSON to see which registered rule should be applied.
+Each device has an associated JSON. When the SDK detects a change in the proximity to a device, it checks the device's attachment JSON to see which of the registered rules should be applied.
 
 During the pre-release stage of Estimote Proximity SDK, attachment JSONs are encoded in tags. The convention for a tag-encoded attachment is
 
@@ -39,12 +39,12 @@ During the pre-release stage of Estimote Proximity SDK, attachment JSONs are enc
 }
 ```
 
-## 0. Setting up attachments in cloud 
+## 0. Setting up attachments in Cloud 
 1. Go to https://cloud.estimote.com/#/
 2. Click on the beacon you want to configure
-3. Click Edit settings button
-4. Click Tags field
-5. Click Create New Tag button
+3. Click the Edit settings button
+4. Click the Tags field
+5. Click the Create New Tag button
 6. Paste in the JSON with attachment that's going to represent your beacon
 7. Click Save changes
 Tags are Cloud-only settings — no additional connecting to the beacons with the Estimote app is required.
@@ -52,7 +52,7 @@ Tags are Cloud-only settings — no additional connecting to the beacons with th
 ![Cloud attachments](/images/adding_attachment_json_tag.png)
 
 ## 1. Build proximity observer
-The `ProximityObserver` is the main object for doing proximity observations. Build it using `ProximityObserverFactory` - and don't forget to put your cloud credentials!
+The `ProximityObserver` is the main object for performing proximity observations. Build it using `ProximityObserverFactory` - and don't forget to put in your Estimote Cloud credentials!
 
 ```Kotlin
 val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE , YOUR_APP_TOKEN_HERE)
@@ -60,7 +60,7 @@ val proximityObserver = ProximityObserverFactory().create(applicationContext, cl
 ```
 
 ## 2. Define proximity rules
-Now the fun part - create your own proximity rules using `proximityObserver.ruleBuilder()`
+Now for the fun part - create your own proximity rules using `proximityObserver.ruleBuilder()`
 
 ```Kotlin
 val rule1 = proximityObserver.ruleBuilder()
@@ -72,10 +72,10 @@ val rule1 = proximityObserver.ruleBuilder()
                 .create()
 ```
 - **attachmentKey** - the key you want to trigger actions for. 
-- **onEnterAction** - action that will be triggered when the user enters the zone defined by given key. 
-- **onExitAction** - action that will be triggered when user exits the zone defined by given key. 
-- **onChangeAction** - triggers when there is a change in proximity attachments of given key. If the zone consists of more than a one beacon, this will help tracking the ones that are nearby, while still remaining one `onEnter` and `onExit` event. 
-- **desiredMeanTriggerDistance** - the distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact". We are constantly improving the precision.
+- **onEnterAction** - the action that will be triggered when the user enters the zone defined by given key. 
+- **onExitAction** - the action that will be triggered when the user exits the zone defined by given key. 
+- **onChangeAction** - triggers when there is a change in proximity attachments of a given key. If the zone consists of more than one beacon, this will help tracking the ones that are nearby, while still remaining one `onEnter` and `onExit` event. 
+- **desiredMeanTriggerDistance** - the distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact." We are constantly improving the precision.
 
 ## 3. Start proximity observation
 When you are done defining your rules, you will need to start the observation process:
@@ -87,13 +87,13 @@ When you are done defining your rules, you will need to start the observation pr
                 .withOnErrorAction{/* Do something here */}
                 .startWithForegroundScanner(notification)
 ```
-- **addProximityRules** - adds your pre-defined rules to `ProximityObserver`
-- **lowLatencyPowerMode** - The most reliable mode, but may drain battery a lot. 
-- **balancedPowerMode** - Balance between scan reliability and battery drainage. 
-- **lowPowerMode** - Battery efficient mode, but not that reliable.
+- **addProximityRules** - adds your pre-defined rules to `ProximityObserver`.
+- **lowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
+- **balancedPowerMode** - balance between scan reliability and battery drainage. 
+- **lowPowerMode** - battery efficient mode, but not that reliable.
 - **onErrorAction** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
-- **startWithForegroundScanner** - starts the observation proces with scanner wrapped in Foreground Service. This will display notification in notifications bar, but will ensure that the scanning won't be killed by the system. It may even work after user kills your app. 
-- **startWithSimpleScanner** - starts the observation with scanner without any service. The scan will be destroyed when your app dies. Use this if you want to run quick and simple scan, or you want to implement service wrapper by yourself.
+- **startWithForegroundScanner** - starts the observation proces with scanner wrapped in Foreground Service. This will display notification in notifications bar, but will ensure that the scanning won't be killed by the system. It may even work after the user kills your app. 
+- **startWithSimpleScanner** - starts the observation with scanner without any service. The scan will be destroyed when your app dies. Use this if you want to run a quick and simple scan, or you want to implement a service wrapper by yourself.
 
 After start, the `ProximityObserver` will return `ProximityObserver.Handler` that you can use to stop scanning later. For example:
 ```Kotlin
@@ -105,7 +105,7 @@ After start, the `ProximityObserver` will return `ProximityObserver.Handler` tha
 
 ## Example app
 
-To get a working prototype, check out the example app. It's a single screen app with three labels that change background color when:
+To get a working prototype, check out the example app. It's a single screen app with three labels that change the background color when:
 
 - you are in close proximity to the first desk,
 - in close proximity to the second desk,
