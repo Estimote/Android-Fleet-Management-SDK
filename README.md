@@ -55,14 +55,22 @@ Tags are Cloud-only settings — no additional connecting to the beacons with th
 The `ProximityObserver` is the main object for performing proximity observations. Build it using `ProximityObserverFactory` - and don't forget to put in your Estimote Cloud credentials!
 
 ```Kotlin
+// Kotlin
 val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE , YOUR_APP_TOKEN_HERE)
 val proximityObserver = ProximityObserverFactory().create(applicationContext, cloudCredentials)
+```
+
+```Java
+// Java
+EstimoteCloudCredentials cloudCredentials = new EstimoteCloudCredentials(YOUR_APP_ID_HERE, YOUR_APP_TOKEN_HERE);
+ProximityObserver proximityObserver = new ProximityObserverFactory().create(getApplicationContext(), cloudCredentials);
 ```
 
 ## 2. Define proximity rules
 Now for the fun part - create your own proximity rules using `proximityObserver.ruleBuilder()`
 
 ```Kotlin
+// Kotlin
 val rule1 = proximityObserver.ruleBuilder()
                 .forAttachmentKey("venue")
                 .withOnEnterAction{/* Do something here */}
@@ -70,6 +78,34 @@ val rule1 = proximityObserver.ruleBuilder()
                 .withOnChangeAction{/* Do something here */}
                 .withDesiredMeanTriggerDistance(2.0)
                 .create()
+```
+
+```Java
+// Java
+ProximityRule rule1 = 
+    proximityObserver.ruleBuilder()
+        .forAttachmentKey("venue")
+        .withOnEnterAction(new Function1<ProximityAttachment, Unit>() {
+          @Override public Unit invoke(ProximityAttachment proximityAttachment) {
+            /* Do something here */
+            return null;
+          }
+        })
+        .withOnExitAction(new Function0<Unit>() {
+          @Override public Unit invoke() {
+             /* Do something here */
+             return null;
+          }
+        })
+        .withOnChangeAction(new Function1<List<? extends ProximityAttachment>, Unit>() {
+          @Override
+          public Unit invoke(List<? extends ProximityAttachment> proximityAttachments) {
+            /* Do something here */
+            return null;
+          }
+        })
+        .withDesiredMeanTriggerDistance(2.0)
+        .create();
 ```
 - **attachmentKey** - the key you want to trigger actions for. 
 - **onEnterAction** - the action that will be triggered when the user enters the zone defined by given key. 
@@ -81,11 +117,27 @@ val rule1 = proximityObserver.ruleBuilder()
 When you are done defining your rules, you will need to start the observation process:
 
 ```Kotlin
- val observationHandler = proximityObserver
-                .addProximityRules(rule1, rule2, rule3)
-                .withBalancedPowerMode()
-                .withOnErrorAction{/* Do something here */}
-                .startWithForegroundScanner(notification)
+// Kotlin
+val observationHandler = proximityObserver
+               .addProximityRules(rule1, rule2, rule3)
+               .withBalancedPowerMode()
+               .withOnErrorAction{/* Do something here */}
+               .startWithForegroundScanner(notification)
+```
+
+```Java
+// Java
+ProximityObserver.Handler observationHandler =
+       proximityObserver.addProximityRules(rule1)
+           .withBalancedPowerMode()
+           .withOnErrorAction(new Function1<Throwable, Unit>() {
+             @Override
+             public Unit invoke(Throwable throwable) {
+               /* Do something here */
+               return null;
+             }
+           })
+           .startWithForegroundScanner(notification);
 ```
 - **addProximityRules** - adds your pre-defined rules to `ProximityObserver`.
 - **lowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
@@ -97,10 +149,20 @@ When you are done defining your rules, you will need to start the observation pr
 
 After start, the `ProximityObserver` will return `ProximityObserver.Handler` that you can use to stop scanning later. For example:
 ```Kotlin
-    override fun onDestroy() {
-        super.onDestroy()
-        observationHandler.stop()
-    }
+// Kotlin
+override fun onDestroy() {
+    observationHandler.stop()
+    super.onDestroy()
+}
+```
+
+```Java
+// Java
+@Override
+protected void onDestroy() {
+    observationHandler.stop();
+    super.onDestroy();
+}
 ```
 
 ## Example app
