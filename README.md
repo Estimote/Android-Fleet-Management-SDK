@@ -18,7 +18,7 @@ Why should you use it?
 
 Add this line to your `build.gradle` file:
 ```Gradle
-compile 'com.estimote:proximity-sdk:0.1.0-alpha.2'
+compile 'com.estimote:proximity-sdk:0.1.0-alpha.3'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
@@ -72,7 +72,7 @@ Now for the fun part - create your own proximity rules using `proximityObserver.
 ```Kotlin
 // Kotlin
 val rule1 = proximityObserver.ruleBuilder()
-                .forAttachmentKey("venue")
+                .forAttachmentKeyAndValue("venue", "office")
                 .withOnEnterAction{/* Do something here */}
                 .withOnExitAction{/* Do something here */}
                 .withOnChangeAction{/* Do something here */}
@@ -84,7 +84,7 @@ val rule1 = proximityObserver.ruleBuilder()
 // Java
 ProximityRule rule1 = 
     proximityObserver.ruleBuilder()
-        .forAttachmentKey("venue")
+        .forAttachmentKeyAndValue("venue", "office")
         .withOnEnterAction(new Function1<ProximityAttachment, Unit>() {
           @Override public Unit invoke(ProximityAttachment proximityAttachment) {
             /* Do something here */
