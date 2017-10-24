@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 1.4.0 (Oct 24, 2017)
+- Mesh Management - Mesh Gateway is now able to synchronize mesh's asset tracking report from beacons in to cloud.
+
 ## 1.3.0 (Sep 22, 2017)
 - Mesh Management - Mesh Gateway beta version
 
