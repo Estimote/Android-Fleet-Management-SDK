@@ -18,7 +18,7 @@ Why should you use it?
 
 Add this line to your `build.gradle` file:
 ```Gradle
-compile 'com.estimote:proximity-sdk:0.1.0-alpha.3'
+compile 'com.estimote:proximity-sdk:0.1.0-alpha.4'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
@@ -71,20 +71,21 @@ Now for the fun part - create your own proximity rules using `proximityObserver.
 
 ```Kotlin
 // Kotlin
-val rule1 = proximityObserver.ruleBuilder()
+val venueZone = proximityObserver.zoneBuilder()
                 .forAttachmentKeyAndValue("venue", "office")
-                .withOnEnterAction{/* Do something here */}
-                .withOnExitAction{/* Do something here */}
-                .withOnChangeAction{/* Do something here */}
-                .withDesiredMeanTriggerDistance(2.0)
+                .inFarRange()
+                .withOnEnterAction{/* do something here */}
+                .withOnExitAction{/* do something here */}
+                .withOnChangeAction{/* do something here */}
                 .create()
 ```
 
 ```Java
 // Java
 ProximityRule rule1 = 
-    proximityObserver.ruleBuilder()
+    proximityObserver.zoneBuilder()
         .forAttachmentKeyAndValue("venue", "office")
+        .inFarRange()
         .withOnEnterAction(new Function1<ProximityAttachment, Unit>() {
           @Override public Unit invoke(ProximityAttachment proximityAttachment) {
             /* Do something here */
@@ -104,14 +105,16 @@ ProximityRule rule1 =
             return null;
           }
         })
-        .withDesiredMeanTriggerDistance(2.0)
         .create();
 ```
-- **attachmentKey** - the key you want to trigger actions for. 
+- **forAttachmentKey** - the key you want to trigger actions for. 
+- **forAttachmentKeyAndValue** - the exact key and value that will trigger this zone actions. 
 - **onEnterAction** - the action that will be triggered when the user enters the zone defined by given key. 
 - **onExitAction** - the action that will be triggered when the user exits the zone defined by given key. 
 - **onChangeAction** - triggers when there is a change in proximity attachments of a given key. If the zone consists of more than one beacon, this will help tracking the ones that are nearby, while still remaining one `onEnter` and `onExit` event. 
-- **desiredMeanTriggerDistance** - the distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact." We are constantly improving the precision.
+- **inFarRange** - the far distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact." We are constantly improving the precision. 
+- **inNearRange** - the near distance at which actions will be invoked.
+- **inCustomRange** - custom desired trigger distance in meters. 
 
 ## 3. Start proximity observation
 When you are done defining your rules, you will need to start the observation process:
@@ -119,16 +122,16 @@ When you are done defining your rules, you will need to start the observation pr
 ```Kotlin
 // Kotlin
 val observationHandler = proximityObserver
-               .addProximityRules(rule1, rule2, rule3)
+               .addProximityZones(zone1, zone2, zone3)
                .withBalancedPowerMode()
                .withOnErrorAction{/* Do something here */}
-               .startWithForegroundScanner(notification)
+               .startWithScannerInForegroundService(notification)
 ```
 
 ```Java
 // Java
 ProximityObserver.Handler observationHandler =
-       proximityObserver.addProximityRules(rule1)
+       proximityObserver.addProximityZones(zone1, zone2, zone3)
            .withBalancedPowerMode()
            .withOnErrorAction(new Function1<Throwable, Unit>() {
              @Override
@@ -137,9 +140,9 @@ ProximityObserver.Handler observationHandler =
                return null;
              }
            })
-           .startWithForegroundScanner(notification);
+           .startWithScannerInForegroundService(notification);
 ```
-- **addProximityRules** - adds your pre-defined rules to `ProximityObserver`.
+- **addProximityZones** - adds your pre-defined zones to `ProximityObserver`.
 - **lowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
 - **balancedPowerMode** - balance between scan reliability and battery drainage. 
 - **lowPowerMode** - battery efficient mode, but not that reliable.
