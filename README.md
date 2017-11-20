@@ -178,14 +178,10 @@ To get a working prototype, check out the [example app](https://github.com/Estim
 
 The demo requires at least two Proximity or Location beacons configured for Estimote Monitoring. It's enabled by default in dev kits shipped after mid-September 2017; to enable it on your own check out the [instructions](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring-).
 
-The demo expects beacons having specific tags assigned:
+The demo expects beacons having specific tags assigned in Estimote Cloud:
 
 - `{"attachment":{"venue":"office","desk":"mint"}}` for the first one,
 - `{"attachment":{"venue":"office","desk":"blueberry"}}` for the second one.
-
-These attachments can be used to define the zones presented below:
-![Zones](/images/demo_attachments.png)
-
 
 ## Documentation
 Javadoc documentation available soon...
