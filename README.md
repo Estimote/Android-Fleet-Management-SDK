@@ -168,9 +168,9 @@ protected void onDestroy() {
 }
 ```
 
-## Example app
+## Example app setup
 
-To get a working prototype, check out the example app. It's a single screen app with three labels that change the background color when:
+To get a working prototype, check out the [example app](https://github.com/Estimote/Android-Proximity-SDK/tree/master/example/ProximityApp). It's a single screen app with three labels that change the background color when:
 
 - you are in close proximity to the first desk,
 - in close proximity to the second desk,
@@ -180,8 +180,8 @@ The demo requires at least two Proximity or Location beacons configured for Esti
 
 The demo expects beacons having specific tags assigned:
 
-- `{"attachment":{"blueberry_desk":true,"venue":"office"}}` for the first one,
-- `{"attachment":{"mint_desk":true,"venue":"office"}}` for the second one.
+- `{"attachment":{"venue":"office","desk":"mint"}}` for the first one,
+- `{"attachment":{"venue":"office","desk":"blueberry"}}` for the second one.
 
 These attachments can be used to define the zones presented below:
 ![Zones](/images/demo_attachments.png)
