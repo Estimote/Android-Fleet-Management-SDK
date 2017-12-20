@@ -1,5 +1,12 @@
 Changelog
 =====================
+
+## 1.4.1 (Dec 20, 2017)
+Maintenance release.
+- Fixed scanning on Android 7+
+- Fixed scanning on devices without low power scanning features (batch scanning, hardware filters)
+- Fixed NPE on scanning start
+
 ## 1.4.0 (Oct 24, 2017)
 - Mesh Management - Mesh Gateway is now able to synchronize mesh's asset tracking report from beacons in to cloud.
 
