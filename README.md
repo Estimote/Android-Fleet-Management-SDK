@@ -1,6 +1,6 @@
 # Estimote SDK for Android #
 
-**Note: Proximity detection features in this SDK are being deprecated in favor of our new [Android Proximity SDK](https://github.com/Estimote/Android-Proximity-SDK), powered by [Estimote Monitoring](http://blog.estimote.com/post/166007374930/the-most-reliable-proximity-tech-now-with-a). If you're starting a new Proximity app or integration, we recommend to use the new SDK.**
+**Note: Proximity detection features (ranging, monitoring) in this SDK are being deprecated in favor of our new [Android Proximity SDK](https://github.com/Estimote/Android-Proximity-SDK), powered by [Estimote Monitoring](http://blog.estimote.com/post/166007374930/the-most-reliable-proximity-tech-now-with-a). If you're starting a new Proximity app or integration, we recommend to use the new SDK.**
 
 The Estimote SDK for Android is a library that allows interaction with [Estimote beacons & stickers](http://estimote.com/#jump-to-products). The SDK system works on Android 4.3 or above and requires a device with Bluetooth Low Energy (Estimote SDK's minimum Android SDK version is 9).
 
