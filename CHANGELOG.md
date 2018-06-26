@@ -1,6 +1,10 @@
 Changelog
 =====================
 
+## 1.4.2 (26 Jun, 2018)
+Maintenance release.
+- Added compatibility for new Proximity SDK.
+
 ## 1.4.1 (Dec 20, 2017)
 Maintenance release.
 - Fixed scanning on Android 7+
