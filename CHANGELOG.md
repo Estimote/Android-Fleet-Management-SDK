@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 1.4.5 (Aug 2, 2018)
+Maintenance release - Fix generic advertisers cloud synchronization issue
+
 ## 1.4.4 (26 Jun, 2018)
 Maintenance release.
 
