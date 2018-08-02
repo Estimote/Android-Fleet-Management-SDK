@@ -1,5 +1,7 @@
 Changelog
 =====================
+## 1.4.4 (26 Jun, 2018)
+Maintenance release.
 
 ## 1.4.2 (26 Jun, 2018)
 Maintenance release.
