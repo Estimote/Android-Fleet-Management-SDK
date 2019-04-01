@@ -1,88 +1,140 @@
-# Estimote SDK for Android #
+# Estimote Fleet Management SDK for Android
 
 ## Introduction
 
-This Android SDK can be used to update the settings of multiple Estimote beacons at once. You no longer need to connect to each beacon individually. Instead, you use Estimote Cloud to queue ‘pending settings’ on your beacons. Then, your Android app equipped with this SDK (see [Bulk Updater section](#bulk-updater)) can propagate those settings the moment it encounters the beacons. This also means that, once you deploy the beacons, users of your app can propagate the settings by simply being around the beacons. 
+Estimote Fleet Management SDK allows you to **configure and update your Estimote Beacons via your own Android app**, for example:
 
-With this SDK, you can:
- - Enable or disable packets (e.g. Estimote Monitoring, iBeacon, Eddystone-UID)
- - Modify the settings of individual beacons (e.g. increase the broadcasting power, decrease the advertising interval, modify Eddystone-URL’s link)
- - Update Estimote beacon firmware
+ - enable Estimote Monitoring and Estimote Telemetry
+ - enable iBeacon, and change its UUID, major, minor, transmit power
+ - update beacon's firmware
+ - etc.
 
-Keep in mind that tags & attachments from [Estimote Proximity SDK](https://github.com/Estimote/Android-Proximity-SDK) are updated instantly, without the need to propagate settings to beacons.
+You can [configure your beacons one by one](#configuring-individual-beacons), or use Estimote Cloud to queue "pending settings" on your beacons and apply these settings with the [Bulk Updater](#bulk-updater).
 
-**All the proximity monitoring features of this SDK have been deprecated and are no longer supported.** Instead, we strongly recommend [Estimote Proximity SDK for Android](https://github.com/Estimote/Android-Proximity-SDK) powered by Estimote Monitoring. On top of Proximity SDK, use this Android SDK for beacon fleet management.
+Integrating this SDK into your app means the users of your app can automatically propagate any configuration changes to your beacons. Say, you deployed the beacons, but the initial usage suggests you need to bump the transmit power up a notch, or maybe make the Telemetry advertise more frequently. With Bulk Updater integrated into the app, any user of the app in range of a "pending settings" beacon will apply the new settings.
 
-If you simply need to change the settings (or apply ‘pending settings’) of the nearby Estimote beacons, get [Estimote Android app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en). For a single beacon or a few of them, this will be the fastest method.
+(Settings that live entirely in Estimote Cloud, like the beacon's name, tags, and attachments, are always updated instantly, without the need to propagate settings to beacons.)
 
-If you have more Estimote devices, [Estimote Deployment app](https://itunes.apple.com/us/app/estimote-deployment/id1109375679?mt=8) will be a better choice. Use it to propagate settings to multiple beacons at once. At this point, it’s available on iOS only. 
+### "Can I use this SDK to detect beacons?"
 
-To learn more about this Android SDK, review the [Java documentation](http://estimote.github.io/Android-SDK/JavaDocs/) and check the [Developer Portal tutorial](https://developer.estimote.com/android/tutorial/part-1-setting-up/). Visit also [Estimote Cloud API docs](https://cloud.estimote.com/docs/).
+Short version: no, use the [Proximity SDK](https://github.com/Estimote/Android-Proximity-SDK) instead.
 
+Longer vesrion: this SDK was previously known as "Estimote SDK", and it included APIs for detecting your beacons, which you could use to show notifications, etc. **These APIs are now deprecated and are no longer supported.** They have been replaced with the [Estimote Proximity SDK for Android](https://github.com/Estimote/Android-Proximity-SDK), powered by [Estimote Monitoring](https://community.estimote.com/hc/en-us/articles/360003252832-What-is-Estimote-Monitoring-).
+
+You can, and are encouraged to, use the Fleet Management SDK alongside the Proximity SDK: Proximity SDK for driving the proximity-based events in your app, and Fleet Management SDK for remotely managing your beacons.
+
+### "Do I need to build an app to configure my beacons?"
+
+No, you can use our [Estimote Android app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en) to change the most common settings, and to apply "pending settings" to individual beacons. Connecting to the beacon automatically applies the latest settings from Estimote Cloud.
+
+If you have more Estimote devices, [Estimote Deployment app](https://itunes.apple.com/us/app/estimote-deployment/id1109375679?mt=8) can apply "pending settings" in bulk. At this time, it's available on iOS only.
+
+## Requirements
+
+Android 4.3 or later, and an Android device with Bluetooth Low Energy.
+
+The minimum Android API level this SDK will run on is 9 (= Android 2.3), but the Bluetooth-detection features (which is most of them) won't work. You can handle this gracefully in your app by not using the fleet management features if you detect Android < 4.3, or no Bluetooth Low Energy available.
+
+Bluetooth Low Energy scanning on Android also requires the app to obtain the location permissions from the user, and "location" must also be enabled system-wide. Chances are, if your app is using beacons (e.g., via the Estimote Proximity SDK), [you already have this permission](https://developer.estimote.com/proximity/android-tutorial/#request-location-permissions).
 
 ## Installation
 
-Estimote SDK for Android is distributed via JCenter repository. To be able to grab necessary artifacts, ensure you have JCenter repository configured. Usually, it's done by the following lines in top-level build.gradle of your project:
+This SDK is distributed via JCenter repository. Most of the time, you'll already have JCenter repo configured in your Android project, with these lines in the Project build.gradle:
 
 ```gradle
 allprojects {
     repositories {
         jcenter()
-        (all other repositories you are using goes here)
+        // ...
     }
 }
 ```
 
-Once you have JCenter configured, add this line to your `build.gradle` file:
+If not, add `jcenter()` inside `repositories`, as shown above. Then, in the Module build.gradle, add:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:sdk:1.4.5'
+    implementation 'com.estimote:mgmtsdk:1.4.4'
+    // if using an older version of Gradle, try "compile" instead of "implementation"
 }
 ```
 
-Still using `Eclipse`? [Here is how](Docs/manual_installation.md) to import our sdk to your project.
+### Connecting Fleet Management SDK to your Estimote Cloud account
 
-## Initializing Estimote SDK
+This SDK needs to be able to access your Estimote Cloud account in order to configure your beacons.
 
-Initialize Estimote SDK in your Application class onCreate() method:
+To do that, register your mobile app in Estimote Cloud in the "Mobile Apps" section. You'll get an App ID and App Token, which you can use to initialize the SDK:
 
 ```java
-//  To get your AppId and AppToken you need to create new application in Estimote Cloud.
-EstimoteSDK.initialize(applicationContext, appId, appToken);
-// Optional, debug logging.
-EstimoteSDK.enableDebugLogging(true);
+// do this before you use any of the fleet management features
+EstimoteSDK.initialize(applicationContext, "my-app-bf6", "7bcabedcb4f...");
 ```
 
-## Requirements
+Your Estimote Cloud account needs to have a fleet management subscription. As of now, there's a free, indefinite trial available if you have less than 20 devices.
 
-The SDK system works on Android 4.3 or above and requires a device with Bluetooth Low Energy (Estimote SDK's minimum Android SDK version is 9).
+## Bulk Updater
 
-## [Bulk Updater](#bulk-updater)
+This is how to set up the Bulk Updater: (we recommend doing this in an Application subclass)
 
-With this feature you can:
- - Enable or disable packets (e.g. iBeacon, Eddystone-UID)
- - Modify the settings of individual beacons (e.g. increase the broadcasting power, decrease the advertising interval, modify Eddystone-URL’s link)
- - Update Estimote beacon firmware
+```java
+private BulkUpdater bulkUpdater;
 
-Check [this tutorial](https://github.com/Estimote/Android-SDK/blob/master/Docs/DOC_deviceConnection.md#advanced-operations-on-connected-device) for the details on how to bulk update your beacons with this SDK.
+@Override
+protected void onCreate() {
+    super.onCreate();
+
+    Context context = getApplicationContext();
+    this.bulkUpdater = new BulkUpdaterBuilder(context)
+        .withFirmwareUpdate()
+        .withCloudFetchInterval(1, TimeUnit.HOURS)
+        .withTimeout(0)
+        .withRetryCount(3)
+        .build()
+}
+```
+
+And this is how to use it:
+
+```java
+this.bulkUpdater.start(new BulkUpdater.BulkUpdaterCallback() {
+    @Override
+    public void onDeviceStatusChange(ConfigurableDevice device,
+            BulkUpdater.Status newStatus, String message) {
+        Log.d("BulkUpdater", device.deviceId + ": " + newStatus);
+    }
+
+    @Override
+    public void onFinished(int updatedCount, int failedCount) {
+        Log.d("BulkUpdater", "Finished. Updated: " +
+                updatedCount + ", Failed: " + failedCount);
+    }
+
+    @Override
+    public void onError(DeviceConnectionException e) {
+        Log.d("BulkUpdater", "Error: " + e.getMessage());
+    }
+});
+```
+
+To stop, and clean up after the BulkUpdater, do:
+
+```java
+bulkUpdater.stop();
+bulkUpdater.destroy();
+```
 
 ## Configuring individual beacons
 
-### Connecting to beacons in Android SDK
+If you want to individually configure a beacon, you'll need to connect to it first: [Connecting to beacons](https://github.com/Estimote/Android-Fleet-Management-SDK/blob/master/Docs/DOC_deviceConnection.md).
 
-In order to modify any settings of a beacon, you’ll need to connect to it first. If a beacon is set to Deployed & Protected [access mode](https://community.estimote.com/hc/en-us/articles/115000221671-What-is-Access-Mode-How-to-enable-it-), you have to be the beacon's owner in Estimote Cloud to modify any settings. Every attempt to connect with a device not logged in to your Estimote account will fail. Enable Development access mode to allow your co-workers to also edit beacon's settings.
+Once connected, you can read and write settings, as well as update the beacon's firmware: [Basic operations on connected device](https://github.com/Estimote/Android-Fleet-Management-SDK/blob/master/Docs/DOC_deviceConnection.md#basic-operations-on-connected-device) and [Advanced operations on connected device](https://github.com/Estimote/Android-Fleet-Management-SDK/blob/master/Docs/DOC_deviceConnection.md#advanced-operations-on-connected-device).
 
-Read the tutorial on how to connect to Estimote Beacons with this SDK [here](https://github.com/Estimote/Android-SDK/blob/master/Docs/DOC_deviceConnection.md#discovering-configurable-devices).
+## Feedback, questions, issues
 
-### Basic operations on connected devices
+Post your questions and feedback to [Estimote Forums](https://forums.estimote.com), we'd love to hear from you!
 
-Once you establish a connection with a beacon, you can perform various actions that we already outlined in [Bulk Updater section](#bulk-updater). This SDK can both read (return the current values) and write settings (set new values). For the details on how to run both, follow [this tutorial](https://github.com/Estimote/Android-SDK/blob/master/Docs/DOC_deviceConnection.md#basic-operations-on-connected-device).
-
-## Your feedback and questions
-At Estimote, we're massive believers in feedback! Here are some common ways to share your thoughts with us:
-  - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-SDK/issues).
-  - Asking our community managers on our [Estimote SDK for Android forum](https://forums.estimote.com/c/android-sdk).
+Report issues on the [issues page](https://github.com/Estimote/Android-Fleet-Management-SDK/issues).
 
 ## Changelog
-To see what has changed in recent versions of Estimote SDK for Android, see the [CHANGELOG](CHANGELOG.md).
+
+See [CHANGELOG.md](CHANGELOG.md).
