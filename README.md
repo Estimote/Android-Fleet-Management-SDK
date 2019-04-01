@@ -1,5 +1,16 @@
 # Estimote Fleet Management SDK for Android
 
+  * [Introduction](#introduction)
+    + ["Can I use this SDK to detect beacons?"](#can-i-use-this-sdk-to-detect-beacons)
+    + ["Do I need to build an app to configure my beacons?"](#do-i-need-to-build-an-app-to-configure-my-beacons)
+  * [Requirements](#requirements)
+  * [Installation](#installation)
+    + [Connecting Fleet Management SDK to your Estimote Cloud account](#connecting-fleet-management-sdk-to-your-estimote-cloud-account)
+  * [Bulk Updater](#bulk-updater)
+  * [Configuring individual beacons](#configuring-individual-beacons)
+  * [Feedback, questions, issues](#feedback-questions-issues)
+  * [Changelog](#changelog)
+
 ## Introduction
 
 Estimote Fleet Management SDK allows you to **configure and update your Estimote Beacons via your own Android app**, for example:
