@@ -8,6 +8,7 @@
     + [Connecting Fleet Management SDK to your Estimote Cloud account](#connecting-fleet-management-sdk-to-your-estimote-cloud-account)
   * [Bulk Updater](#bulk-updater)
   * [Configuring individual beacons](#configuring-individual-beacons)
+  * [API documentation (AKA JavaDocs)](#api-documentation-aka-javadoc)
   * [Feedback, questions, issues](#feedback-questions-issues)
   * [Changelog](#changelog)
 
@@ -30,7 +31,7 @@ Integrating this SDK into your app means the users of your app can automatically
 
 Short version: no, use the [Proximity SDK](https://github.com/Estimote/Android-Proximity-SDK) instead.
 
-Longer vesrion: this SDK was previously known as "Estimote SDK", and it included APIs for detecting your beacons, which you could use to show notifications, etc. **These APIs are now deprecated and are no longer supported.** They have been replaced with the [Estimote Proximity SDK for Android](https://github.com/Estimote/Android-Proximity-SDK), powered by [Estimote Monitoring](https://community.estimote.com/hc/en-us/articles/360003252832-What-is-Estimote-Monitoring-).
+Longer version: this SDK was previously known as "Estimote SDK", and it included APIs for detecting your beacons, which you could use to show notifications, etc. **These APIs are now deprecated and are no longer supported.** They have been replaced with the [Estimote Proximity SDK for Android](https://github.com/Estimote/Android-Proximity-SDK), powered by [Estimote Monitoring](https://community.estimote.com/hc/en-us/articles/360003252832-What-is-Estimote-Monitoring-).
 
 You can, and are encouraged to, use the Fleet Management SDK alongside the Proximity SDK: Proximity SDK for driving the proximity-based events in your app, and Fleet Management SDK for remotely managing your beacons.
 
@@ -139,6 +140,12 @@ bulkUpdater.destroy();
 If you want to individually configure a beacon, you'll need to connect to it first: [Connecting to beacons](https://github.com/Estimote/Android-Fleet-Management-SDK/blob/master/Docs/DOC_deviceConnection.md).
 
 Once connected, you can read and write settings, as well as update the beacon's firmware: [Basic operations on connected device](https://github.com/Estimote/Android-Fleet-Management-SDK/blob/master/Docs/DOC_deviceConnection.md#basic-operations-on-connected-device) and [Advanced operations on connected device](https://github.com/Estimote/Android-Fleet-Management-SDK/blob/master/Docs/DOC_deviceConnection.md#advanced-operations-on-connected-device).
+
+## API documentation (AKA JavaDocs)
+
+… is available here:
+
+<http://estimote.github.io/Android-Fleet-Management-SDK/JavaDocs/>
 
 ## Feedback, questions, issues
 
