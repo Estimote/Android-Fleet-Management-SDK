@@ -37,7 +37,7 @@ You can, and are encouraged to, use the Fleet Management SDK alongside the Proxi
 
 ### "Do I need to build an app to configure my beacons?"
 
-No, you can use our [Estimote Android app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en) to change the most common settings, and to apply "pending settings" to individual beacons. Connecting to the beacon automatically applies the latest settings from Estimote Cloud.
+No, you can use our [Estimote Android app](https://play.google.com/store/apps/details?id=com.estimote.apps.main&hl=en) to change the most common settings, and to apply "pending settings" to individual beacons. Connecting to the beacon in the app automatically applies the latest settings from Estimote Cloud.
 
 If you have more Estimote devices, [Estimote Deployment app](https://itunes.apple.com/us/app/estimote-deployment/id1109375679?mt=8) can apply "pending settings" in bulk. At this time, it's available on iOS only.
 
@@ -96,7 +96,7 @@ protected void onCreate() {
     super.onCreate();
 
     Context context = getApplicationContext();
-    this.bulkUpdater = new BulkUpdaterBuilder(context)
+    bulkUpdater = new BulkUpdaterBuilder(context)
         .withFirmwareUpdate()
         .withCloudFetchInterval(1, TimeUnit.HOURS)
         .withTimeout(0)
@@ -108,7 +108,7 @@ protected void onCreate() {
 And this is how to use it:
 
 ```java
-this.bulkUpdater.start(new BulkUpdater.BulkUpdaterCallback() {
+bulkUpdater.start(new BulkUpdater.BulkUpdaterCallback() {
     @Override
     public void onDeviceStatusChange(ConfigurableDevice device,
             BulkUpdater.Status newStatus, String message) {
@@ -128,9 +128,38 @@ this.bulkUpdater.start(new BulkUpdater.BulkUpdaterCallback() {
 });
 ```
 
+One more thing: you need to feed the BulkUpdater with data from the beacons' Connectivity packets:
+
+```java
+private BeaconManager beaconManager;
+
+// ...
+
+beaconManager = new BeaconManager(context);
+
+// this will make the beacon attempt to detect Connectivity packets for 10 seconds,
+// then wait 50 seconds before the next detection, then repeat the cycle
+beaconManager.setForegroundScanPeriod(10000, 50000);
+
+// this connects to an underlying service, not to the beacon (-;
+beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+    @Override
+    public void onServiceReady() {
+        beaconManager.setConfigurableDevicesListener(new BeaconManager.ConfigurableDevicesListener() {
+            @Override
+            public void onConfigurableDevicesFound(List<ConfigurableDevice> configurableDevices) {
+                bulkUpdater.onDevicesFound(configurableDevices);
+            }
+        });
+    }
+});
+beaconManager.startConfigurableDevicesDiscovery();
+```
+
 To stop, and clean up after the BulkUpdater, do:
 
 ```java
+beaconManager.stopConfigurableDevicesDiscovery()
 bulkUpdater.stop();
 bulkUpdater.destroy();
 ```
