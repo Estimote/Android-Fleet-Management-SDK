@@ -8,7 +8,7 @@
     + [Connecting Fleet Management SDK to your Estimote Cloud account](#connecting-fleet-management-sdk-to-your-estimote-cloud-account)
   * [Bulk Updater](#bulk-updater)
   * [Configuring individual beacons](#configuring-individual-beacons)
-  * [API documentation (AKA JavaDocs)](#api-documentation-aka-javadoc)
+  * [API documentation (AKA JavaDocs)](#api-documentation-aka-javadocs)
   * [Feedback, questions, issues](#feedback-questions-issues)
   * [Changelog](#changelog)
 
