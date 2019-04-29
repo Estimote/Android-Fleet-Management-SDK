@@ -67,6 +67,7 @@ If not, add `jcenter()` inside `repositories`, as shown above. Then, in the Modu
 ```gradle
 dependencies {
     implementation 'com.estimote:mgmtsdk:1.4.4'
+    implementation 'com.estimote:coresdk:1.3.2'
     // if using an older version of Gradle, try "compile" instead of "implementation"
 }
 ```
